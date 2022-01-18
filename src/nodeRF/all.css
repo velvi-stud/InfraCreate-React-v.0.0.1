@@ -1,0 +1,37 @@
+.cf {
+      margin: 0;
+      min-width: 100%;
+      min-height: 100%;
+      padding: 0;
+}
+
+.vheight {
+      min-height: 80vh;
+      max-height: 80vh;
+      height: 80vh;
+      padding: 0;
+}
+
+.vheight2{
+      min-height: 10vh;
+      max-height: 10vh;
+      height: 10vh;
+      padding: 0;
+}
+
+.rowDNI{
+      direction: ltr;
+      padding-left: 0 !important;
+}
+
+.colDNI{
+      margin-block: auto; 
+      margin: auto;
+      padding-left: 0
+}
+
+#custom-switch{
+      margin-top: auto;
+      width: 3vw;
+      height: 2vh
+}

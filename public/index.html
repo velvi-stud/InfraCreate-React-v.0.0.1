@@ -27,6 +27,71 @@
     <title>React App</title>
   </head>
   <body>
+
+    <style>
+
+    /* SCROLBAR */
+    ::-webkit-scrollbar {
+      width: 3px;
+      height: 3px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* Per tutte le classi di nodi che sono selezionati */
+    /*https://www.w3schools.com/cssref/sel_attr_begin.asp*/
+    [class^="react-flow__node"].selected{
+      border: 3px solid gray;
+      border-radius: 2em;
+      border-color: red;
+    }
+
+    /* FOR EDGES */
+    .react-flow__edge-path:hover {
+      stroke-width: 5;
+      stroke:darkorchid;
+    }
+    .react-flow__edge.selected .react-flow__edge-path {
+      stroke-width: 2;
+      border-color: red;
+    }
+
+
+    /* quando un nodo di tipo customized,special ed exale è selezionato
+    .react-flow__node-customized.selected,
+    .react-flow__node-special.selected,
+    .react-flow__node-exale.selected
+    {
+      border: 2px solid gray;
+      border-color: red;
+    } */
+
+    /* quando un nodo di tipo base è selezionato
+    .react-flow__node-server.selected,
+    .react-flow__node-port.selected,
+    .react-flow__node-network.selected,
+    .react-flow__node-subnet.selected
+    {
+      border: 3px solid gray;
+      border-radius: 2em;
+      border-color: red;
+    } */
+
+   
+
+    #root{
+      overflow-x: clip;
+    }
+
+    </style>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

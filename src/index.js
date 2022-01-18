@@ -4,10 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const showApp = () =>{
+  var x = new App();
+  return(x.renderize());
+};
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <div>
+  {/* <React.StrictMode> */}
+    {showApp()}
+  {/* </React.StrictMode> */}
+  </div>,
+
   document.getElementById('root')
 );
 

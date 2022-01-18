@@ -6,9 +6,9 @@
 }
 
 .vheight {
-      min-height: 80vh;
-      max-height: 80vh;
-      height: 80vh;
+      min-height: 75vh;
+      max-height: 75vh;
+      height: 75vh;
       padding: 0;
 }
 
@@ -16,6 +16,20 @@
       min-height: 10vh;
       max-height: 10vh;
       height: 10vh;
+      padding: 0;
+}
+
+.vheight3{
+      min-height: 15vh;
+      max-height: 15vh;
+      height: 15vh;
+      padding: 0;
+}
+
+#dragdrop.vheight {
+      min-height: 73vh;
+      max-height: 73vh;
+      height: 73vh;
       padding: 0;
 }
 

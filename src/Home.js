@@ -5,6 +5,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import tryJSON from './DataParser/DP';
 import Application from './nodeRF/Application';
 import Singleton from './nodeRF/Singleton';
+import iac from './images/coop/iac_img.jpg'
 
 const Home = () => {
 
@@ -107,10 +108,10 @@ const Home = () => {
                 </Row>
                 <Row className="mt-5">
                     <Col xs={12} md={6} lg={6} >
-                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "2.1em", }} onClick={() => updateMod('theater', true)} > Create Theater </Button>
+                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateMod('theater', true)} > Create Theater </Button>
                     </Col>
                     <Col xs={12} md={6} lg={6} >
-                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "2.1em", }} onClick={() => updateMod('module', true)}> Create Module </Button>
+                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateMod('module', true)}> Create Module </Button>
                     </Col>
                 </Row>
 
@@ -119,17 +120,11 @@ const Home = () => {
                 </div>
 
                 <Row className="mt-5">
+                    <Col>
+                    <img src={iac}></img>
+                    </Col>
+                    <Col>
                     <p style={{ fontSize: "1.4em", }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Sed lorem mi, tincidunt sit amet egestas in, finibus vel ex.
-                        Integer sit amet molestie libero. Phasellus vitae laoreet libero.
-                        Donec eget volutpat purus, quis gravida neque. Fusce velit eros,
-                        semper eu ex in, convallis ullamcorper nibh. Sed et lectus nec nibh
-                        egestas mattis. Donec eu sapien purus. Curabitur leo erat, mollis ac
-                        eleifend in, semper eget urna. Etiam eu metus libero. In porttitor
-                        ornare augue at suscipit. Duis vel metus pharetra, facilisis dui ut,
-                        rutrum quam. Phasellus fermentum mattis velit ut consectetur.
-                        Duis nec urna velit.
                         Cras varius felis ac enim elementum lacinia. Maecenas quis nunc luctus,
                         pretium libero sit amet, viverra sapien. Sed mollis nunc enim,
                         sit amet scelerisque augue venenatis at. Etiam tincidunt nunc quis
@@ -145,6 +140,7 @@ const Home = () => {
                         Nunc efficitur augue nec justo aliquam, vitae rutrum massa sodales.
                         Donec mollis nisl sed est venenatis porta
                     </p>
+                    </Col>
                 </Row>
             </Container>
         </div>

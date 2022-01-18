@@ -37,6 +37,13 @@ class DataNodeInfo extends React.Component {
                 this._ram = React.createRef(null);
                 this._usr = React.createRef(null);
                 this._pwd = React.createRef(null);
+                this.images = [
+                    { nome_img: 'image_1', os_img: 'Linux' },
+                    { nome_img: 'image_2', os_img: 'Fedora' },
+                    { nome_img: 'image_3', os_img: 'MacOSx' },
+                    { nome_img: 'image_4', os_img: 'CentOS' }
+                ];
+                this.update_os = React.createRef(null);
                 break;
 
             case 'port':
@@ -96,6 +103,10 @@ class DataNodeInfo extends React.Component {
         var img = this._img.current.value;
         if (img !== null && img !== '')
             this.element['data']['$image'] = img;
+        if (img !== null && img !== undefined && img !== '' && img !== 'Select image')
+            var l = this.images.find(x => x.nome_img === img).os_img;
+        console.log(this.update_os);
+        this.update_os.current.innerHTML = l;
 
         var flavour = {
             $cpu: this._cpu.current.value,
@@ -117,6 +128,21 @@ class DataNodeInfo extends React.Component {
 
     // ritorna la struttura i/o per i DEL SERVER
     server_data() {
+
+        const updateimg = () => {
+            var items = []
+            for (const [index, value] of this.images.entries()) {
+                console.log(index, value);
+                items.push(<option value={value.nome_img}>{value.nome_img}</option>)
+            }
+            return (
+                <>
+                    {items}
+                </>
+            )
+        }
+
+
         return (
             <Row style={{ width: '100%', }} className='text-center align-center justify-content-center'>
                 <Form className="pl-3 pr-3">
@@ -126,7 +152,7 @@ class DataNodeInfo extends React.Component {
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label>
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Node name</p>
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Server name</p>
                                 </Form.Label>
                             </Col>
                             <Col xs={12} md={7} lg={8}>
@@ -178,7 +204,7 @@ class DataNodeInfo extends React.Component {
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label className="">
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Server OS</p>
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Server image</p>
                                 </Form.Label>
                             </Col>
                             <Col xs={12} md={7} lg={8}>
@@ -189,12 +215,14 @@ class DataNodeInfo extends React.Component {
                                     onChange={() => this.updateServerData()}
                                 >
                                     <option >{this.checkDataList(['data', '$image'], 'Select image')} </option>
-                                    <option value="Linux ">Linux  </option>
+                                    {updateimg()}
+                                    {/* <option value="Linux ">Linux  </option>
                                     <option value="Fedora">Fedora </option>
                                     <option value="MacOSx">MacOSx </option>
-                                    <option value="CentOS">CentOS </option>
+                                    <option value="CentOS">CentOS </option> */}
                                 </Form.Select>
                             </Col>
+                            <p ref={this.update_os} style={{ marginBottom: '0', fontSize: '1.3em', textAlign: 'end', paddingRight: '2em' }}></p>
                         </Row>
 
 
@@ -342,7 +370,7 @@ class DataNodeInfo extends React.Component {
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label className="">
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Node name</p>
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Port name</p>
                                 </Form.Label>
                             </Col>
                             <Col xs={12} md={7} lg={8}>
@@ -438,7 +466,7 @@ class DataNodeInfo extends React.Component {
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label className="">
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Node name</p>
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Net name</p>
                                 </Form.Label>
                             </Col>
                             <Col xs={12} md={7} lg={8}>
@@ -727,7 +755,7 @@ class DataNodeInfo extends React.Component {
                             <cite className='d-inline' style={{ fontSize: '0.5em' }}>{this.tipo} </cite>
                         </h2>
                     </div>*/}
-                    <Container className='cf px-1 py-2' style={{ direction: 'rtl', overflowX: 'hidden', overflowY: 'scroll', fontSize: "0.8em", position:'relative' }}>
+                    <Container className='cf px-1 py-2' style={{ direction: 'rtl', overflowX: 'hidden', overflowY: 'scroll', fontSize: "0.8em", position: 'relative' }}>
                         <Row className='mb-2'>
                             <Col style={{ overflowX: 'auto' }} className='p-2'>
                                 <h2 className='d-inline mb-3'>{this.element['data']['label']}</h2>
@@ -736,9 +764,9 @@ class DataNodeInfo extends React.Component {
                         </Row>
                         {this.switch_data()}
                         {/* https://stackoverflow.com/questions/526035/how-can-i-position-my-div-at-the-bottom-of-its-container */}
-                        <Row style={{position:'absolute', bottom:'0', opacity:'50%'}}>
+                        {/* <Row style={{ position: 'absolute', bottom: '0', opacity: '50%' }}>
                             {JSON.stringify(this.element)}
-                        </Row>
+                        </Row> */}
                     </Container>
                 </div>
             );

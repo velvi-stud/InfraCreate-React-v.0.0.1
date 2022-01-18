@@ -48,7 +48,7 @@ class Sidebar extends React.Component {
             <div className='pt-2 pb-2' style={{ /*minHeight: '70vh', maxHeight: '70vh',*/ }}>
                 {/* MODIFICARE QUI LA LUNGHEZZA DELLA SIDEBAR */}
 
-                <Container className='justify-content-center text-center cf vheight' style={{ overflowX: 'hidden', overflowY: 'visible', minHeight:'78vh', maxHeight:'78vh',}}>
+                <Container id='dragdrop' className='justify-content-center text-center cf vheight' style={{ overflowX: 'hidden', overflowY: 'visible',}}>
                     
                     <Row className='justify-content-center text-center mt-1 mb-1'>
                         <h5>Drag and Drop node.</h5>
@@ -58,7 +58,7 @@ class Sidebar extends React.Component {
                     {this.TMPLT('port')}
                     {this.TMPLT('network')}
                     {this.TMPLT('subnet')}
-                    {this.TMPLT('customized')}
+                    {/* {this.TMPLT('customized')}
                     {this.TMPLT('special')}
                     {this.TMPLT('exale')}
                     {this.TMPLT('customized')}
@@ -75,7 +75,7 @@ class Sidebar extends React.Component {
                     {this.TMPLT('exale')}
                     {this.TMPLT('customized')}
                     {this.TMPLT('special')}
-                    {this.TMPLT('exale')}
+                    {this.TMPLT('exale')} */}
 
 
 

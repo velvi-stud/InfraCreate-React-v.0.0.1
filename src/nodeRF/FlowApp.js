@@ -99,8 +99,9 @@ const FlowApp = () => {
         con il metodo associato setIstanzaReactFlow() per la manipolazione,
     */
     //const [elementi, setElementi] = useState(ElementiIniziali);
-    const [elementi, setElementi, { undo, canUndo, redo, canRedo }] = useUndoable(ElementiIniziali);
+    const [elementi, setElementi, { undo, canUndo, redo, canRedo }] = useUndoable([]);
     //([]) -> SE VUOTO
+    //(ElementiIniziali) -> SE CON QUALCHE PLACE HOLDER
     // const { transform } = useZoomPanHelper();
 
     /** @STATE -> observable
@@ -297,7 +298,7 @@ const FlowApp = () => {
                 id,
                 type,
                 position,
-                data: { label: 'Click to insert name', desc: '' },
+                data: { label: 'Insert node name', desc: '' },
             };
             console.log();
             setElementi((es) => es.concat(newNode)); // @@@@ aggiunge/concatena il nuovo nodo al canvas dei nodi Elementi
@@ -389,7 +390,7 @@ const FlowApp = () => {
 
     function addNavbar() {
         return (
-            <Container className='cf' style={{ /*maxHeight: '7vh',*/ minHeight: '7vh' }}>
+            <Container className='cf sticky-top' style={{ /*maxHeight: '7vh',*/ minHeight: '7vh' }}>
                 <Navbar collapseOnSelect expand="lg" bg="light" variant="primary" style={{ minHeight: '7vh', /*maxHeight: '7vh',*/ paddingLeft: '1vw', paddingRight: '1vw' }}>
                     <Navbar.Brand /*href="#home"*/>
                         <h2 className='d-inline mb-3'>
@@ -429,7 +430,6 @@ const FlowApp = () => {
             </Container>
         );
     }
-
 
 
     function addSubbar() {
@@ -506,7 +506,7 @@ const FlowApp = () => {
 
     function addFootBar() {
         return (
-            <Container className='cf vheight2 p-3' style={{ overflowX: 'clip', overflowY: 'scroll', textAlign: 'left' }}>
+            <Container className='cf vheight3 p-2' style={{ overflowX: 'hidden', overflowY: 'auto', textAlign: 'left' }}>
                 <Row>
                     <Col>
                         <Row>
@@ -531,7 +531,7 @@ const FlowApp = () => {
                         {
                             nodes.map(
                                 (node) => (
-                                    <div key={node.data.label} className='d-inline'>
+                                    <div key={node.id} className='d-inline'>
                                         {node.data.label} - x: {node.__rf.position.x.toFixed(2)}, y: {node.__rf.position.y.toFixed(2)}&nbsp;&nbsp;&nbsp;
                                     </div>
                                 )
@@ -596,7 +596,7 @@ const FlowApp = () => {
                 </Row>
             </Container>
 
-            <div className='vheight2' style={{ background: '' }}>
+            <div className='vheight3' style={{ background: '' }}>
                 {addFootBar()}
             </div>
 

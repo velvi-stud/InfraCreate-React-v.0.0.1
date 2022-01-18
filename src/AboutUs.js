@@ -16,17 +16,17 @@ const AboutUs = () => {
                 <Row className="mt-5 text-left" style={{ display: "initial" }}>
                     <h1 className='display-4'> Why this App? </h1>
                     <p style={{ fontSize: "1.4em", textAlign: "initial" }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Sed lorem mi, tincidunt sit amet egestas in, finibus vel ex.
-                        Integer sit amet molestie libero. Phasellus vitae laoreet libero.
-                        Donec eget volutpat purus, quis gravida neque. Fusce velit eros,
+                        This app was born as internship project with the intent to create a 
+                        support for the creation and maganagement of infrastructure using a grafic
+                        approach to take an output a file (TOSCA standard) containing the topology 
+                        built with this App.
                     </p>
                 </Row>
                 <Row className="mt-5 text-left" style={{ display: "initial" }}>
                     <h1 className='display-4'> Who are we? </h1>
                     <p style={{ fontSize: "1.4em", textAlign: "center" }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Sed lorem mi, tincidunt sit amet egestas in, finibus vel ex.
+                        We are a team of System Management Enterprise. <br></br>
+                        We are:
                     </p>
                     <Container className='container-fluid justify-content-center text-center'>
                         <Row className=' justify-content-center text-center'>

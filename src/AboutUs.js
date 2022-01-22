@@ -25,8 +25,8 @@ const AboutUs = () => {
                 <Row className="mt-5 text-left" style={{ display: "initial" }}>
                     <h1 className='display-4'> Who are we? </h1>
                     <p style={{ fontSize: "1.4em", textAlign: "center" }}>
-                        We are a team of System Management Enterprise. <br></br>
-                        We are:
+                        We are a System Management Enterprise Team. <br></br>
+                        Composed by:
                     </p>
                     <Container className='container-fluid justify-content-center text-center'>
                         <Row className=' justify-content-center text-center'>

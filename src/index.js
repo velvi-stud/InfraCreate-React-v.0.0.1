@@ -4,22 +4,27 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const showApp = () =>{
+
+import {createStore} from 'redux';
+import { Provider } from 'react-redux';
+import rootReducers from './reducers/Reducers';
+const store = createStore(rootReducers);
+
+
+const showApp = () => {
   var x = new App();
-  return(x.renderize());
+  return (x.renderize());
 };
 
 ReactDOM.render(
   <div>
-  {/* <React.StrictMode> */}
-    {showApp()}
-  {/* </React.StrictMode> */}
+    {/* <React.StrictMode> */}
+    <Provider store={store} >
+      {showApp()}
+    </Provider>
+    {/* </React.StrictMode> */}
   </div>,
-
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

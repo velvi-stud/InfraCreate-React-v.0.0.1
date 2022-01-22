@@ -1,15 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; //IMPORTANTE -> IMPORTARE
 import { Row, Col, Container, NavDropdown, Nav, Navbar, Button, } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+//import { HotKeys } from "react-hotkeys"; //-> per shortcut
 import useUndoable from "use-undoable";
 import React, { useState, useCallback, useEffect } from 'react';
 import ReactFlow, { removeElements, addEdge, Controls, ControlButton, Background, useZoomPanHelper, useStoreState, useStoreActions } from 'react-flow-renderer';
 import _ from 'lodash'; // for count element objects -> shortuct _
 import Sidebar from './Sidebar.js'; // per la sidebar
-import node_temp_list from './NodeTemplateList';
 import DataNodeInfo from './DataNodeInfo.js';
 import './all.css'
-import Singleton from './Singleton.js';
+import AllTypeNodes from '../node-template/AllTypeNodes';
 import grid_dot from '../images/nodeimg/grid_dot.png';
 import grid_line from '../images/nodeimg/grid_line.png';
 import grid_no from '../images/nodeimg/grid_no.png';
@@ -23,65 +23,62 @@ import indietro from '../images/nodeimg/undo.png';
 import avanti from '../images/nodeimg/redo.png';
 import deletex from '../images/nodeimg/delete.png';
 import selall from '../images/nodeimg/select_all.png';
-//import { HotKeys } from "react-hotkeys"; //-> per shortcut
 
-// DA VEDERE !!!
+import { useSelector, useDispatch } from 'react-redux';
+import { modify, set } from '../reducers/actions/Actions.js';
+
 import localforage from 'localforage';
+
+/**
+ * SETTINGS PER LOCALFORAGE
+ */
 localforage.config({
     name: 'react-flow-docs',
     storeName: 'flows',
 });
 const flowKey = 'example-flow'; // chiave per reperire i dati
 
+
 /* @ function per generare nuovo id random -> fatto corrispondere con le iniziali dell'idge*/
-// EDGE = reactflow__edge
-// NODE = reactflow__node
+/* INFO PER REPERIRE I DATI DAL JSON
+    EDGE = reactflow__edge
+    NODE = reactflow__node
+*/
 const getNodeId = () => `reactflow__node-${+new Date()}`;
 
 /* @ operazioni per reperire stili e classi dei nodi base */
-const NTL = new node_temp_list();
-NTL.initialize();
-// oggetto contenente, in base al tipo l'implementazione della classe
-// da aggiugnere come elemento al  tag ReactFlow in nodeTypes = {allNodeTypes}
-const allNodeTypes = {
-    customized: NTL.getListMeth()["customized"],
-    special: NTL.getListMeth()["special"],
-    exale: NTL.getListMeth()["exale"],
-    server: NTL.getListMeth()["server"],
-    port: NTL.getListMeth()["port"],
-    network: NTL.getListMeth()["network"],
-    subnet: NTL.getListMeth()["subnet"],
-}
+const ATN = new AllTypeNodes();
+const allNodeTypes = ATN.GetObj();
 
 // set elementi iniziali
-const ElementiIniziali = [
+// const ElementiIniziali = [
 
-    {
-        id: getNodeId(),
-        type: 'server',
-        position: { x: 100, y: 200 },
-        data: { label: ' server_prova ', desc: " info_server " }, //text != lable in special/custom type
-    },
-    {
-        id: getNodeId() + 1,
-        type: 'port',
-        position: { x: 400, y: 200 },
-        data: { label: ' port_prova ', desc: " info_port " }, //text != lable in special/custom type
-    },
-    {
-        id: getNodeId() + 2,
-        type: 'network',
-        position: { x: 400, y: 0 },
-        data: { label: ' net_prova ', desc: " info_net " }, //text != lable in special/custom type
-    },
-    {
-        id: getNodeId() + 3,
-        type: 'subnet',
-        position: { x: 100, y: 0 },
-        data: { label: ' sub_prova ', desc: " info_sub " }, //text != lable in special/custom type
-    },
+//     {
+//         id: getNodeId(),
+//         type: 'server',
+//         position: { x: 100, y: 200 },
+//         data: { label: ' server_prova ', desc: " info_server " }, //text != lable in special/custom type
+//     },
+//     {
+//         id: getNodeId() + 1,
+//         type: 'port',
+//         position: { x: 400, y: 200 },
+//         data: { label: ' port_prova ', desc: " info_port " }, //text != lable in special/custom type
+//     },
+//     {
+//         id: getNodeId() + 2,
+//         type: 'network',
+//         position: { x: 400, y: 0 },
+//         data: { label: ' net_prova ', desc: " info_net " }, //text != lable in special/custom type
+//     },
+//     {
+//         id: getNodeId() + 3,
+//         type: 'subnet',
+//         position: { x: 100, y: 0 },
+//         data: { label: ' sub_prova ', desc: " info_sub " }, //text != lable in special/custom type
+//     },
 
-];
+// ];
 
 
 
@@ -107,7 +104,7 @@ const FlowApp = () => {
     /** @STATE -> observable
         Per aprire la schermata delle info una volta eseguito il drop del nodo
      */
-    const [DNI, setDNI] = useState({ selected_element: undefined, show: false })
+    const [datanodeinfo, setDNI] = useState({ selected_element: undefined, show: false })
 
     /** @STATES -> observables
      *  Per aggiornare le dimenzioni del canvas e della side dei dati dei nodi.
@@ -120,7 +117,7 @@ const FlowApp = () => {
     const [bkgnd, updateBackground] = useState({ type: 'lines', img: grid_dot, gap: 12, size: 1.5 });
 
     /** @STATE -> observable
-     *  Per reperire i dati principali dal singleton
+     *  Per reperire i dati principali
      */
     const [state, setState] = useState({ type: '', name: '', description: '' })
 
@@ -134,28 +131,27 @@ const FlowApp = () => {
     */
     const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
 
-    /** QUEST FUNCTION FA AGGIORNARE I DATI DERIVATI DAL SINGLETON */
+    /**
+     * PER FAR FUNZIONARE LE FUNZIONI selectAll e addFootBar
+     */
+    const nodes = useStoreState((store) => store.nodes);
+    const transform = useStoreState((store) => store.transform);
+    const setSelectedElements = useStoreActions((actions) => actions.setSelectedElements);
+
+
+    const infopan = useSelector(state => state.datapass)
+    const dispatch = useDispatch();
+
+
+    /** QUEST FUNCTION FA AGGIORNARE I DATI DERIVATI DAL REDUX */
     useEffect(
         () => {
             /* DA CANCELLARE -> PER PROVA */
             setState({
-                type: 'Module',
-                name: 'Name',
-                description: 'DESCRIPTIOOOOOOOOOOON'
+                type: infopan.type,
+                name: infopan.name,
+                description: infopan.description
             });
-            // DA RIMANERE
-            let x = Singleton.getInstance();
-            let y = x.getPrimaryInfo();
-            console.log('x:', x.getPrimaryInfo());
-            console.log('y', y);
-            if (y !== undefined) {
-                setState({
-                    type: y.type,
-                    name: y.name,
-                    description: y.description
-                });
-                console.log('stato:', state);
-            }
         }
         , [])
 
@@ -201,10 +197,7 @@ const FlowApp = () => {
             console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
             flow['#elements'] = _.size(flow.elements); // defrae il numero dei nodi.
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
-            //console.log("saved diagram!");
-            // console.log(flow);
             console.log(JSON.stringify(flow)); // salva il json
-            // console.log(JSON.stringify(flow['elements']));
         } else {
             console.log("error saving diagram!");
         }
@@ -305,7 +298,6 @@ const FlowApp = () => {
         }
     }
 
-
     /**
      * @function onElementClick
      * @param {*} event
@@ -326,6 +318,8 @@ const FlowApp = () => {
         setDimCanvas(6);
         setDimSider(4);
         setDisplay('block'); // MOSTRA LA COLONNA CONTENENTE LE SIDE INFO
+
+        dispatch({data:selected_element, type:'selectednode'});
     }
 
     /**
@@ -350,8 +344,7 @@ const FlowApp = () => {
      *  ritorna un Container (passato al lato dx) contenente tutte le strutture per personalizzare i nodi
      */
     function showDataNode() {
-        var d = new DataNodeInfo(DNI);
-        //console.log(d.renderize());
+        var d = new DataNodeInfo(datanodeinfo);
         return d.renderize();
     }
 
@@ -388,7 +381,7 @@ const FlowApp = () => {
     }
 
 
-    function addNavbar() {
+    function addNavBar() {
         return (
             <Container className='cf sticky-top' style={{ /*maxHeight: '7vh',*/ minHeight: '7vh' }}>
                 <Navbar collapseOnSelect expand="lg" bg="light" variant="primary" style={{ minHeight: '7vh', /*maxHeight: '7vh',*/ paddingLeft: '1vw', paddingRight: '1vw' }}>
@@ -431,8 +424,7 @@ const FlowApp = () => {
         );
     }
 
-
-    function addSubbar() {
+    function addSubBar() {
         return (
             <Container className='cf bg-light' style={{ /*maxHeight: '3vh',*/ minHeight: '3vh', paddingLeft: '1vw', paddingRight: '1vw', border: '1px solid gray', }}>
 
@@ -466,12 +458,12 @@ const FlowApp = () => {
                             &nbsp; Redo
                         </Button>
                         <a className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</a>
-                        <a className='btn p-0' onClick={() => { setElementi((els) => removeElements(DNI.selected_element, els)) }} style={{ marginRight: '1vw' }}>
+                        <a className='btn p-0' onClick={() => { setElementi((els) => removeElements(datanodeinfo.selected_element, els)) }} style={{ marginRight: '1vw' }}>
                             <img src={deletex} width={18} height={18} alt="delete" style={{ marginBottom: '0.4vh' }} />
                             &nbsp; Delete node
                         </a>
                         <a className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</a>
-                        <a className='btn p-0' onClick={() => { selectAll() }} style={{ marginRight: '1vw' }}>
+                        <a className='btn p-0' onClick={() => { setSelectedElements(nodes.map((node) => ({ id: node.id, type: node.type }))) }} style={{ marginRight: '1vw' }}>
                             <img src={selall} width={18} height={18} alt="delete" style={{ marginBottom: '0.4vh' }} />
                             &nbsp; Select all nodes
                         </a>
@@ -491,19 +483,6 @@ const FlowApp = () => {
         );
     }
 
-    /**
-     * PER FAR FUNZIONARE LE FUNZIONI selectAll e addFootBar
-     */
-    const nodes = useStoreState((store) => store.nodes);
-    const transform = useStoreState((store) => store.transform);
-    const setSelectedElements = useStoreActions((actions) => actions.setSelectedElements);
-    function selectAll() {
-        console.log('nodes', nodes)
-        console.log('transform', nodes)
-        console.log('sse', setSelectedElements)
-        setSelectedElements(nodes.map((node) => ({ id: node.id, type: node.type })));
-    };
-
     function addFootBar() {
         return (
             <Container className='cf vheight3 p-2' style={{ overflowX: 'hidden', overflowY: 'auto', textAlign: 'left' }}>
@@ -520,7 +499,7 @@ const FlowApp = () => {
                         <Row>
                             <Col>
                                 <h5 className='p-0 m-0'>Node selected:</h5>
-                                {JSON.stringify(DNI.selected_element) }
+                                {JSON.stringify(datanodeinfo.selected_element)}
                             </Col>
                         </Row>
                     </Col>
@@ -546,8 +525,8 @@ const FlowApp = () => {
     return (
         <div>
             <div style={{ minHeight: '10vh',/* maxHeight: '10vh',*/ }}>
-                {addNavbar()}
-                {addSubbar()}
+                {addNavBar()}
+                {addSubBar()}
             </div>
             <Container className='cf vheight' style={{ maxWidth: '100vw', }}>
                 <Row className='justify-content-center text-center' style={{ /*minHeight: '100%',*/ maxWidth: '100vw', margin: '0' }} >

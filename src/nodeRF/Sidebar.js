@@ -1,9 +1,8 @@
 import React, { createRef } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Accordion } from 'react-bootstrap';
 import AllTypeNodes from '../node-template/AllTypeNodes';
 import './all.css'
-import {useSelector, useDispatch} from 'react-redux';
-import selectednode from '../reducers/Selectednode';
+import { useSelector, useDispatch } from 'react-redux';
 
 class Sidebar extends React.Component {
 
@@ -12,15 +11,17 @@ class Sidebar extends React.Component {
         this.SN = createRef();
         this.ATN = new AllTypeNodes();
         this.nodes = this.ATN.getListStyle();
-        this.TMPLT = this.TMPLT.bind(this);
-        this.render = this.render.bind(this);
+
         this.listnode = [];
         Object.entries(this.nodes).map(
             ([key, value]) => {
-                this.listnode.push(this.TMPLT(value.type, value.style));
+                //if (value.type !== 'module')
+                this.listnode.push(this.renderDaD(value.type, value.style));
             }
         )
+
         this.render = this.render.bind(this);
+        this.renderDaD = this.renderDaD.bind(this);
     }
 
     /**
@@ -40,7 +41,7 @@ class Sidebar extends React.Component {
         event.dataTransfer.effectAllowed = 'move'; //sito in link
     };
 
-    TMPLT(type, style) {
+    renderDaD(type, style) {
         return (
             // l'attr. KEY serve quando si creano elementi così, non è obbligatorio ma da errore
             <Row key={type} className='justify-content-center text-center m-2'>
@@ -60,7 +61,20 @@ class Sidebar extends React.Component {
                     <Row className='justify-content-center text-center mt-1 mb-1'>
                         <h5>Drag and Drop node.</h5>
                     </Row>
-
+                    {/* <Accordion defaultActiveKey={['0']} alwaysOpen>
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header> Base Nodes </Accordion.Header>
+                            <Accordion.Body>
+                                {this.listnode}
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="1">
+                            <Accordion.Header> Module Nodes </Accordion.Header>
+                            <Accordion.Body>
+                                aa
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion> */}
                     {this.listnode}
 
 

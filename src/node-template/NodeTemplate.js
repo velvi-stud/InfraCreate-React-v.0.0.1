@@ -36,7 +36,7 @@ const node_temp = (tipo1, style1, img1, css_in1, css_out1) => {
 				<img src={imagins} width={w} height={h} alt="picgra" />
 
 				{/* Description */}
-				<div> <p style={{ marginBottom: '0' }}> {data.desc} </p> </div>
+				<div> <p style={{ marginBottom: '0' }}> {data.description} </p> </div>
 
 				{/* PORTA USCITA TIPO 1*/}
 				<Handle

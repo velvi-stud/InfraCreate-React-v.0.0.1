@@ -17,23 +17,23 @@ import ReactFlow,
     useUpdateNodeInternals,
 } from 'react-flow-renderer';
 import _ from 'lodash'; // for count element objects -> shortuct _
-import Sidebar from './Sidebar.js'; // per la sidebar
-import DataNodeInfo from './DataNodeInfo.js';
-import './all.css'
-import AllTypeNodes from '../node-template/AllTypeNodes';
-import grid_dot from '../images/nodeimg/grid_dot.png';
-import grid_line from '../images/nodeimg/grid_line.png';
-import grid_no from '../images/nodeimg/grid_no.png';
-import save from '../images/nodeimg/savedisk.png';
-import restore from '../images/nodeimg/restore.png';
-import zoomin from '../images/nodeimg/zoom_in.png';
-import zoomout from '../images/nodeimg/zoom_out.png';
-import fitview from '../images/nodeimg/fit_view.png';
-import menu from '../images/nodeimg/menu.png';
-import indietro from '../images/nodeimg/undo.png';
-import avanti from '../images/nodeimg/redo.png';
-import deletex from '../images/nodeimg/delete.png';
-import selall from '../images/nodeimg/select_all.png';
+import Sidebar from './Sidebar_theater'; // per la sidebar
+import DataNodeInfo from './DataNodeInfo_theater';
+import '../all.css'
+import AllTypeNodes from '../../node-template/AllTypeNodes';
+import grid_dot from '../../images/nodeimg/grid_dot.png';
+import grid_line from '../../images/nodeimg/grid_line.png';
+import grid_no from '../../images/nodeimg/grid_no.png';
+import save from '../../images/nodeimg/savedisk.png';
+import restore from '../../images/nodeimg/restore.png';
+import zoomin from '../../images/nodeimg/zoom_in.png';
+import zoomout from '../../images/nodeimg/zoom_out.png';
+import fitview from '../../images/nodeimg/fit_view.png';
+import menu from '../../images/nodeimg/menu.png';
+import indietro from '../../images/nodeimg/undo.png';
+import avanti from '../../images/nodeimg/redo.png';
+import deletex from '../../images/nodeimg/delete.png';
+import selall from '../../images/nodeimg/select_all.png';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -102,7 +102,7 @@ const allNodeTypes = ATN.GetObj();
 
 
 
-const FlowApp = (props) => {
+const FlowApp_t = (props) => {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -305,20 +305,23 @@ const FlowApp = (props) => {
         if (elementi) {
             // const type = event.dataTransfer.getData('application/reactflow');
             const type = event.dataTransfer.getData("type");
-            ////////////////////// TODO: Inserire nome (==id ==label), etc...
-            // controlla che sia in drop un nodo, e non una QUALSIASI cosa
+            const name = event.dataTransfer.getData("name");
+            const description = event.dataTransfer.getData("description");
+            const version = event.dataTransfer.getData("version");
+            var topology = event.dataTransfer.getData("topology");
+            topology = JSON.parse(topology)
+            console.log('arrivaed:',topology);
             if (type === '' || type === null) {
                 return;
             }
-            const position = IstanzaReactFlow.project({ x: event.clientX - 350, y: event.clientY });
+            const position = IstanzaReactFlow.project({ x: event.clientX - 350, y: event.clientY -50 });
             const id = getNodeId();
             const newNode = {
                 id,
                 type,
                 position,
-                data: { label: 'Insert node name', description: '' },
+                data: { label: name, description: description, version:version, topology:topology },
             };
-            console.log();
             setElementi((es) => es.concat(newNode)); // @@@@ aggiunge/concatena il nuovo nodo al canvas dei nodi Elementi
         }
     }
@@ -644,4 +647,4 @@ const FlowApp = (props) => {
     );
 }
 
-export default FlowApp;
+export default FlowApp_t;

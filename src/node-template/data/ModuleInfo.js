@@ -3,7 +3,7 @@ import { Row, Form, Col } from 'react-bootstrap';
 import '../../nodeRF/all.css'
 
 
-class PortInfo extends React.Component {
+class ModuleInfo extends React.Component {
 
     /**
      * 
@@ -13,19 +13,16 @@ class PortInfo extends React.Component {
      */
     constructor(elemento) {
         super();
-
-        console.log('network:', elemento);
+        console.log('module:', elemento);
         this.element = elemento;
         this.tipo = this.element.type;
 
         this._label = React.createRef(null);
         this._desc = React.createRef(null);
-        this._groupname = React.createRef(null);
-        this._net_type = React.createRef(null);
     }
 
 
-    updateNetworkData() {
+    updateModuleData() {
         var label = this._label.current.value;
         if (label !== null && label !== '')
             this.element['data']['label'] = label;
@@ -34,13 +31,6 @@ class PortInfo extends React.Component {
         if (desc !== null && desc !== '')
             this.element['data']['desc'] = desc;
 
-        var gname = this._groupname.current.value;
-        if (gname !== null && gname !== '')
-            this.element['data']['$group'] = gname;
-
-        var ntype = this._net_type.current.value;
-        if (ntype !== null && ntype !== '')
-            this.element['data']['$net_type'] = ntype;
     }
 
     renderize() {
@@ -53,7 +43,7 @@ class PortInfo extends React.Component {
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label className="">
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Net name</p>
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Module name</p>
                                 </Form.Label>
                             </Col>
                             <Col xs={12} md={7} lg={8}>
@@ -61,7 +51,7 @@ class PortInfo extends React.Component {
                                     ref={this._label}
                                     placeholder={this.checkDataList(['data', 'label'], 'Insert node name')}
                                     style={{ fontSize: "1.4em" }}
-                                    onChange={() => this.updateNetworkData()}
+                                    onChange={() => this.updateModuleData()}
                                 />
                             </Col>
                         </Row>
@@ -79,46 +69,8 @@ class PortInfo extends React.Component {
                                     /*as='textarea'*/
                                     placeholder={this.checkDataList(['data', 'desc'], 'Insert node description')}
                                     style={{ fontSize: "1.4em" }}
-                                    onChange={() => this.updateNetworkData()}
+                                    onChange={() => this.updateModuleData()}
                                 />
-                            </Col>
-                        </Row>
-
-                        {/* GROUP NAME */}
-                        <Row className='mb-2 mt-2 justify-content-center rowDNI' >
-                            <Col xs={12} md={5} lg={4} className='colDNI'>
-                                <Form.Label className="">
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Group name</p>
-                                </Form.Label>
-                            </Col>
-                            <Col xs={12} md={7} lg={8}>
-                                <Form.Control
-                                    ref={this._groupname}
-                                    placeholder={this.checkDataList(['data', '$group'], 'Insert group name')}
-                                    style={{ fontSize: "1.4em" }}
-                                    onChange={() => this.updateNetworkData()}
-                                />
-                            </Col>
-                        </Row>
-
-                        {/* TYPE NET */}
-                        <Row className='mb-2 mt-2 justify-content-center rowDNI' >
-                            <Col xs={12} md={5} lg={4} className='colDNI'>
-                                <Form.Label className="">
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Type</p>
-                                </Form.Label>
-                            </Col>
-                            <Col xs={12} md={7} lg={8}>
-                                <Form.Select
-                                    ref={this._net_type}
-                                    aria-label="Default select"
-                                    style={{ fontSize: "1.4em" }}
-                                    onChange={() => this.updateNetworkData()}
-                                >
-                                    <option>{this.checkDataList(['data', '$net_type'], 'Select type')}</option>
-                                    <option value="consumer"> Consumer </option>
-                                    <option value="provider"> Provider </option>
-                                </Form.Select>
                             </Col>
                         </Row>
 
@@ -145,4 +97,4 @@ class PortInfo extends React.Component {
 
 }
 
-export default PortInfo;
+export default ModuleInfo;

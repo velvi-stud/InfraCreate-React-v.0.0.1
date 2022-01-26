@@ -28,8 +28,12 @@ class SubnetInfo extends React.Component {
         this.state = {
             trycheck: null,
         }
+        //this.renderize= this.renderize.bind(this);
     }
 
+    componentDidMount() {
+        this.renderize();
+     }
 
     updateSubnetData() {
         var label = this._label.current.value;
@@ -60,9 +64,9 @@ class SubnetInfo extends React.Component {
     }
 
     renderize() {
-        this.setState({
+        this.state= {
             trycheck: null
-          })
+        }
 
         var x = this.checkDataList(['data', '$subnet', '$enable_dhcp'], 'null')
         if (x !== 'null') {

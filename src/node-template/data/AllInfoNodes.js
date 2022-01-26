@@ -2,6 +2,7 @@ import PortInfo from './PortInfo.js';
 import ServerInfo from './ServerInfo.js';
 import NetworkInfo from './NetworkInfo.js';
 import SubnetInfo from './SubnetInfo.js';
+import ModuleInfo from './ModuleInfo.js';
 import {Row} from 'react-bootstrap';
 
 class AllInfoNodes {
@@ -9,7 +10,7 @@ class AllInfoNodes {
     constructor(sel_el) {
         this.selected_element = sel_el;
         this.type = this.selected_element.type;
-        console.log('ain', this.selected_element, this.type);
+        //console.log('ain', this.selected_element, this.type);
     }
 
     getRenderize() {
@@ -29,6 +30,10 @@ class AllInfoNodes {
                 break;
             case 'subnet':
                 x = new SubnetInfo(this.selected_element);
+                x = x.renderize();
+                break;
+            case 'module':
+                x = new ModuleInfo(this.selected_element);
                 x = x.renderize();
                 break;
             default:

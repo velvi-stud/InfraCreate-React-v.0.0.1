@@ -1,11 +1,10 @@
 //https://www.youtube.com/watch?v=5jILq3ELhXg
-import { set } from "./actions/Actions";
 
 const initialState = {}
 
 const selectednode = (state = initialState, action) => {
     switch (action.type) {
-        case 'selectednode':
+        case 'modulestopology':
             state = action.data;
             return action.data;
         default:

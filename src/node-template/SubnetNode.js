@@ -17,7 +17,7 @@ class SubnetNode {
             borderRadius: '2em',
             padding: 10,
         };
-        this.styleport = {
+        this.portstyle = {
             borderRadius: 0,
             height:'0.8em',
             width: '0.5em',

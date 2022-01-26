@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
-import AllInfoNodes from '../node-template/data/AllInfoNodes.js';
-import './all.css'
+import AllInfoNodes from '../../node-template/data/AllInfoNodes.js';
+import '../all.css'
 
 
 class DataNodeInfo extends React.Component {

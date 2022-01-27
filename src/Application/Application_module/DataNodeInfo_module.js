@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
-import AllInfoNodes from '../node-template/data/AllInfoNodes.js';
-import './all.css'
+import AllInfoNodes from '../../nodes/data/AllInfoNodes.js';
+import '../all.css'
 
 
-class DataNodeInfo extends React.Component {
+class DataNodeInfo_m extends React.Component {
 
     /**
      * 
@@ -65,4 +65,4 @@ class DataNodeInfo extends React.Component {
 
 }
 
-export default DataNodeInfo;
+export default DataNodeInfo_m;

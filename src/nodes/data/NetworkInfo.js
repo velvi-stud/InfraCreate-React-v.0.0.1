@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Form, Col } from 'react-bootstrap';
-import '../../nodeRF/all.css'
+import '../../Application/all.css'
 
 
 class PortInfo extends React.Component {
@@ -13,18 +13,19 @@ class PortInfo extends React.Component {
      */
     constructor(elemento) {
         super();
-        console.log('port:', elemento);
+
+        console.log('network:', elemento);
         this.element = elemento;
         this.tipo = this.element.type;
 
         this._label = React.createRef(null);
         this._desc = React.createRef(null);
-        this._default = React.createRef(null);
-        this._type = React.createRef(null);
+        this._groupname = React.createRef(null);
+        this._net_type = React.createRef(null);
     }
 
 
-    updatePortData() {
+    updateNetworkData() {
         var label = this._label.current.value;
         if (label !== null && label !== '')
             this.element['data']['label'] = label;
@@ -33,13 +34,13 @@ class PortInfo extends React.Component {
         if (desc !== null && desc !== '')
             this.element['data']['desc'] = desc;
 
-        var properties = {
-            $default: this._default.current.value,
-            $type: this._type.current.value,
-        };
+        var gname = this._groupname.current.value;
+        if (gname !== null && gname !== '')
+            this.element['data']['$group'] = gname;
 
-        this.element['data']['$properties'] = properties;
-
+        var ntype = this._net_type.current.value;
+        if (ntype !== null && ntype !== '')
+            this.element['data']['$net_type'] = ntype;
     }
 
     renderize() {
@@ -52,7 +53,7 @@ class PortInfo extends React.Component {
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label className="">
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Port name</p>
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Net name</p>
                                 </Form.Label>
                             </Col>
                             <Col xs={12} md={7} lg={8}>
@@ -60,7 +61,7 @@ class PortInfo extends React.Component {
                                     ref={this._label}
                                     placeholder={this.checkDataList(['data', 'label'], 'Insert node name')}
                                     style={{ fontSize: "1.4em" }}
-                                    onChange={() => this.updatePortData()}
+                                    onChange={() => this.updateNetworkData()}
                                 />
                             </Col>
                         </Row>
@@ -78,29 +79,29 @@ class PortInfo extends React.Component {
                                     /*as='textarea'*/
                                     placeholder={this.checkDataList(['data', 'desc'], 'Insert node description')}
                                     style={{ fontSize: "1.4em" }}
-                                    onChange={() => this.updatePortData()}
+                                    onChange={() => this.updateNetworkData()}
                                 />
                             </Col>
                         </Row>
 
-                        {/* DEFAULT */}
+                        {/* GROUP NAME */}
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label className="">
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Default</p>
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Group name</p>
                                 </Form.Label>
                             </Col>
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
-                                    ref={this._default}
-                                    placeholder={this.checkDataList(['data', '$properties', '$default'], 'Insert node default')}
+                                    ref={this._groupname}
+                                    placeholder={this.checkDataList(['data', '$group'], 'Insert group name')}
                                     style={{ fontSize: "1.4em" }}
-                                    onChange={() => this.updatePortData()}
+                                    onChange={() => this.updateNetworkData()}
                                 />
                             </Col>
                         </Row>
 
-                        {/* TYPE */}
+                        {/* TYPE NET */}
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label className="">
@@ -108,15 +109,18 @@ class PortInfo extends React.Component {
                                 </Form.Label>
                             </Col>
                             <Col xs={12} md={7} lg={8}>
-                                <Form.Control
-                                    ref={this._type}
-                                    placeholder={this.checkDataList(['data', '$properties', '$type'], 'Insert node type')}
+                                <Form.Select
+                                    ref={this._net_type}
+                                    aria-label="Default select"
                                     style={{ fontSize: "1.4em" }}
-                                    onChange={() => this.updatePortData()}
-                                />
+                                    onChange={() => this.updateNetworkData()}
+                                >
+                                    <option>{this.checkDataList(['data', '$net_type'], 'Select type')}</option>
+                                    <option value="consumer"> Consumer </option>
+                                    <option value="provider"> Provider </option>
+                                </Form.Select>
                             </Col>
                         </Row>
-
 
                     </Form.Group >
                 </Form >

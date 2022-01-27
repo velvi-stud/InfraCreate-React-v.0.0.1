@@ -4,7 +4,7 @@ const initialState = {}
 
 const selectednode = (state = initialState, action) => {
     switch (action.type) {
-        case 'modulestopology':
+        case 'selectednode':
             state = action.data;
             return action.data;
         default:

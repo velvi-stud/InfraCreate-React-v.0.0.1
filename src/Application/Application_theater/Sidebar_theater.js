@@ -1,14 +1,14 @@
 import React, { createRef } from 'react';
 import { Container, Row, Accordion } from 'react-bootstrap';
-import AllTypeNodes from '../../node-template/AllTypeNodes';
+import AllTypeNodes from '../../nodes/AllTypeNodes';
 import _ from 'lodash';
-import ModuleNode from '../../node-template/ModuleNode';
+import ModuleNode from '../../nodes/ModuleNode';
 import '../all.css'
 import { useSelector, useDispatch } from 'react-redux';
 
 
 
-class Sidebar extends React.Component {
+class Sidebar_t extends React.Component {
 
     constructor() {
         super();
@@ -119,4 +119,4 @@ class Sidebar extends React.Component {
 
 };
 
-export default Sidebar;
+export default Sidebar_t;

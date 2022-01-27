@@ -1,5 +1,5 @@
 //import React from 'react';
-import node_temp from './NodeTemplate.js';
+import node_temp from './template/NodeTemplate';
 import network from '../images/nodeimg/network.png';
 import connector from '../images/nodeimg/connector.png';
 import database from '../images/nodeimg/database.png';

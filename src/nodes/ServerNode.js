@@ -1,5 +1,5 @@
 //import React from 'react';
-import node_temp from './NodeTemplate.js';
+import node_temp from './template/NodeTemplate';
 import network from '../images/nodeimg/network.png';
 import connector from '../images/nodeimg/connector.png';
 import database from '../images/nodeimg/database.png';
@@ -7,22 +7,24 @@ import server from '../images/nodeimg/server.png';
 import subnet from '../images/nodeimg/subnet.png'; 
 
 
-class SubnetNode {
+class ServerNode {
 
-    constructor(){
-        this.type = "subnet";
+    constructor(){ 
+        this.type = "server";
         this.style = {
-            background: 'lightsalmon',
+            background: 'lightseagreen',
             color: 'black',
             borderRadius: '2em',
             padding: 10,
-        };
+        }; 
         this.portstyle = {
             borderRadius: 0,
             height:'0.8em',
             width: '0.5em',
         };
-        this.meta= node_temp(this.type, this.style, subnet, this.portstyle, this.portstyle);
+
+        this.meta= node_temp(this.type, this.style, server, this.portstyle, this.portstyle);
+
     }
 
     getType() {
@@ -36,4 +38,4 @@ class SubnetNode {
     }
 
 }
-export default SubnetNode;
+export default ServerNode;

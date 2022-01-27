@@ -7,7 +7,7 @@ import NavbarApp from './NavbarApp';
 import Home from './Home';
 import AboutUs from './AboutUs';
 
-import Application from './nodeRF/Application.js'
+import Application from './Application/Application.js'
 
 
 // la function App() è richiamata per ritornare qualcosa -> html

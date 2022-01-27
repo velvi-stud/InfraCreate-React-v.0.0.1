@@ -3,7 +3,8 @@
 const initialState = {
     type: '',
     name: '',
-    description: ''
+    description: '',
+    version:''
 }
 
 const datapass = (state = initialState, action) => {

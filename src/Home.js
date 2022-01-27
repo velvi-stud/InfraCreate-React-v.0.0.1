@@ -48,12 +48,13 @@ const Home = () => {
         var type = mod.tipo;
         var z = { type, name, description };
         console.log("z: ", z);
-
+        var version= '1.0';
         /* REDUX PER PASSARE DATI SULL'ENTITà DA MODELLARE */
         var newinfo = {
             type: type,
             name: name,
-            description: description
+            description: description,
+            version: version
         }
         // carica dati
         dispatch({ data: newinfo, type: 'datapass' });
@@ -1397,7 +1398,7 @@ const Home = () => {
             module1, module2, module3, module4, module5
         ];
         // carica dati
-        dispatch({data:modules, type: 'modulesobtained'});
+        dispatch({data:modules, type: 'modulesretrieved'});
 
     }
 

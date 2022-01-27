@@ -1,10 +1,10 @@
 import React, { createRef } from 'react';
 import { Container, Row, Accordion } from 'react-bootstrap';
-import AllTypeNodes from '../node-template/AllTypeNodes';
-import './all.css'
+import AllTypeNodes from '../../nodes/AllTypeNodes';
+import '../all.css'
 import { useSelector, useDispatch } from 'react-redux';
 
-class Sidebar extends React.Component {
+class Sidebar_m extends React.Component {
 
     constructor() {
         super();
@@ -15,8 +15,8 @@ class Sidebar extends React.Component {
         this.listnode = [];
         Object.entries(this.nodes).map(
             ([key, value]) => {
-                //if (value.type !== 'module')
-                this.listnode.push(this.renderDaD(value.type, value.style));
+                if (value.type !== 'module')
+                    this.listnode.push(this.renderDaD(value.type, value.style));
             }
         )
 
@@ -86,4 +86,4 @@ class Sidebar extends React.Component {
 
 };
 
-export default Sidebar;
+export default Sidebar_m;

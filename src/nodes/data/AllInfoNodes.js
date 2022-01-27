@@ -5,7 +5,7 @@ import SubnetInfo from './SubnetInfo.js';
 import ModuleInfo from './ModuleInfo.js';
 import {Row} from 'react-bootstrap';
 
-class AllInfoNodes {
+class AllInfoNodes { 
 
     constructor(sel_el) {
         this.selected_element = sel_el;

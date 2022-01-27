@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; //IMPORTANTE -> IMPORTARE
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import FlowApp from './FlowApp';
-import FlowApp_t from './Application_theater.js/FlowApp_theater';
+import FlowApp_m from './Application_module/FlowApp_module';
+import FlowApp_t from './Application_theater/FlowApp_theater';
 import './all.css'
 import { ReactFlowProvider } from 'react-flow-renderer';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 const Application = () => {
 
   const infopan = useSelector(state => state.datapass)
-  const [state, setState] = useState({ type: '', name: '', description: '' })
+  const [state, setState] = useState({ type: '', name: '', description: '', version: '' })
 
   /** QUEST FUNCTION FA AGGIORNARE I DATI DERIVATI DAL REDUX */
   useEffect(
@@ -23,20 +23,21 @@ const Application = () => {
       setState({
         type: infopan.type,
         name: infopan.name,
-        description: infopan.description
+        description: infopan.description,
+        version: infopan.version
       });
     }
     , [])
 
-    function getApp(){
-      if(state.type==='module')
-        return <FlowApp name={state.name} type={state.type} description={state.description} />;
-      else if (state.type==='theater'){
+  function getApp() {
+    if (state.type === 'module')
+      return <FlowApp_m name={state.name} type={state.type} description={state.description} version={state.version}/>;
+    else if (state.type === 'theater') {
       console.log('teatro');
-        return <FlowApp_t name={state.name} type={state.type} description={state.description} />;
-      }else 
-        return null;
-    }
+      return <FlowApp_t name={state.name} type={state.type} description={state.description} version={state.version} />;
+    } else
+      return null;
+  }
 
   return (
     <div>

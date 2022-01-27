@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Button, Overlay, Tooltip, Popover, OverlayTrigger } from 'react-bootstrap';
 import ReactFlow, { Background, Handle, ReactFlowProvider, Controls } from 'react-flow-renderer';
-import PortNode from './PortNode.js';
-import ServerNode from './ServerNode.js';
-import SubnetNode from './SubnetNode.js';
-import NetworkNode from './NetworkNode.js';
+import PortNode from '../PortNode.js';
+import ServerNode from '../ServerNode.js';
+import SubnetNode from '../SubnetNode.js';
+import NetworkNode from '../NetworkNode.js';
 import _ from 'lodash';
 
 
@@ -59,7 +59,7 @@ class xxx {
 
 
 
-const module_temp = (tipo1, style1, css_in1, css_out1, jsonchild) => {
+const module_temp = (tipo1, style1, css_in1, css_out1) => {
 
 	const tipo = tipo1;
 	const style = style1;

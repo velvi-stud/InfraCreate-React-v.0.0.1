@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Form, Col } from 'react-bootstrap';
-import '../../nodeRF/all.css'
+import '../../Application/all.css'
 
 
 class ModuleInfo extends React.Component {

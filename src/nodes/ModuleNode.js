@@ -1,5 +1,5 @@
 //import React from 'react';
-import module_temp from './ModuleTemplate.js';
+import module_temp from './template/ModuleTemplate.js';
 
 class ModuleNode {
 
@@ -271,7 +271,7 @@ class ModuleNode {
             }
         ];
 
-        this.meta = module_temp(this.type, this.style, this.portstyle, this.portstyle, this.JsonExport);
+        this.meta = module_temp(this.type, this.style, this.portstyle, this.portstyle);
     }
 
     getType() {

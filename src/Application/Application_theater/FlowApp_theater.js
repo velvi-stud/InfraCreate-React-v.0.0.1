@@ -1,9 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; //IMPORTANTE -> IMPORTARE
-import { Row, Col, Container, NavDropdown, Nav, Navbar, Button, } from 'react-bootstrap';
+import {
+    Row,
+    Col,
+    Container,
+    NavDropdown,
+    Nav,
+    Navbar,
+    Button,
+    Offcanvas,
+    Form
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 //import { HotKeys } from "react-hotkeys"; //-> per shortcut
 import useUndoable from "use-undoable";
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import ReactFlow,
 {
     removeElements,
@@ -17,10 +27,10 @@ import ReactFlow,
     useUpdateNodeInternals,
 } from 'react-flow-renderer';
 import _ from 'lodash'; // for count element objects -> shortuct _
-import Sidebar from './Sidebar_theater'; // per la sidebar
-import DataNodeInfo from './DataNodeInfo_theater';
+import Sidebar_t from './Sidebar_theater'; // per la sidebar
+import DataNodeInfo_t from './DataNodeInfo_theater';
 import '../all.css'
-import AllTypeNodes from '../../node-template/AllTypeNodes';
+import AllTypeNodes from '../../nodes/AllTypeNodes';
 import grid_dot from '../../images/nodeimg/grid_dot.png';
 import grid_line from '../../images/nodeimg/grid_line.png';
 import grid_no from '../../images/nodeimg/grid_no.png';
@@ -108,6 +118,11 @@ const FlowApp_t = (props) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /** @STATE -> observable
+     *  Per reperire i dati principali
+     */
+    const [state, setState] = useState({ type: props.type, name: props.name, description: props.description, version: props.version })
+
     /*  @STATE -> observable
         Per l'istanza del modello react (valorizzata all'avvio)
         con il metodo associato setIstanzaReactFlow() per la manipolazione,
@@ -140,10 +155,6 @@ const FlowApp_t = (props) => {
      */
     const [bkgnd, updateBackground] = useState({ type: 'lines', img: grid_dot, gap: 12, size: 1.5 });
 
-    /** @STATE -> observable
-     *  Per reperire i dati principali
-     */
-    const [state, setState] = useState({ type: props.type, name: props.name, description: props.description })
 
     /** @STATE -> observable
      *  Per aggiornare la view per DNI al side dx.
@@ -163,14 +174,8 @@ const FlowApp_t = (props) => {
     const setSelectedElements = useStoreActions((actions) => actions.setSelectedElements);
 
     /**
-     * PER AGGIORNARE I NODI CON PORTE MULTIPLE
-     */
-    const updateNodeInternals = useUpdateNodeInternals();
-
-    /**
      * PER REPERIRE I DATI SALVATI
      */
-    const infopan = useSelector(state => state.datapass)
     const dispatch = useDispatch();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -218,9 +223,11 @@ const FlowApp_t = (props) => {
             const flow = IstanzaReactFlow.toObject(); //converte il diagramma in oggetto
             console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
             flow['#elements'] = _.size(flow.elements); // detrae il numero dei nodi.
-            flow['module_name'] = state.name;
-            flow['module_description'] = state.description;
-            flow['version'] = '1.0'; //TODO
+            flow['theater_name'] = state.name;
+            flow['theater_description'] = state.description;
+            flow['theater_version'] = '1.0'; //TODO
+            //flow['theater_sessions'] = []; //TODO
+            flow['areas'] = areas; //TODO
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
             console.log(JSON.stringify(flow)); // salva il json
         } else {
@@ -276,7 +283,6 @@ const FlowApp_t = (props) => {
         setElementi((els) => els.concat(newNode)); // @@@@ concatena i nodi creati a quelli presenti
     }, [setElementi]);
 
-
     /**
      * @function onDragOver
      * @param {*} event
@@ -310,17 +316,17 @@ const FlowApp_t = (props) => {
             const version = event.dataTransfer.getData("version");
             var topology = event.dataTransfer.getData("topology");
             topology = JSON.parse(topology)
-            console.log('arrivaed:',topology);
+            console.log('arrivaed:', topology);
             if (type === '' || type === null) {
                 return;
             }
-            const position = IstanzaReactFlow.project({ x: event.clientX - 350, y: event.clientY -50 });
+            const position = IstanzaReactFlow.project({ x: event.clientX - 350, y: event.clientY - 50 });
             const id = getNodeId();
             const newNode = {
                 id,
                 type,
                 position,
-                data: { label: name, description: description, version:version, topology:topology },
+                data: { label: name, description: description, version: version, topology: topology },
             };
             setElementi((es) => es.concat(newNode)); // @@@@ aggiunge/concatena il nuovo nodo al canvas dei nodi Elementi
         }
@@ -383,7 +389,7 @@ const FlowApp_t = (props) => {
         setDimCanvas(10);
         setDimSider(0);
         setDisplay('none'); // RIMUOVE LA COLONNA CONTENENTE LE SIDE INFO
-        
+
     }
 
 
@@ -393,7 +399,7 @@ const FlowApp_t = (props) => {
      *  ritorna un Container (passato al lato dx) contenente tutte le strutture per personalizzare i nodi
      */
     function showDataNode() {
-        var d = new DataNodeInfo(datanodeinfo);
+        var d = new DataNodeInfo_t(datanodeinfo);
         return d.renderize();
     }
 
@@ -419,16 +425,142 @@ const FlowApp_t = (props) => {
 
     }
 
+
+
+    const updateState = (name, desc, version) => {
+        var x = { name: name, description: desc, version: version, type: state.type };
+        setState(x);
+    }
+    const [showoc, setShowOC] = useState(false);
+    const handleClose = () => setShowOC(false);
+    const handleShow = () => setShowOC(true);
+    const [areas, setAreas] = useState([]);
+
+    const GetOffcanvas = () => {
+
+        const z_name = useRef(null);
+        const z_desc = useRef(null);
+        const z_ver = useRef(null);
+
+        const updateDataApp = () => {
+            var name = z_name.current.value;
+            var desc = z_desc.current.value;
+            var ver = z_ver.current.value;
+            updateState(name, desc, ver);
+        }
+
+        const updateAreas = (a_name, a_desc) => {
+            var x = {
+                $area_name: a_name,
+                $area_desc: a_desc
+            }
+            var y = {
+                ...areas,
+                $area: x
+            }
+            setAreas(y);
+            console.log(areas);
+        }
+
+        return (
+            <Offcanvas show={showoc} onHide={handleClose} style={{width:'45vw'}}>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>
+                        <h2 className='d-inline mb-3'>
+                            {state.name} Info
+                        </h2>
+                    </Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    <div>
+                        <Container className='cf px-1 py-2' style={{ direction: 'ltr', overflowX: 'hidden', overflowY: 'scroll', fontSize: "0.8em", position: 'relative' }}>
+                            {/* <Row className='mb-2'>
+                                <Col style={{ overflowX: 'auto' }} className='p-2'>
+                                    <h2 className='d-inline mb-3'>{this.element['data']['label']}</h2>
+                                    <h2 className='d-inline' style={{ fontSize: '1em' }}>{this.tipo} </h2>
+                                </Col>
+                            </Row> */}
+
+                            {/* NAME */}
+                            <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                                <Col xs={12} md={5} lg={4} className='colDNI text-center' >
+                                    <Form.Label className="">
+                                        <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>
+                                            Name {state.type}
+                                        </p>
+                                    </Form.Label>
+                                </Col>
+                                <Col xs={12} md={7} lg={8}>
+                                    <Form.Control
+                                        ref={z_name}
+                                        placeholder={state.name}
+                                        style={{ fontSize: "1.4em" }}
+                                    //onChange={}
+                                    />
+                                </Col>
+                            </Row>
+
+                            {/* DESCRIPTION */}
+                            <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                                <Col xs={12} md={5} lg={4} className='colDNI text-center'>
+                                    <Form.Label className="">
+                                        <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Description</p>
+                                    </Form.Label>
+                                </Col>
+                                <Col xs={12} md={7} lg={8}>
+                                    <Form.Control
+                                        ref={z_desc}
+                                        /*as='textarea'*/
+                                        placeholder={state.description}
+                                        style={{ fontSize: "1.4em" }}
+                                    //onChange={}
+                                    />
+                                </Col>
+                            </Row>
+
+                            {/* VERSION */}
+                            <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                                <Col xs={12} md={5} lg={4} className='colDNI text-center'>
+                                    <Form.Label className="">
+                                        <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Version</p>
+                                    </Form.Label>
+                                </Col>
+                                <Col xs={12} md={7} lg={8}>
+                                    <Form.Control
+                                        ref={z_ver}
+                                        /*as='textarea'*/
+                                        placeholder={state.version}
+                                        style={{ fontSize: "1.4em" }}
+                                    //onChange={}
+                                    />
+                                </Col>
+                            </Row>
+
+                            <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                                <Col xs={12} md={6} lg={4} className='colDNI text-center'>
+                                    <Button variant="primary" onClick={() => updateDataApp()} > Save Changes </Button>
+                                </Col>
+                                <Col xs={12} md={6} lg={4} className='colDNI text-center'>
+                                    <Button variant="danger" onClick={() => handleClose()} > Discard Changes </Button>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>
+                </Offcanvas.Body>
+            </Offcanvas >
+        );
+    }
+
+
     /**
      * @function getSidebar
      * @returns
      *  This function return a render output of sidebar -> node
      */
     function getSidebar() {
-        var x = new Sidebar()
+        var x = new Sidebar_t()
         return (x.render());
     }
-
 
     function addNavBar() {
         return (
@@ -447,8 +579,8 @@ const FlowApp_t = (props) => {
 
                         <Nav className="me-auto">
 
-                            <Nav.Link>Features</Nav.Link>
-                            <Nav.Link>Items</Nav.Link>
+                            <Nav.Link onClick={() => handleShow()}>Theater details</Nav.Link>
+                            {/* <Nav.Link>Items</Nav.Link>
 
                             <NavDropdown title="Image details" id="collasible-nav-dropdown">
                                 <NavDropdown.Item >1</NavDropdown.Item>
@@ -457,7 +589,7 @@ const FlowApp_t = (props) => {
                                 { }
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item >Add Image</NavDropdown.Item>
-                            </NavDropdown>
+                            </NavDropdown> */}
 
                         </Nav>
 
@@ -468,7 +600,7 @@ const FlowApp_t = (props) => {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-
+                {GetOffcanvas()}
             </Container>
         );
     }

@@ -4,7 +4,7 @@ const modulesTop = [];
 
 const modulesretrieved = (state = modulesTop, action) => {
     switch (action.type) {
-        case 'modulesobtained':
+        case 'modulesretrieved':
             state = action.data;
             return action.data;
         default:

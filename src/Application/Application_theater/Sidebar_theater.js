@@ -41,7 +41,7 @@ class Sidebar_t extends React.Component {
             listnode: []
         }
         var name, description, version, topology;
-        console.log(moduleslist);
+        //console.log(moduleslist);
         Object.entries(moduleslist).map(
             ([key, value]) => {
                 value = value[0];
@@ -82,7 +82,7 @@ class Sidebar_t extends React.Component {
             return value;
         });
         topology= JSON.stringify(topology);
-        console.log('topology passed: ', topology);
+        //console.log('topology passed: ', topology);
         event.dataTransfer.setData('topology', topology );
         event.dataTransfer.effectAllowed = 'move'; //sito in link
     };

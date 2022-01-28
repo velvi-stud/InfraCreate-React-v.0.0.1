@@ -403,6 +403,7 @@ const FlowApp_t = (props) => {
         return d.renderize();
     }
 
+
     /**
      * @function setBackground
      * @description
@@ -431,10 +432,10 @@ const FlowApp_t = (props) => {
         var x = { name: name, description: desc, version: version, type: state.type };
         setState(x);
     }
+
     const [showoc, setShowOC] = useState(false);
     const handleClose = () => setShowOC(false);
     const handleShow = () => setShowOC(true);
-    const [areas, setAreas] = useState([]);
 
     const GetOffcanvas = () => {
 
@@ -449,21 +450,8 @@ const FlowApp_t = (props) => {
             updateState(name, desc, ver);
         }
 
-        const updateAreas = (a_name, a_desc) => {
-            var x = {
-                $area_name: a_name,
-                $area_desc: a_desc
-            }
-            var y = {
-                ...areas,
-                $area: x
-            }
-            setAreas(y);
-            console.log(areas);
-        }
-
         return (
-            <Offcanvas show={showoc} onHide={handleClose} style={{width:'45vw'}}>
+            <Offcanvas show={showoc} onHide={handleClose} style={{ width: '45vw' }}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>
                         <h2 className='d-inline mb-3'>
@@ -536,6 +524,8 @@ const FlowApp_t = (props) => {
                                 </Col>
                             </Row>
 
+                            {Areas_node()}
+
                             <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                                 <Col xs={12} md={6} lg={4} className='colDNI text-center'>
                                     <Button variant="primary" onClick={() => updateDataApp()} > Save Changes </Button>
@@ -550,6 +540,181 @@ const FlowApp_t = (props) => {
             </Offcanvas >
         );
     }
+
+
+    const [areas, setAreas] = useState({}); // TO MODIFY INITIAL AREA IN CASE OF IMPORT CHANGE INITIAL STATE IMPORTING THE JSON
+
+    const Areas_node = () => {
+
+        const an = useRef();
+        const ad = useRef();
+
+        const updateAreas = () => {
+            console.log('new area', an.current.value, ad.current.value)
+            var x = {};
+            function NEWarea(name, desc) {
+                var temp = {
+                    $area_name: name,
+                    $area_desc: desc
+                }
+                this.area = temp;
+            }
+            var y = new Array();
+            Object.entries(areas).map(
+                ([key, value]) => {
+                    y.push(new NEWarea(value.$area_name, value.$area_desc));
+                }
+            );
+            y.push(new NEWarea(an.current.value, ad.current.value));
+            Object.entries(y).map(
+                ([key, value]) => {
+                    var dict = {};
+                    dict = value;
+                    x[key] = dict;
+                }
+            );
+            setAreas(x);
+        }
+
+        const removeArea = (a_name) => {
+            for (var k in areas) {
+                if (k == a_name) {
+                    delete areas[a_name];
+                    return true;
+                } else if (typeof areas[k] === "object") {
+                    if (removeArea(areas[k], a_name)) return true;
+                }
+            }
+            return false;
+        }
+
+        function showAreas() {
+            Object.entries(areas).map(
+                ([key, value]) => {
+                    <div id={key}>
+                        Area:
+                        {/* NAME */}
+                        <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                            <Col xs={12} md={5} lg={4} className='colDNI text-center' >
+                                <Form.Label className="">
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>
+                                        Area name
+                                    </p>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={12} md={7} lg={8}>
+                                <Form.Control
+                                    //ref={}
+                                    placeholder={value.$area_name}
+                                    style={{ fontSize: "1.4em" }}
+                                //onChange={}
+                                />
+                            </Col>
+                        </Row>
+                        {/* DESCRIPTION */}
+                        <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                            <Col xs={12} md={5} lg={4} className='colDNI text-center'>
+                                <Form.Label className="">
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Description</p>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={12} md={7} lg={8}>
+                                <Form.Control
+                                    //ref={}
+                                    /*as='textarea'*/
+                                    placeholder={value.$area_desc}
+                                    style={{ fontSize: "1.4em" }}
+                                //onChange={}
+                                />
+                            </Col>
+                        </Row>
+
+                        <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                            <Col xs={12} md={5} lg={4} className='colDNI text-center'>
+                                <Button onClick={() => { removeArea(value.$area_name); console.log('eliminata area:', areas); }}> Remove Area </Button>
+                            </Col>
+                        </Row>
+
+                    </div>
+
+                }
+            )
+        }
+
+        const [AddArea, setshowAddArea] = useState({ text: 'Add Area', show: 'none' })
+        function switchAddArea() {
+            if (AddArea.show === 'none') {
+                setshowAddArea({ text: 'Close area creation', show: 'block' });
+            } else {
+                setshowAddArea({ text: 'Add Area', show: 'none' });
+            }
+        }
+
+        console.log(areas);
+        return (
+            <Container className='cf px-1 py-2' style={{ direction: 'ltr', overflowX: 'hidden', overflowY: 'scroll', fontSize: "0.8em", position: 'relative' }}>
+                <Row className='mb-2'>
+                    <Col style={{ overflowX: 'auto' }} className='p-2'>
+                        <h2 className=' mb-3'>Areas:</h2>
+                    </Col>
+                </Row>
+
+                {showAreas()}
+
+                <Button onClick={() => { switchAddArea() }}> {AddArea.text} </Button>
+                <div style={{ display: AddArea.show }}>
+                    Add Area:
+                    {/* NAME */}
+                    <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                        <Col xs={12} md={5} lg={4} className='colDNI text-center' >
+                            <Form.Label className="">
+                                <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>
+                                    Area Name
+                                </p>
+                            </Form.Label>
+                        </Col>
+                        <Col xs={12} md={7} lg={8}>
+                            <Form.Control
+                                ref={an}
+                                placeholder={state.name}
+                                style={{ fontSize: "1.4em" }}
+                            //onChange={}
+                            />
+                        </Col>
+                    </Row>
+
+                    {/* DESCRIPTION */}
+                    <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                        <Col xs={12} md={5} lg={4} className='colDNI text-center'>
+                            <Form.Label className="">
+                                <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>
+                                    Description
+                                </p>
+                            </Form.Label>
+                        </Col>
+                        <Col xs={12} md={7} lg={8}>
+                            <Form.Control
+                                ref={ad}
+                                /*as='textarea'*/
+                                placeholder={state.description}
+                                style={{ fontSize: "1.4em" }}
+                            //onChange={}
+                            />
+                        </Col>
+                    </Row>
+
+                    <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                        <Col xs={12} md={5} lg={4} className='colDNI text-center'>
+                            <Button onClick={() => { updateAreas() }}> Add Area </Button>
+                        </Col>
+                    </Row>
+                </div>
+
+            </Container>
+        );
+    }
+
+
 
 
     /**

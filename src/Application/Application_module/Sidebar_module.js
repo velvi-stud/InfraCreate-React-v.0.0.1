@@ -1,8 +1,7 @@
 import React, { createRef } from 'react';
-import { Container, Row, Accordion } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import AllTypeNodes from '../../nodes/AllTypeNodes';
 import '../all.css'
-import { useSelector, useDispatch } from 'react-redux';
 
 class Sidebar_m extends React.Component {
 

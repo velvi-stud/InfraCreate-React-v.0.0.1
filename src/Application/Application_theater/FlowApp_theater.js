@@ -3,7 +3,6 @@ import {
     Row,
     Col,
     Container,
-    NavDropdown,
     Nav,
     Navbar,
     Button,
@@ -13,7 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 //import { HotKeys } from "react-hotkeys"; //-> per shortcut
 import useUndoable from "use-undoable";
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import ReactFlow,
 {
     removeElements,
@@ -24,7 +23,6 @@ import ReactFlow,
     useZoomPanHelper,
     useStoreState,
     useStoreActions,
-    useUpdateNodeInternals,
 } from 'react-flow-renderer';
 import _ from 'lodash'; // for count element objects -> shortuct _
 import Sidebar_t from './Sidebar_theater'; // per la sidebar
@@ -47,7 +45,7 @@ import selall from '../../images/nodeimg/select_all.png';
 
 import Areas_node from './HandleAreas';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import localforage from 'localforage';
 
@@ -180,9 +178,19 @@ const FlowApp_t = (props) => {
      */
     const dispatch = useDispatch();
 
+    
+    const [showoc, setShowOC] = useState(false);
+    const handleClose = () => setShowOC(false);
+    const handleShow = () => setShowOC(true);
+
+    const [areas, setAreas] = useState({}); // TO MODIFY INITIAL AREA IN CASE OF IMPORT CHANGE INITIAL STATE IMPORTING THE JSON
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
     /**
      * @function onElementsRemove
@@ -235,7 +243,7 @@ const FlowApp_t = (props) => {
         } else {
             console.log("error saving diagram!");
         }
-    }, [IstanzaReactFlow]);
+    }, [IstanzaReactFlow, areas, state.description, state.name, ]);
 
     /**
      * @function onRestore
@@ -401,7 +409,8 @@ const FlowApp_t = (props) => {
      *  ritorna un Container (passato al lato dx) contenente tutte le strutture per personalizzare i nodi
      */
     function showDataNode() {
-        var d = new DataNodeInfo_t(datanodeinfo);
+        console.log('aaaaaaaaa:', areas);
+        var d = new DataNodeInfo_t(datanodeinfo,areas);
         return d.renderize();
     }
 
@@ -435,19 +444,13 @@ const FlowApp_t = (props) => {
         setState(x);
     }
 
-    const [showoc, setShowOC] = useState(false);
-    const handleClose = () => setShowOC(false);
-    const handleShow = () => setShowOC(true);
-
-    const [areas, setAreas] = useState({}); // TO MODIFY INITIAL AREA IN CASE OF IMPORT CHANGE INITIAL STATE IMPORTING THE JSON
-
     const GetOffcanvas = () => {
 
         const z_name = useRef(null);
         const z_desc = useRef(null);
         const z_ver = useRef(null);
 
-        function updateDataApp(){
+        function updateDataApp() {
             var name = z_name.current.value;
             var desc = z_desc.current.value;
             var ver = z_ver.current.value;
@@ -466,7 +469,7 @@ const FlowApp_t = (props) => {
                 <Offcanvas.Body>
                     <div>
                         <Container className='cf px-1 py-2' style={{ fontSize: "0.8em", position: 'relative' }}>
-                        
+
 
                             {/* NAME */}
                             <Row className='mb-2 mt-2 justify-content-center rowDNI' >
@@ -523,7 +526,8 @@ const FlowApp_t = (props) => {
                                 </Col>
                             </Row>
 
-                            <Areas_node areas={areas} onChange={(value)=>{setAreas(value)}}></Areas_node>
+                            {/* PER CONTROLLARE LE AREE */}
+                            <Areas_node areas={areas} onChange={(value) => { setAreas(value) }}></Areas_node>
                             {/* {console.log('nuovostato:',areas)} */}
 
                             <Row className='mb-2 mt-2 justify-content-center rowDNI' >
@@ -540,8 +544,6 @@ const FlowApp_t = (props) => {
             </Offcanvas >
         );
     }
-
-
 
 
 
@@ -605,25 +607,25 @@ const FlowApp_t = (props) => {
 
                 <Row className="me-auto" >
                     <Col style={{ textAlign: 'left' }}>
-                        <a className='btn p-0' onClick={zoomIn} style={{ marginRight: '1vw' }}>
+                        <button className='btn p-0' onClick={zoomIn} style={{ marginRight: '1vw' }}>
                             <img src={zoomin} width={18} height={18} alt="zoomin" style={{ marginBottom: '0.4vh' }} />
                             Zoom in
-                        </a>
-                        <a className='btn p-0' onClick={zoomOut} style={{ marginRight: '1vw' }}>
+                        </button>
+                        <button className='btn p-0' onClick={zoomOut} style={{ marginRight: '1vw' }}>
                             <img src={zoomout} width={18} height={18} alt="zoomout" style={{ marginBottom: '0.4vh' }} />
                             Zoom out
-                        </a>
-                        <a className='btn p-0' onClick={fitView} style={{ marginRight: '1vw' }}>
+                        </button>
+                        <button className='btn p-0' onClick={fitView} style={{ marginRight: '1vw' }}>
                             <img src={fitview} width={18} height={18} alt="firview" style={{ marginBottom: '0.4vh' }} />
                             Fit view
-                        </a>
-                        <a className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</a>
-                        <a className='btn p-0' onClick={() => { setBackground() }} style={{ marginRight: '1vw' }}>
+                        </button>
+                        <button className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</button>
+                        <button className='btn p-0' onClick={() => { setBackground() }} style={{ marginRight: '1vw' }}>
                             <img src={bkgnd['img']} width={13} height={13} alt="changebg" style={{ marginBottom: '0.4vh' }} />
                             &nbsp;
                             Change background {bkgnd['type']}
-                        </a>
-                        <a className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</a>
+                        </button>
+                        <button className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</button>
                         <Button className='btn p-0' onClick={() => undo()} disabled={!canUndo} style={{ marginRight: '1vw', color: 'black', backgroundColor: 'transparent', borderColor: 'transparent' }}>
                             <img src={indietro} width={18} height={18} alt="undo" style={{ marginBottom: '0.4vh' }} />
                             &nbsp;Undo
@@ -632,17 +634,17 @@ const FlowApp_t = (props) => {
                             <img src={avanti} width={18} height={18} alt="redo" style={{ marginBottom: '0.4vh' }} />
                             &nbsp; Redo
                         </Button>
-                        <a className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</a>
-                        <a className='btn p-0' onClick={() => { setElementi((els) => removeElements(datanodeinfo.selected_element, els)) }} style={{ marginRight: '1vw' }}>
+                        <button className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</button>
+                        <button className='btn p-0' onClick={() => { setElementi((els) => removeElements(datanodeinfo.selected_element, els)) }} style={{ marginRight: '1vw' }}>
                             <img src={deletex} width={18} height={18} alt="delete" style={{ marginBottom: '0.4vh' }} />
                             &nbsp; Delete node
-                        </a>
-                        <a className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</a>
-                        <a className='btn p-0' onClick={() => { setSelectedElements(nodes.map((node) => ({ id: node.id, type: node.type }))) }} style={{ marginRight: '1vw' }}>
+                        </button>
+                        <button className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</button>
+                        <button className='btn p-0' onClick={() => { setSelectedElements(nodes.map((node) => ({ id: node.id, type: node.type }))) }} style={{ marginRight: '1vw' }}>
                             <img src={selall} width={18} height={18} alt="delete" style={{ marginBottom: '0.4vh' }} />
                             &nbsp; Select all nodes
-                        </a>
-                        <a className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</a>
+                        </button>
+                        <button className='btn p-0' style={{ opacity: '10%', marginRight: '1vw' }}>|</button>
                         {/* <a className='btn p-0' onClick={() => { updateNodeInternals(datanodeinfo.selected_element.id); console.log(datanodeinfo.selected_element.id); }} style={{ marginRight: '1vw' }}>
                             <img src={selall} width={18} height={18} alt="delete" style={{ marginBottom: '0.4vh' }} />
                             &nbsp;  Refresh

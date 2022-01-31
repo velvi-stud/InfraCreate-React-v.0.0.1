@@ -5,7 +5,7 @@ import FlowApp_m from './Application_module/FlowApp_module';
 import FlowApp_t from './Application_theater/FlowApp_theater';
 import './all.css'
 import { ReactFlowProvider } from 'react-flow-renderer';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, } from 'react-redux';
 
 
 
@@ -27,7 +27,7 @@ const Application = () => {
         version: infopan.version
       });
     }
-    , [])
+    , [infopan.description, infopan.name, infopan.type, infopan.version])
 
   function getApp() {
     if (state.type === 'module')
@@ -50,7 +50,7 @@ const Application = () => {
         </ReactFlowProvider>
       </Container>
     </div>
-  );
+  ); 
 
 
 }

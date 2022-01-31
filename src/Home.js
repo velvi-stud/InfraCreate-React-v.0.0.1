@@ -1246,19 +1246,6 @@ const Home = () => {
                         }
                     },
                     {
-                        "id": "reactflow__node-1643105000694",
-                        "type": "network",
-                        "position": {
-                            "x": 382.0197016486155,
-                            "y": 392.7783498220018
-                        },
-                        "data": {
-                            "label": "n2",
-                            "desc": "",
-                            "$net_type": "provider"
-                        }
-                    },
-                    {
                         "id": "reactflow__node-1643105061738",
                         "type": "network",
                         "position": {
@@ -1348,14 +1335,6 @@ const Home = () => {
                         "target": "reactflow__node-1643104988986",
                         "targetHandle": "s2",
                         "id": "reactflow__edge-reactflow__node-1643104887857p1-reactflow__node-1643104988986s2",
-                        "type": "default"
-                    },
-                    {
-                        "source": "reactflow__node-1643104988986",
-                        "sourceHandle": "s2",
-                        "target": "reactflow__node-1643105000694",
-                        "targetHandle": "n2",
-                        "id": "reactflow__edge-reactflow__node-1643104988986s2-reactflow__node-1643105000694n2",
                         "type": "default"
                     },
                     {

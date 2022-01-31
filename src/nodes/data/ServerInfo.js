@@ -79,7 +79,7 @@ class PortInfo extends React.Component {
     }
 
     renderize() {
-        const updateimg = () => {
+        const showImg = () => {
             var items = []
             for (const [index, value] of this.images.entries()) {
                 console.log(index, value);
@@ -165,7 +165,7 @@ class PortInfo extends React.Component {
                                     onChange={() => this.updateServerData()}
                                 >
                                     <option >{this.checkDataList(['data', '$image'], 'Select image')} </option>
-                                    {updateimg()}
+                                    {showImg()}
                                     {/* <option value="Linux ">Linux  </option>
                                     <option value="Fedora">Fedora </option>
                                     <option value="MacOSx">MacOSx </option>

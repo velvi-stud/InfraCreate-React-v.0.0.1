@@ -5,17 +5,17 @@ import {
     Button,
     Form
 } from 'react-bootstrap';
-import React, { useState,  useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 const Areas_node = (props) => {
 
     //console.log(props)
-    const [areas, setAreas] = useState(props.areas); 
+    const [areas, setAreas] = useState(props.areas);
 
     const an = useRef();
     const ad = useRef();
 
-    const addNewArea = () => {
+    function addArea() {
         //console.log('new area', an.current.value, ad.current.value)
         var x = {};
         function NEWarea(name, desc) {
@@ -50,6 +50,22 @@ const Areas_node = (props) => {
                 var ar = value.area;
                 if (ar.$area_name !== a_name)
                     x[key] = value;
+            }
+        )
+        setAreas(x);
+        props.onChange(x);
+    }
+    function updateArea(old_name,new_name, new_desc) { //TODO
+        var x = {};
+        Object.entries(areas).map(
+            ([key, value]) => {
+                var ar = value.area;
+                if (ar.$area_name === old_name) {
+                    ar.$area_name = new_name;
+                    ar.$area_desc = new_desc;
+                }
+                value.area = ar;
+                x[key] = value;
             }
         )
         setAreas(x);
@@ -111,11 +127,11 @@ const Areas_node = (props) => {
                         </Row>
 
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
-                            <Col xs={12} md={5} lg={4} className='colDNI text-center'>
-                                <Button onClick={() => { removeArea(name); console.log('eliminata area:', areas); }}> Modify Area </Button>
-                            </Col>
-                            <Col xs={12} md={5} lg={4} className='colDNI text-center'>
-                                <Button onClick={() => { removeArea(name); console.log('eliminata area:', areas); }}> Remove Area </Button>
+                            {/* <Col xs={12} md={5} lg={4} className='colDNI text-center'>
+                                <Button variant='primary' onClick={() => { removeArea(name); console.log('eliminata area:', areas); }}> Modify Area </Button>
+                            </Col> */}
+                            <Col  /*xs={12} md={5} lg={4}*/ className='colDNI' style={{textAlign:'right'}}>
+                                <Button variant='danger' onClick={() => { removeArea(name); console.log('eliminata area:', areas); }}> Remove Area </Button>
                             </Col>
                         </Row>
 
@@ -127,12 +143,12 @@ const Areas_node = (props) => {
         return (x);
     }
 
-    const [CanvasNewArea, setshowCanvasNewArea] = useState({ text: 'Add Area', show: 'none' })
+    const [CanvasNewArea, setshowCanvasNewArea] = useState({ text: 'Create new area', show: 'none', variant: 'success' })
     function switchAddArea() {
         if (CanvasNewArea.show === 'none') {
-            setshowCanvasNewArea({ text: 'Close area creation', show: 'block' });
+            setshowCanvasNewArea({ text: 'Close area creation', show: 'block', variant: 'warning' });
         } else {
-            setshowCanvasNewArea({ text: 'Add Area', show: 'none' });
+            setshowCanvasNewArea({ text: 'Create new area', show: 'none', variant: 'success' });
         }
     }
 
@@ -147,9 +163,13 @@ const Areas_node = (props) => {
 
             {showStoredAreas()}
 
-            <Button onClick={() => { switchAddArea() }}> {CanvasNewArea.text} </Button>
+            <Row className='mb-2'>
+                <Col style={{ textAlign: 'center' }} className='p-2'>
+                    <Button variant={CanvasNewArea.variant} onClick={() => { switchAddArea() }}> {CanvasNewArea.text} </Button>
+                </Col>
+            </Row>
+
             <div style={{ display: CanvasNewArea.show }}>
-                Add Area:
                 {/* NAME */}
                 <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                     <Col xs={12} md={5} lg={4} className='colDNI text-center' >
@@ -191,7 +211,7 @@ const Areas_node = (props) => {
 
                 <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                     <Col xs={12} md={5} lg={4} className='colDNI text-center'>
-                        <Button onClick={() => { addNewArea() }}> Add Area </Button>
+                        <Button variant='success' onClick={() => { addArea() }}> Add Area </Button>
                     </Col>
                 </Row>
             </div>

@@ -69,12 +69,14 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 	const ATN = new xxx();
 	const allNodeTypes = ATN.GetObj();
 
+	var np = 0, nc = 0;
 
 	const Generate_custom_node = ({ data }) => {
 
 		function handleprov() {
 			let elemProv = data.topology.filter(element => element.data !== undefined && element.data.$net_type !== undefined && element.data.$net_type === 'provider');
 			let sizeProv = _.size(elemProv);
+			np = sizeProv;
 			//console.log('prov:', aaa)
 			let x = [];
 			let a = 100 / (sizeProv + 1);
@@ -84,6 +86,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 			var d = {};
 			Object.entries(elemProv).map(
 				([key, value]) => {
+					var v = value.id;
 					c = { top: z + '%' };
 					d = {
 						...css_out,
@@ -91,8 +94,8 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 					}
 					l =
 						<Handle
-							key={value.data.label}
-							id={value.data.label}
+							key={v} //KEY === ID
+							id={v} // ID === ID == LABEL
 							type="source"
 							position="right"
 							style={d}
@@ -109,7 +112,8 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 
 		function handlecons() {
 			let elemCons = data.topology.filter(element => element.data !== undefined && element.data.$net_type !== undefined && element.data.$net_type === 'consumer');
-			let sizeCons = _.size(elemCons);			
+			let sizeCons = _.size(elemCons);
+			nc = sizeCons;
 			//console.log('cons:', sizeprov)
 			let x = [];
 			let a = 100 / (sizeCons + 1);
@@ -119,6 +123,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 			var d = {};
 			Object.entries(elemCons).map(
 				([key, value]) => {
+					var v = value.id;
 					c = { top: z + '%' };
 					d = {
 						...css_in,
@@ -126,8 +131,8 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 					}
 					l =
 						<Handle
-							key={value.data.label}
-							id={value.data.label}
+							key={v}  //KEY === ID == LABEL
+							id={v} // ID === ID == LABEL
 							type="target"
 							position="left"
 							style={d}
@@ -143,7 +148,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 		}
 
 
-		function Overlayy (){
+		function Overlayy() {
 			return (
 				<OverlayTrigger trigger="click" placement="bottom" overlay={
 
@@ -189,8 +194,27 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 		//if(data.topology !== undefined && data.topology !== [] )
 		//topology_data(data.topology);
 
+		const cs = () => {
+			handleprov();
+			handlecons();
+			var max = _.max([np, nc]);
+			console.log('max is: ', max);
+			max = 10 + (max + 1);
+			var c = {
+				height: max + 'vh',
+				display: 'table-cell',
+				verticalAlign: 'middle'
+			};
+			var d = {
+				...style,
+				...c
+			}
+			return d;
+		}
+		const style2 = cs();
+
 		return (
-			<div style={style}>
+			<div key={data.id} style={style2}>
 
 				{/* PORTA INGRESSO TIPO 1*/}
 				{handlecons()}

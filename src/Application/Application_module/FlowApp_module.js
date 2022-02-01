@@ -3,7 +3,6 @@ import {
     Row,
     Col,
     Container,
-    NavDropdown,
     Nav,
     Navbar,
     Button,
@@ -13,7 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 //import { HotKeys } from "react-hotkeys"; //-> per shortcut
 import useUndoable from "use-undoable";
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import ReactFlow,
 {
     removeElements,
@@ -24,7 +23,6 @@ import ReactFlow,
     useZoomPanHelper,
     useStoreState,
     useStoreActions,
-    useUpdateNodeInternals,
 } from 'react-flow-renderer';
 import _ from 'lodash'; // for count element objects -> shortuct _
 import Sidebar_m from './Sidebar_module.js';
@@ -46,6 +44,7 @@ import deletex from '../../images/nodeimg/delete.png';
 import selall from '../../images/nodeimg/select_all.png';
 
 import { useSelector, useDispatch } from 'react-redux';
+import exportToJson from '../DownloadJSON.js';
 
 import localforage from 'localforage';
 
@@ -219,7 +218,7 @@ const FlowApp_m = (props) => {
      *      trasforma l'istanzaReactFlow in un oggetto [toObject] (per poterlo memorizzare, anche in json)
      *      lo memorizza in localforage in $$$$.
      */
-    const onSave = useCallback(() => {
+    function onSave () {
         if (IstanzaReactFlow) {
             const flow = IstanzaReactFlow.toObject(); //converte il diagramma in oggetto
             console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
@@ -229,10 +228,12 @@ const FlowApp_m = (props) => {
             flow['version'] = state.version;
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
             console.log(JSON.stringify(flow)); // salva il json
+            let filename = 'module_blueprint_'+state.name;
+            exportToJson(flow,filename);
         } else {
             console.log("error saving diagram!");
         }
-    }, [IstanzaReactFlow]);
+    }
 
     /**
      * @function onRestore
@@ -434,6 +435,7 @@ const FlowApp_m = (props) => {
 
 
     const updateState = (name, desc, version) => {
+        console.log('oooo', name,desc,version);
         var x = { name: name, description: desc, version: version, type: state.type };
         setState(x);
     }

@@ -47,6 +47,8 @@ import Areas_node from './HandleAreas';
 
 import { useDispatch } from 'react-redux';
 
+import exportToJson from '../DownloadJSON';
+
 import localforage from 'localforage';
 
 
@@ -228,7 +230,7 @@ const FlowApp_t = (props) => {
      *      trasforma l'istanzaReactFlow in un oggetto [toObject] (per poterlo memorizzare, anche in json)
      *      lo memorizza in localforage in $$$$.
      */
-    const onSave = useCallback(() => {
+    function onSave () {
         if (IstanzaReactFlow) {
             const flow = IstanzaReactFlow.toObject(); //converte il diagramma in oggetto
             console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
@@ -240,10 +242,12 @@ const FlowApp_t = (props) => {
             flow['areas'] = areas; //TODO
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
             console.log(JSON.stringify(flow)); // salva il json
+            let filename = 'theater_blueprint_'+state.name;
+            exportToJson(flow,filename);
         } else {
             console.log("error saving diagram!");
         }
-    }, [IstanzaReactFlow, areas, state.description, state.name, ]);
+    }
 
     /**
      * @function onRestore

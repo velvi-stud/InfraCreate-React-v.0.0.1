@@ -14,14 +14,6 @@ class Sidebar_t extends React.Component {
         super();
         this.MN = new ModuleNode();
         this.style = this.MN.getStyle();
-
-        // this.listnode = [];
-        // Object.entries(this.nodes).map(
-        //     ([key, value]) => {
-        //         //if (value.type !== 'module')
-        //         this.listnode.push(this.renderDaD(value.type, value.style));
-        //     }
-        // )
         this.state = {
             moduleslist: [],
             listnode: []
@@ -29,11 +21,14 @@ class Sidebar_t extends React.Component {
 
         this.func();
         console.log(this.state.modulelist, this.state.listnode);
-
         this.render = this.render.bind(this);
         this.renderDaD = this.renderDaD.bind(this);
     }
 
+    /**
+     * @function func
+     *  retireve module data from "redux" shared area
+     */
     func = () => {
         var moduleslist = useSelector(state => state.modulesretrieved)
         this.state = {
@@ -63,6 +58,7 @@ class Sidebar_t extends React.Component {
 
     /**
      * @function onDragStart
+     *  function to handle drag-start event from this sidebar
      * @param {*} event 
      *  modalità di trasferimento (trasferimento Drag&Drop variabili).
      * @param {*} nodeType 
@@ -77,16 +73,24 @@ class Sidebar_t extends React.Component {
         event.dataTransfer.setData('type', 'module');
         event.dataTransfer.setData('name', name);
         event.dataTransfer.setData('description', description);
-        event.dataTransfer.setData('version', version);      
-        var topology = _.map(topology, function(value, key){
+        event.dataTransfer.setData('version', version);
+        var topology = _.map(topology, function (value, key) {
             return value;
         });
-        topology= JSON.stringify(topology);
+        topology = JSON.stringify(topology);
         //console.log('topology passed: ', topology);
-        event.dataTransfer.setData('topology', topology );
+        event.dataTransfer.setData('topology', topology);
         event.dataTransfer.effectAllowed = 'move'; //sito in link
     };
 
+    /**
+     * @function renderDaD
+     *  generate a row containing the type node element with his unique style to drag on canvas
+     * @param {*} type 
+     * @param {*} style 
+     * @returns 
+     *  return a html-row rappresenting the draggable node
+     */
     renderDaD(name, description, version, topology) {
         return (
             // l'attr. KEY serve quando si creano elementi così, non è obbligatorio ma da errore
@@ -100,20 +104,15 @@ class Sidebar_t extends React.Component {
 
 
     render() {
-
         return (
             <div className='pt-2 pb-2'>
                 <Container id='dragdrop' className='justify-content-center text-center cf vheight' style={{ overflowX: 'hidden', overflowY: 'visible', }}>
                     <Row className='justify-content-center text-center mt-1 mb-1'>
                         <h5>Drag and Drop Modules.</h5>
                     </Row>
-
                     {this.state.listnode}
-
-
                 </Container>
             </div>
-
         );
     }
 

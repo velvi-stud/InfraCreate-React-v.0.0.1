@@ -10,7 +10,6 @@ class DataNodeInfo_m extends React.Component {
      * 
      * @param {*} dati 
      *      forma dati: ({ selected_element: undefined, show: false })
-     * @returns 
      */
     constructor(dati) {
         super();
@@ -30,18 +29,10 @@ class DataNodeInfo_m extends React.Component {
         //console.log('dni', this.ain);
     }
 
-
-    ///// struttura contenente gli elementi da mostrare in base al tipo //////
     renderize() {
         if (this.show) {
             return (
                 <div className='vheight'>
-                    {/* <div className='justify-content-center text-center m-2' style={{ overflowX: 'scroll', overflowY: 'hidden', minHeight:'5vh',maxHeight: '5vh', }}>
-                        <h2 className='d-inline mb-3'>
-                            {this.element['data']['label']}
-                            <cite className='d-inline' style={{ fontSize: '0.5em' }}>{this.tipo} </cite>
-                        </h2>
-                    </div>*/}
                     <Container className='cf px-1 py-2' style={{ direction: 'rtl', overflowX: 'hidden', overflowY: 'scroll', fontSize: "0.8em", position: 'relative' }}>
                         <Row className='mb-2'>
                             <Col style={{ overflowX: 'auto' }} className='p-2'>

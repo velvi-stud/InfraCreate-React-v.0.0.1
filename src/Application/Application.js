@@ -16,7 +16,10 @@ const Application = () => {
   const infopan = useSelector(state => state.datapass)
   const [state, setState] = useState({ type: '', name: '', description: '', version: '' })
 
-  /** QUEST FUNCTION FA AGGIORNARE I DATI DERIVATI DAL REDUX */
+  /**
+   * UseEffect React Hook 
+   *  the scope is to take the base data passed and stored locally, (datapass) "redux"
+   */
   useEffect(
     () => {
       /* DA CANCELLARE -> PER PROVA */
@@ -29,15 +32,25 @@ const Application = () => {
     }
     , [infopan.description, infopan.name, infopan.type, infopan.version])
 
+
+  /**
+   * @function getApp
+   * @returns 
+   *  check if users want to create module or template model, 
+   *  if module, return the FlowApp_module
+   *  else if is threater, return the FlowApp_theater
+   *  else return null
+   */
   function getApp() {
     if (state.type === 'module')
-      return <FlowApp_m name={state.name} type={state.type} description={state.description} version={state.version}/>;
+      return <FlowApp_m name={state.name} type={state.type} description={state.description} version={state.version} />;
     else if (state.type === 'theater') {
       console.log('teatro');
       return <FlowApp_t name={state.name} type={state.type} description={state.description} version={state.version} />;
     } else
       return null;
   }
+
 
   return (
     <div>
@@ -50,7 +63,7 @@ const Application = () => {
         </ReactFlowProvider>
       </Container>
     </div>
-  ); 
+  );
 
 
 }

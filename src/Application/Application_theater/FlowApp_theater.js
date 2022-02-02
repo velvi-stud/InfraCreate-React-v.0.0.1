@@ -78,39 +78,10 @@ const getNodeId = () => `reactflow__node-${+new Date()}`;
 const ATN = new AllTypeNodes();
 const allNodeTypes = ATN.GetObj();
 
-// set elementi iniziali
-// const ElementiIniziali = [
 
-//     {
-//         id: getNodeId(),
-//         type: 'server',
-//         position: { x: 100, y: 200 },
-//         data: { label: ' server_prova ', desc: " info_server " }, //text != lable in special/custom type
-//     },
-//     {
-//         id: getNodeId() + 1,
-//         type: 'port',
-//         position: { x: 400, y: 200 },
-//         data: { label: ' port_prova ', desc: " info_port " }, //text != lable in special/custom type
-//     },
-//     {
-//         id: getNodeId() + 2,
-//         type: 'network',
-//         position: { x: 400, y: 0 },
-//         data: { label: ' net_prova ', desc: " info_net " }, //text != lable in special/custom type
-//     },
-//     {
-//         id: getNodeId() + 3,
-//         type: 'subnet',
-//         position: { x: 100, y: 0 },
-//         data: { label: ' sub_prova ', desc: " info_sub " }, //text != lable in special/custom type
-//     },
-
-// ];
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -180,7 +151,7 @@ const FlowApp_t = (props) => {
      */
     const dispatch = useDispatch();
 
-    
+
     const [showoc, setShowOC] = useState(false);
     const handleClose = () => setShowOC(false);
     const handleShow = () => setShowOC(true);
@@ -192,10 +163,9 @@ const FlowApp_t = (props) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
     /**
      * @function onElementsRemove
+     *  function to handle when an element is removed from canvas
      * @param {*} elementsToRemove
      *   Selezionati gli elementi da rimuovere
      * @description
@@ -224,13 +194,15 @@ const FlowApp_t = (props) => {
 
     /**
      * @function onSave
+     *  function to handle when save event is calles
      * @description
      *  Questa funzione serve per salvare i dati. https://it.reactjs.org/docs/hooks-reference.html#usecallback
      *      Se l'istanza è attiva ed è vera (c'è qualcosa),
      *      trasforma l'istanzaReactFlow in un oggetto [toObject] (per poterlo memorizzare, anche in json)
      *      lo memorizza in localforage in $$$$.
+     *     ->>>>>>>>>>> SALVA DownloadJSON.js 
      */
-    function onSave () {
+    function onSave() {
         if (IstanzaReactFlow) {
             const flow = IstanzaReactFlow.toObject(); //converte il diagramma in oggetto
             console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
@@ -242,8 +214,8 @@ const FlowApp_t = (props) => {
             flow['areas'] = areas; //TODO
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
             console.log(JSON.stringify(flow)); // salva il json
-            let filename = 'theater_blueprint_'+state.name;
-            exportToJson(flow,filename);
+            let filename = 'theater_blueprint_' + state.name;
+            exportToJson(flow, filename);
         } else {
             console.log("error saving diagram!");
         }
@@ -251,6 +223,7 @@ const FlowApp_t = (props) => {
 
     /**
      * @function onRestore
+     *  function to handle when restore event is required
      * @description
      *  Questa funzione serve per ripristinare i dati. https://it.reactjs.org/docs/hooks-reference.html#usecallback
      *      Prende i dati da localforage in $$$$ con la chiave flowkey
@@ -299,11 +272,11 @@ const FlowApp_t = (props) => {
 
     /**
      * @function onDragOver
+     *  function to handle when drag-over event happens on canvas
      * @param {*} event
      *  Paramentro che indica la modalità di trasferimento (trasferimento Drag&Drop variabili)
      * @description
      *  Function richiamta quando si è finito l'operazione di dragging. https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
-     *
      */
     function onDragOver(event) {
         event.preventDefault();
@@ -312,6 +285,7 @@ const FlowApp_t = (props) => {
 
     /**
      * @function onDrop
+     *  function to handle when drop event happens on canvas
      * @param {*} event
      *  Parametro che indica la modalità di trasferimento (trasferimento Drag&Drop variabili)
      * @description
@@ -348,6 +322,7 @@ const FlowApp_t = (props) => {
 
     /**
      * @function onElementClick
+     *  function to handle the evenet when element is clicked
      * @param {*} event
      *  Cattura evento mouse
      * @param {*} selected_element
@@ -373,25 +348,19 @@ const FlowApp_t = (props) => {
         dispatch({ data: selected_element, type: 'selectednode' });
     }
 
-
     function onNodeDoubleClick(event, selected_element) {
-        console.log('element double clicked: ', selected_element);
-        if (selected_element.type === 'module') {
-            console.log("azz");
-            //onAdd()
-        }
-        else {
-            // const tm = { selected_element: selected_element, show: true };
-            // setDNI(tm);
-            // setDimCanvas(6);
-            // setDimSider(4);
-            // setDisplay('block'); // MOSTRA LA COLONNA CONTENENTE LE SIDE INFO
-        }
-        dispatch({ data: selected_element, type: 'selectednode' });
+        // console.log('element double clicked: ', selected_element);
+        // if (selected_element.type === 'module') {
+        //     console.log("azz");
+        // }
+        // else {
+        // }
+        // dispatch({ data: selected_element, type: 'selectednode' });
     }
 
     /**
      * @function onPaneClick
+     *  function to handle when panel are clicked
      * @param {*} event
      *  Cattura evento mouse
      * @description
@@ -407,20 +376,13 @@ const FlowApp_t = (props) => {
     }
 
 
-    /**
-     * @function showDataNode
-     * @returns
-     *  ritorna un Container (passato al lato dx) contenente tutte le strutture per personalizzare i nodi
-     */
-    function showDataNode() {
-        console.log('aaaaaaaaa:', areas);
-        var d = new DataNodeInfo_t(datanodeinfo,areas);
-        return d.renderize();
-    }
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @function setBackground
+     *  for setting background style
      * @description
      *  Praticamente in base al pulsante control premuto aggiorna lo sfondo (e l'immagine del pulsante)
      */
@@ -442,17 +404,24 @@ const FlowApp_t = (props) => {
     }
 
 
-
-    const updateState = (name, desc, version) => {
-        var x = { name: name, description: desc, version: version, type: state.type };
-        setState(x);
-    }
-
+    /**
+     * @function GetOffcanvas
+     *  create/generate an offcanvas where 
+     *      - are showed the info (updateable) project
+     *      - Is possible to remove/add the areas of threater
+     * @returns 
+     *  return an element Offcanvas where the user can change the base info of the module
+     */
     const GetOffcanvas = () => {
 
         const z_name = useRef(null);
         const z_desc = useRef(null);
         const z_ver = useRef(null);
+
+        const updateState = (name, desc, version) => {
+            var x = { name: name, description: desc, version: version, type: state.type };
+            setState(x);
+        }
 
         function updateDataApp() {
             var name = z_name.current.value;
@@ -549,11 +518,9 @@ const FlowApp_t = (props) => {
         );
     }
 
-
-
-
     /**
      * @function getSidebar
+     *  generate a sidebar where are all modules preaviusly uploaded
      * @returns
      *  This function return a render output of sidebar -> node
      */
@@ -562,6 +529,28 @@ const FlowApp_t = (props) => {
         return (x.render());
     }
 
+    /**
+     * @function showDataNode
+     *  show a sidecanvas where show all info module node (updateble)
+     * @returns
+     *  ritorna un Container (passato al lato dx) contenente tutte le strutture per personalizzare i nodi
+     */
+    function showDataNode() {
+        console.log('aaaaaaaaa:', areas);
+        var d = new DataNodeInfo_t(datanodeinfo, areas);
+        return d.renderize();
+    }
+
+    /**
+     * @function addNavBar
+     *  create an pseudo-nav-bar on the project to manipulate infos.
+     * @returns 
+     *  return a navbar where are function, such as
+     *      module-details -> GetOffcanvas
+     *      save -> onSave
+     *      restore -> onRestore
+     *      exit -> Redirect to ./home 
+     */
     function addNavBar() {
         return (
             <Container className='cf sticky-top' style={{ /*maxHeight: '7vh',*/ minHeight: '7vh' }}>
@@ -605,6 +594,20 @@ const FlowApp_t = (props) => {
         );
     }
 
+    /**
+     * @function addSubBar
+     *  create a sub-bar where situate all operazion to handle/personalize canvas
+     *      - zoomin
+     *      - zoomout
+     *      - fitviw
+     *      - changebackground ->setBackground
+     *      - UNDO -> canUndo
+     *      - REDO -> canRedo
+     *      - delate
+     *      - selectall
+     * @returns 
+     *  return a sub-bar container
+     */
     function addSubBar() {
         return (
             <Container className='cf bg-light' style={{ /*maxHeight: '3vh',*/ minHeight: '3vh', paddingLeft: '1vw', paddingRight: '1vw', border: '1px solid gray', }}>
@@ -671,6 +674,14 @@ const FlowApp_t = (props) => {
         );
     }
 
+    /**
+     * @function addFootBar
+     *  generate and update a footbar containing
+     *      - element select
+     *      - margin canvas
+     *      - all nodes in canvas
+     * @returns 
+     */
     function addFootBar() {
         return (
             <Container className='cf vheight3 p-2' style={{ overflowX: 'hidden', overflowY: 'auto', textAlign: 'left' }}>

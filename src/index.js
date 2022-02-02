@@ -10,11 +10,17 @@ import { Provider } from 'react-redux';
 import rootReducers from './reducers/Reducers';
 const store = createStore(rootReducers);
 
-
+/**
+ * @function showApp
+ *  passing the render of class App.
+ * @returns 
+ *  html of App to upload
+ */
 const showApp = () => {
   var x = new App();
   return (x.renderize());
 };
+
 
 ReactDOM.render(
   <div>

@@ -9,8 +9,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Home = () => {
 
-    const [mod, setMod] = useState({ tipo: '', show: false });
-    const [disp, setDisp] = useState('block');
+    const [showDataInput, setShowDataInput] = useState({ tipo: '', show: false });
+    const [display, setDisplay] = useState('block');
 
     const nome = createRef();
     const descrizione = createRef();
@@ -21,31 +21,38 @@ const Home = () => {
     // const modules = useSelector(state => state.modulesretrieved)
     const dispatch = useDispatch();
 
-
-    function updateMod(tipo, show) {
+    /**
+     * @function updateShowDataInput
+     * @param {*} tipo 
+     * @param {*} show 
+     *  show/hide div fot input text
+     * @returns 
+     */
+    function updateShowDataInput(tipo, show) {
         const tm = { tipo, show };
         //console.log(tm, mod);
-        if (tm.tipo === mod.tipo) {
-            setDisp('none')
+        if (tm.tipo === showDataInput.tipo) {
+            setDisplay('none')
             tm.tipo = '';
             tm.show = false;
-            mod.tipo = !mod.tipo;
+            showDataInput.tipo = !showDataInput.tipo;
             return;
         }
-        setDisp('block')
-        setMod(tm);
+        setDisplay('block')
+        setShowDataInput(tm);
         return;
     }
 
-    function routeChange() {
-        let path = `Application`;
-        history.push(path);
-    }
-
+    /**
+     * @function activateApp
+     *  1)  store data to pass (datapass) into shared area "redux"
+     *      [in case is a theater hypotize the retrieve of module json]
+     *  2) redirect to Application 
+     */
     function activateApp() {
         var name = nome.current.value; // prendere il valore dello stato corrente dell'elemto riferito da "nome"
         var description = descrizione.current.value; // prendere il valore dello stato corrente dell'elemto riferito da "descrizione"
-        var type = mod.tipo;
+        var type = showDataInput.tipo;
         var z = { type, name, description };
         console.log("z: ", z);
         var version = '1.0';
@@ -66,7 +73,12 @@ const Home = () => {
         routeChange();
     }
 
-    /* FUNZIONE PER IPOTIZZARE DI PRENDERE DATI DA UN FS*/
+
+    /**
+     * @function retrieveData
+     *  store modules data (modulesretrieved) into shared area "redux"
+     *      [simulate the retreivation of module data stored json]
+     */
     function retrieveData() {
         /* HP CHE PRENDE I DATI */
         var module1 = [
@@ -1272,8 +1284,24 @@ const Home = () => {
 
     }
 
-    const showInput = () => {
-        if (mod.show) {
+    
+    /**
+     * @function routeChange
+     *  redidect into Application js page
+     */
+     function routeChange() {
+        let path = `Application`;
+        history.push(path);
+    }
+
+    /**
+     * @function showFormInput
+     * @returns 
+     *  return, if a condition is verified, the div containing the form for the creation
+     *  else return null.
+     */
+    function showFormInput() {
+        if (showDataInput.show) {
             return (
                 <Container>
                     <Row className='text-center align-center justify-content-center'>
@@ -1282,13 +1310,13 @@ const Home = () => {
                                 <Form.Group className="" controlId="ControlTextarea">
                                     <Form.Label className="">
                                         <h3 className="d-inline">Insert</h3>
-                                        <h3 className="d-inline" style={{ color: "#0d6efd", }}> {mod.tipo} </h3>
+                                        <h3 className="d-inline" style={{ color: "#0d6efd", }}> {showDataInput.tipo} </h3>
                                         <h3 className="d-inline">name</h3>
                                     </Form.Label>
                                     <Form.Control ref={nome} placeholder='Insert name' style={{ fontSize: "1.4em" }} />
                                     <Form.Label className="mt-4">
                                         <h3 className="d-inline">Insert</h3>
-                                        <h3 className="d-inline" style={{ color: "#0d6efd", }}> {mod.tipo} </h3>
+                                        <h3 className="d-inline" style={{ color: "#0d6efd", }}> {showDataInput.tipo} </h3>
                                         <h3 className="d-inline">description</h3>
                                     </Form.Label>
                                     <Form.Control ref={descrizione} as="textarea" placeholder='Insert description' style={{ fontSize: "1.4em" }} />
@@ -1328,15 +1356,15 @@ const Home = () => {
                 </Row>
                 <Row className="mt-5">
                     <Col xs={12} md={6} lg={6} >
-                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateMod('theater', true)} > Create Theater </Button>
+                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateShowDataInput('theater', true)} > Create Theater </Button>
                     </Col>
                     <Col xs={12} md={6} lg={6} >
-                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateMod('module', true)}> Create Module </Button>
+                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateShowDataInput('module', true)}> Create Module </Button>
                     </Col>
                 </Row>
 
-                <div style={{ display: disp }}>
-                    {showInput()}
+                <div style={{ display: display }}>
+                    {showFormInput()}
                 </div>
 
                 <img src={iac} width={'60%'} height={'50%'} className='mt-5'></img>

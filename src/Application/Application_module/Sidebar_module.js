@@ -23,8 +23,10 @@ class Sidebar_m extends React.Component {
         this.renderDaD = this.renderDaD.bind(this);
     }
 
+
     /**
      * @function onDragStart
+     *  function to handle the drag-start event from this sidebar
      * @param {*} event 
      *  modalità di trasferimento (trasferimento Drag&Drop variabili).
      * @param {*} nodeType 
@@ -40,6 +42,15 @@ class Sidebar_m extends React.Component {
         event.dataTransfer.effectAllowed = 'move'; //sito in link
     };
 
+    
+    /**
+     * @function renderDaD
+     *  generate a row containing the type node element with his unique style to drag on canvas
+     * @param {*} type 
+     * @param {*} style 
+     * @returns 
+     *  return a html-row rappresenting the draggable node
+     */
     renderDaD(type, style) {
         return (
             // l'attr. KEY serve quando si creano elementi così, non è obbligatorio ma da errore
@@ -53,30 +64,13 @@ class Sidebar_m extends React.Component {
 
 
     render() {
-
         return (
             <div className='pt-2 pb-2'>
                 <Container id='dragdrop' className='justify-content-center text-center cf vheight' style={{ overflowX: 'hidden', overflowY: 'visible', }}>
                     <Row className='justify-content-center text-center mt-1 mb-1'>
                         <h5>Drag and Drop node.</h5>
                     </Row>
-                    {/* <Accordion defaultActiveKey={['0']} alwaysOpen>
-                        <Accordion.Item eventKey="0">
-                            <Accordion.Header> Base Nodes </Accordion.Header>
-                            <Accordion.Body>
-                                {this.listnode}
-                            </Accordion.Body>
-                        </Accordion.Item>
-                        <Accordion.Item eventKey="1">
-                            <Accordion.Header> Module Nodes </Accordion.Header>
-                            <Accordion.Body>
-                                aa
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    </Accordion> */}
                     {this.listnode}
-
-
                 </Container>
             </div>
 

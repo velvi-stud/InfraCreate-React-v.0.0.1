@@ -36,25 +36,18 @@ class xxx {
 			}
 		)
 	}
-
-
 	getListType() {
 		return this.listType;
 	}
-
 	getListMeta() {
 		return this.listMeta;
 	}
-
 	getListStyle() {
 		return this.listStyle;
 	}
-
 	GetObj() {
 		return this.name;
 	}
-
-
 }
 
 
@@ -72,6 +65,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 	var np = 0, nc = 0;
 
 	const Generate_custom_node = ({ data }) => {
+
 
 		function handleprov() {
 			let elemProv = data.topology.filter(element => element.data !== undefined && element.data.$net_type !== undefined && element.data.$net_type === 'provider');
@@ -93,14 +87,24 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 						...c
 					}
 					l =
-						<Handle
-							key={v} //KEY === ID
-							id={v} // ID === ID == LABEL
-							type="source"
-							position="right"
-							style={d}
-						/>
-						;
+						<OverlayTrigger
+							key={v}
+							placement='right'
+							overlay={
+								<Tooltip id={`tooltip-${v}`}>
+									<strong>{value.data.label}</strong> provider.
+								</Tooltip>
+							}
+						>
+							<Handle
+								key={v} //KEY === ID
+								id={v} // ID === ID == LABEL
+								type="source"
+								position="right"
+								style={d}
+							/>
+						</OverlayTrigger>
+					;
 					x.push(l);
 					z = z + a;
 				}
@@ -130,14 +134,24 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 						...c
 					}
 					l =
-						<Handle
-							key={v}  //KEY === ID == LABEL
-							id={v} // ID === ID == LABEL
-							type="target"
-							position="left"
-							style={d}
-						/>
-						;
+					<OverlayTrigger
+					key={v}
+					placement='right'
+					overlay={
+						<Tooltip id={`tooltip-${v}`}>
+							<strong>{value.data.label}</strong> consumer.
+						</Tooltip>
+					}
+				>
+					<Handle
+						key={v} //KEY === ID
+						id={v} // ID === ID == LABEL
+						type="target"
+						position="left"
+						style={d}
+					/>
+				</OverlayTrigger>
+			;
 					x.push(l);
 					z = z + a;
 				}
@@ -189,7 +203,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 		}
 
 		//console.log('node '+tipo+' created');
-		//const [BTN, setBTN] = useState({ title: 'Show topology', display: 'none' })
+		//const [BTN, setBTN] = useState({title: 'Show topology', display: 'none' })
 
 		//if(data.topology !== undefined && data.topology !== [] )
 		//topology_data(data.topology);
@@ -211,7 +225,23 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 			}
 			return d;
 		}
+
 		const style2 = cs();
+
+		const isSession = () => {
+			if (nc === 0) {
+				return (
+					<div>
+						<p style={{ margin: '0', text: '1em' }}>
+							<i>
+								Session module
+							</i>
+						</p>
+					</div>
+				)
+			}
+			return null
+		}
 
 		return (
 			<div key={data.id} style={style2}>
@@ -220,7 +250,8 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 				{handlecons()}
 
 				{/* NOME */}
-				<div> <b> {data.label} </b></div>
+				<div> <h5 style={{ margin: '0' }}> {data.label} </h5></div>
+				{isSession()}
 
 				{/* Description */}
 				<div> <p style={{ marginBottom: '0' }}> {data.description} </p> </div>

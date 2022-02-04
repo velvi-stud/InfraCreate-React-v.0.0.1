@@ -780,7 +780,7 @@ const Home = () => {
                         "data": {
                             "label": "n1",
                             "desc": "",
-                            "$net_type": "consumer"
+                            "$net_type": "provider"
                         }
                     },
                     {

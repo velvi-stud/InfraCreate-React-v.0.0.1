@@ -68,8 +68,9 @@ const flowKey = 'example-flow'; // chiave per reperire i dati
 /* INFO PER REPERIRE I DATI DAL JSON
     EDGE = reactflow__edge
     NODE = reactflow__node
+    per il tipo con NODE reactflow__node-$tipo-$data
 */
-const getNodeId = () => `reactflow__node-${+new Date()}`;
+const getNodeId = (tipo) => `reactflow__node-${tipo}-${+new Date()}`;
 
 /* @ operazioni per reperire stili e classi dei nodi base */
 const ATN = new AllTypeNodes();
@@ -300,7 +301,7 @@ const FlowApp_m = (props) => {
                 return;
             }
             const position = IstanzaReactFlow.project({ x: event.clientX - 350, y: event.clientY });
-            const id = getNodeId();
+            const id = getNodeId(type);
             const newNode = {
                 id,
                 type,

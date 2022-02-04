@@ -82,7 +82,7 @@ class PortInfo extends React.Component {
         const showImg = () => {
             var items = []
             for (const [index, value] of this.images.entries()) {
-                console.log(index, value);
+                //console.log(index, value);
                 items.push(<option key={value.nome_img} value={value.nome_img}>{value.nome_img}</option>)
             }
             return (

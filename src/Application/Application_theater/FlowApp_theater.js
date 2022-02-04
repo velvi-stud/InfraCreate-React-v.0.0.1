@@ -408,7 +408,7 @@ const FlowApp_t = (props) => {
      * @function GetOffcanvas
      *  create/generate an offcanvas where 
      *      - are showed the info (updateable) project
-     *      - Is possible to remove/add the areas of threater
+     *      - Is possible to remove/add the areas of threater -> HandleAreas()
      * @returns 
      *  return an element Offcanvas where the user can change the base info of the module
      */

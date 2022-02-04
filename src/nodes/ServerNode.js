@@ -1,29 +1,27 @@
 //import React from 'react';
 import node_temp from './template/NodeTemplate';
-import network from '../images/nodeimg/network.png';
-import connector from '../images/nodeimg/connector.png';
-import database from '../images/nodeimg/database.png';
-import server from '../images/nodeimg/server.png'; 
-import subnet from '../images/nodeimg/subnet.png'; 
+import img from '../images/nodeimg/server.png';
 
 
 class ServerNode {
 
-    constructor(){ 
+    constructor() {
         this.type = "server";
         this.style = {
             background: 'lightseagreen',
             color: 'black',
             borderRadius: '2em',
             padding: 10,
-        }; 
+        };
         this.portstyle = {
             borderRadius: 0,
-            height:'0.8em',
+            height: '0.8em',
             width: '0.5em',
         };
+        var isValidConnectionIn = (connection) => connection.source.includes('port');
+        var isValidConnectionOut = (connection) => connection.target.includes('port');
 
-        this.meta= node_temp(this.type, this.style, server, this.portstyle, this.portstyle);
+        this.meta = node_temp(this.type, this.style, img, this.portstyle, this.portstyle, isValidConnectionIn, isValidConnectionOut);
 
     }
 

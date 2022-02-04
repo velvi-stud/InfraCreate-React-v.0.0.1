@@ -5,6 +5,7 @@ import NetworkNode from './NetworkNode.js';
 import ModuleNode from './ModuleNode.js';
 
 class AllTypeNodes {
+
     constructor() {
         this.listType = [];
         this.listStyle = [];
@@ -17,7 +18,7 @@ class AllTypeNodes {
             subnet: new SubnetNode(),
             module: new ModuleNode(),
         }
-        // SETNAME -> ADD
+        // SETNAME -> ADD ->>>>>>>>>>>>>>>>> PER DEFINIRE NODI NEL REACTFLOW canvas
         this.name = {
             server: this.element.server.getMeta(),
             port: this.element.port.getMeta(),

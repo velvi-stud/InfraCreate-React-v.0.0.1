@@ -10,7 +10,7 @@
     {
       "src": "infra64.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "64x64"
     },
     {
       "src": "infra512.png",

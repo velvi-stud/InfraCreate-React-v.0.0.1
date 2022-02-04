@@ -54,10 +54,6 @@ class DataNodeInfo_t extends React.Component {
 
                         {this.module}
 
-
-
-
-
                         {/* https://stackoverflow.com/questions/526035/how-can-i-position-my-div-at-the-bottom-of-its-container */}
                         {/* <Row style={{ position: 'absolute', bottom: '0', opacity: '50%' }}>
                             {JSON.stringify(this.element)}

@@ -1,10 +1,6 @@
 //import React from 'react';
 import node_temp from './template/NodeTemplate';
-import network from '../images/nodeimg/network.png';
-import connector from '../images/nodeimg/connector.png';
-import database from '../images/nodeimg/database.png';
-import server from '../images/nodeimg/server.png'; 
-import subnet from '../images/nodeimg/subnet.png'; 
+import img from '../images/nodeimg/network.png';
 
 
 class NetworkNode {
@@ -22,7 +18,10 @@ class NetworkNode {
             height:'0.8em',
             width: '0.5em',
         };
-        this.meta= node_temp(this.type, this.style, network, this.portstyle, this.portstyle);
+        var isValidConnectionIn = (connection) => connection.source.includes('subnet');
+        var isValidConnectionOut = (connection) => connection.target.includes('subnet');
+
+        this.meta= node_temp(this.type, this.style, img, this.portstyle, this.portstyle, isValidConnectionIn, isValidConnectionOut);
     }
 
     getType() {

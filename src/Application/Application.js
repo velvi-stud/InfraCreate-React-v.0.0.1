@@ -45,7 +45,6 @@ const Application = () => {
     if (state.type === 'module')
       return <FlowApp_m name={state.name} type={state.type} description={state.description} version={state.version} />;
     else if (state.type === 'theater') {
-      console.log('teatro');
       return <FlowApp_t name={state.name} type={state.type} description={state.description} version={state.version} />;
     } else
       return null;

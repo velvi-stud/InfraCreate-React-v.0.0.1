@@ -13,7 +13,7 @@ class PortInfo extends React.Component {
      */
     constructor(elemento) {
         super();
-        console.log('port:', elemento);
+        //console.log('port:', elemento);
         this.element = elemento;
         this.tipo = this.element.type;
 
@@ -29,16 +29,16 @@ class PortInfo extends React.Component {
         if (label !== null && label !== '')
             this.element['data']['label'] = label;
 
-        var desc = this._desc.current.value;
-        if (desc !== null && desc !== '')
-            this.element['data']['desc'] = desc;
+        var description = this._desc.current.value;
+        if (description !== null && description !== '')
+            this.element['data']['description'] = description;
 
         var properties = {
-            $default: this._default.current.value,
-            $type: this._type.current.value,
+            default: this._default.current.value,
+            type: this._type.current.value,
         };
 
-        this.element['data']['$properties'] = properties;
+        this.element['data']['properties'] = properties;
 
     }
 
@@ -76,7 +76,7 @@ class PortInfo extends React.Component {
                                 <Form.Control
                                     ref={this._desc}
                                     /*as='textarea'*/
-                                    placeholder={this.checkDataList(['data', 'desc'], 'Insert node description')}
+                                    placeholder={this.checkDataList(['data', 'description'], 'Insert node description')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updatePortData()}
                                 />
@@ -93,7 +93,7 @@ class PortInfo extends React.Component {
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
                                     ref={this._default}
-                                    placeholder={this.checkDataList(['data', '$properties', '$default'], 'Insert node default')}
+                                    placeholder={this.checkDataList(['data', 'properties', 'default'], 'Insert node default')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updatePortData()}
                                 />
@@ -110,7 +110,7 @@ class PortInfo extends React.Component {
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
                                     ref={this._type}
-                                    placeholder={this.checkDataList(['data', '$properties', '$type'], 'Insert node type')}
+                                    placeholder={this.checkDataList(['data', 'properties', 'type'], 'Insert node type')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updatePortData()}
                                 />

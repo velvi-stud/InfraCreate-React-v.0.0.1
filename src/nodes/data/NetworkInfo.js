@@ -14,7 +14,7 @@ class PortInfo extends React.Component {
     constructor(elemento) {
         super();
 
-        console.log('network:', elemento);
+        //console.log('network:', elemento);
         this.element = elemento;
         this.tipo = this.element.type;
 
@@ -30,17 +30,17 @@ class PortInfo extends React.Component {
         if (label !== null && label !== '')
             this.element['data']['label'] = label;
 
-        var desc = this._desc.current.value;
-        if (desc !== null && desc !== '')
-            this.element['data']['desc'] = desc;
+        var description = this._desc.current.value;
+        if (description !== null && description !== '')
+            this.element['data']['description'] = description;
 
         var gname = this._groupname.current.value;
         if (gname !== null && gname !== '')
-            this.element['data']['$group'] = gname;
+            this.element['data']['group'] = gname;
 
         var ntype = this._net_type.current.value;
         if (ntype !== null && ntype !== '')
-            this.element['data']['$net_type'] = ntype;
+            this.element['data']['net_type'] = ntype;
     }
 
     renderize() {
@@ -77,7 +77,7 @@ class PortInfo extends React.Component {
                                 <Form.Control
                                     ref={this._desc}
                                     /*as='textarea'*/
-                                    placeholder={this.checkDataList(['data', 'desc'], 'Insert node description')}
+                                    placeholder={this.checkDataList(['data', 'description'], 'Insert node description')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateNetworkData()}
                                 />
@@ -94,7 +94,7 @@ class PortInfo extends React.Component {
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
                                     ref={this._groupname}
-                                    placeholder={this.checkDataList(['data', '$group'], 'Insert group name')}
+                                    placeholder={this.checkDataList(['data', 'group'], 'Insert group name')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateNetworkData()}
                                 />
@@ -115,7 +115,7 @@ class PortInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateNetworkData()}
                                 >
-                                    <option>{this.checkDataList(['data', '$net_type'], 'Select type')}</option>
+                                    <option>{this.checkDataList(['data', 'net_type'], 'Select type')}</option>
                                     <option value="consumer"> Consumer </option>
                                     <option value="provider"> Provider </option>
                                 </Form.Select>

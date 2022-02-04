@@ -68,7 +68,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 
 
 		function handleprov() {
-			let elemProv = data.topology.filter(element => element.data !== undefined && element.data.$net_type !== undefined && element.data.$net_type === 'provider');
+			let elemProv = data.topology.filter(element => element.data !== undefined && element.data.net_type !== undefined && element.data.net_type === 'provider');
 			let sizeProv = _.size(elemProv);
 			np = sizeProv;
 			//console.log('prov:', aaa)
@@ -115,7 +115,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 		}
 
 		function handlecons() {
-			let elemCons = data.topology.filter(element => element.data !== undefined && element.data.$net_type !== undefined && element.data.$net_type === 'consumer');
+			let elemCons = data.topology.filter(element => element.data !== undefined && element.data.net_type !== undefined && element.data.net_type === 'consumer');
 			let sizeCons = _.size(elemCons);
 			nc = sizeCons;
 			//console.log('cons:', sizeprov)
@@ -212,7 +212,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 			handleprov();
 			handlecons();
 			var max = _.max([np, nc]);
-			console.log('max is: ', max);
+			//console.log('max is: ', max);
 			max = 10 + (max + 1);
 			var c = {
 				height: max + 'vh',

@@ -106,7 +106,7 @@ const Home = () => {
                         "data": {
                             "label": "Insert node name",
                             "description": "",
-                            "$net_type": "provider"
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -119,7 +119,7 @@ const Home = () => {
                         "data": {
                             "label": "Insert node name",
                             "description": "",
-                            "$net_type": "provider"
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -132,7 +132,7 @@ const Home = () => {
                         "data": {
                             "label": "Insert node name",
                             "description": "",
-                            "$net_type": "provider"
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -145,7 +145,7 @@ const Home = () => {
                         "data": {
                             "label": "Insert node name",
                             "description": "",
-                            "$net_type": "consumer"
+                            "net_type": "consumer"
                         }
                     },
                     {
@@ -158,7 +158,7 @@ const Home = () => {
                         "data": {
                             "label": "Insert node name",
                             "description": "",
-                            "$net_type": "provider"
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -171,7 +171,7 @@ const Home = () => {
                         "data": {
                             "label": "Insert node name",
                             "description": "",
-                            "$net_type": "provider"
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -184,7 +184,7 @@ const Home = () => {
                         "data": {
                             "label": "Insert node name",
                             "description": "",
-                            "$net_type": "provider"
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -197,7 +197,7 @@ const Home = () => {
                         "data": {
                             "label": "Insert node name",
                             "description": "",
-                            "$net_type": "provider"
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -210,7 +210,7 @@ const Home = () => {
                         "data": {
                             "label": "Insert node name",
                             "description": "",
-                            "$net_type": "provider"
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -249,8 +249,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n1",
-                            "desc": "",
-                            "$net_type": "consumer"
+                            "description": "",
+                            "net_type": "consumer"
                         }
                     },
                     {
@@ -262,16 +262,16 @@ const Home = () => {
                         },
                         "data": {
                             "label": "serv1",
-                            "desc": "",
-                            "$image": "Select image",
-                            "$flavor": {
-                                "$cpu": "Select size",
-                                "$hd": "Select size",
-                                "$ram": "Select size"
+                            "description": "",
+                            "image": "Select image",
+                            "flavor": {
+                                "cpu": "Select size",
+                                "hd": "Select size",
+                                "ram": "Select size"
                             },
-                            "$userdata": {
-                                "$usr": "",
-                                "$pwd": ""
+                            "userdata": {
+                                "usr": "",
+                                "pwd": ""
                             }
                         }
                     },
@@ -284,10 +284,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p1",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -300,17 +300,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s1",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -323,10 +323,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p2",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -339,17 +339,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s2",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -362,8 +362,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n2",
-                            "desc": "",
-                            "$net_type": "provider"
+                            "description": "",
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -375,8 +375,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n3",
-                            "desc": "",
-                            "$net_type": "provider"
+                            "description": "",
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -388,17 +388,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s3",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -411,10 +411,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p3",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -514,8 +514,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n1",
-                            "desc": "",
-                            "$net_type": "consumer"
+                            "description": "",
+                            "net_type": "consumer"
                         }
                     },
                     {
@@ -527,16 +527,16 @@ const Home = () => {
                         },
                         "data": {
                             "label": "serv1",
-                            "desc": "",
-                            "$image": "Select image",
-                            "$flavor": {
-                                "$cpu": "Select size",
-                                "$hd": "Select size",
-                                "$ram": "Select size"
+                            "description": "",
+                            "image": "Select image",
+                            "flavor": {
+                                "cpu": "Select size",
+                                "hd": "Select size",
+                                "ram": "Select size"
                             },
-                            "$userdata": {
-                                "$usr": "",
-                                "$pwd": ""
+                            "userdata": {
+                                "usr": "",
+                                "pwd": ""
                             }
                         }
                     },
@@ -549,10 +549,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p1",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -565,17 +565,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s1",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -588,10 +588,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p2",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -604,17 +604,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s2",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -627,8 +627,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n2",
-                            "desc": "",
-                            "$net_type": "provider"
+                            "description": "",
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -640,8 +640,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n3",
-                            "desc": "",
-                            "$net_type": "provider"
+                            "description": "",
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -653,17 +653,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s3",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -676,10 +676,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p3",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -779,8 +779,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n1",
-                            "desc": "",
-                            "$net_type": "provider"
+                            "description": "",
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -792,16 +792,16 @@ const Home = () => {
                         },
                         "data": {
                             "label": "serv1",
-                            "desc": "",
-                            "$image": "Select image",
-                            "$flavor": {
-                                "$cpu": "Select size",
-                                "$hd": "Select size",
-                                "$ram": "Select size"
+                            "description": "",
+                            "image": "Select image",
+                            "flavor": {
+                                "cpu": "Select size",
+                                "hd": "Select size",
+                                "ram": "Select size"
                             },
-                            "$userdata": {
-                                "$usr": "",
-                                "$pwd": ""
+                            "userdata": {
+                                "usr": "",
+                                "pwd": ""
                             }
                         }
                     },
@@ -814,10 +814,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p1",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -830,17 +830,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s1",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -853,10 +853,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p2",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -869,17 +869,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s2",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -892,8 +892,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n2",
-                            "desc": "",
-                            "$net_type": "provider"
+                            "description": "",
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -905,8 +905,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n3",
-                            "desc": "",
-                            "$net_type": "provider"
+                            "description": "",
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -918,17 +918,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s3",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -941,10 +941,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p3",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -1044,8 +1044,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n1",
-                            "desc": "",
-                            "$net_type": "consumer"
+                            "description": "",
+                            "net_type": "consumer"
                         }
                     },
                     {
@@ -1057,16 +1057,16 @@ const Home = () => {
                         },
                         "data": {
                             "label": "serv1",
-                            "desc": "",
-                            "$image": "Select image",
-                            "$flavor": {
-                                "$cpu": "Select size",
-                                "$hd": "Select size",
-                                "$ram": "Select size"
+                            "description": "",
+                            "image": "Select image",
+                            "flavor": {
+                                "cpu": "Select size",
+                                "hd": "Select size",
+                                "ram": "Select size"
                             },
-                            "$userdata": {
-                                "$usr": "",
-                                "$pwd": ""
+                            "userdata": {
+                                "usr": "",
+                                "pwd": ""
                             }
                         }
                     },
@@ -1079,10 +1079,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p1",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -1095,17 +1095,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s1",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -1118,10 +1118,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p2",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },
@@ -1134,17 +1134,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s2",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -1157,8 +1157,8 @@ const Home = () => {
                         },
                         "data": {
                             "label": "n3",
-                            "desc": "",
-                            "$net_type": "provider"
+                            "description": "",
+                            "net_type": "provider"
                         }
                     },
                     {
@@ -1170,17 +1170,17 @@ const Home = () => {
                         },
                         "data": {
                             "label": "s3",
-                            "desc": "",
-                            "$subnet": {
-                                "$ip_version": "Select version",
-                                "$cidr": {
-                                    "$default": ""
+                            "description": "",
+                            "subnet": {
+                                "ip_version": "Select version",
+                                "cidr": {
+                                    "default": ""
                                 },
-                                "$allocation_pools": {
-                                    "$allocation_pool_start": "",
-                                    "$allocation_pool_end": ""
+                                "allocation_pools": {
+                                    "allocation_pool_start": "",
+                                    "allocation_pool_end": ""
                                 },
-                                "$enable_dhcp": false
+                                "enable_dhcp": false
                             }
                         }
                     },
@@ -1193,10 +1193,10 @@ const Home = () => {
                         },
                         "data": {
                             "label": "p3",
-                            "desc": "",
-                            "$properties": {
-                                "$default": "",
-                                "$type": ""
+                            "description": "",
+                            "properties": {
+                                "default": "",
+                                "type": ""
                             }
                         }
                     },

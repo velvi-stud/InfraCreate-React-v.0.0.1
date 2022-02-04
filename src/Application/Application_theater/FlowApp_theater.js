@@ -47,9 +47,9 @@ import Areas_node from './HandleAreas';
 
 import { useDispatch } from 'react-redux';
 
-import exportToJson from '../DownloadJSON';
-
 import localforage from 'localforage';
+
+import parsefile from '../DownloadFILE';
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -205,7 +205,7 @@ const FlowApp_t = (props) => {
     function onSave() {
         if (IstanzaReactFlow) {
             const flow = IstanzaReactFlow.toObject(); //converte il diagramma in oggetto
-            console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
+            //console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
             flow['#elements'] = _.size(flow.elements); // detrae il numero dei nodi.
             flow['theater_name'] = state.name;
             flow['theater_description'] = state.description;
@@ -215,7 +215,8 @@ const FlowApp_t = (props) => {
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
             console.log(JSON.stringify(flow)); // salva il json
             let filename = 'theater_blueprint_' + state.name;
-            exportToJson(flow, filename);
+            new parsefile(filename,flow,'json');
+            new parsefile(filename,flow,'yaml');
         } else {
             console.log("error saving diagram!");
         }
@@ -304,7 +305,7 @@ const FlowApp_t = (props) => {
             const version = event.dataTransfer.getData("version");
             var topology = event.dataTransfer.getData("topology");
             topology = JSON.parse(topology)
-            console.log('arrivaed:', topology);
+            //console.log('arrivaed:', topology);
             if (type === '' || type === null) {
                 return;
             }
@@ -536,7 +537,7 @@ const FlowApp_t = (props) => {
      *  ritorna un Container (passato al lato dx) contenente tutte le strutture per personalizzare i nodi
      */
     function showDataNode() {
-        console.log('aaaaaaaaa:', areas);
+        //console.log('aaaaaaaaa:', areas);
         var d = new DataNodeInfo_t(datanodeinfo, areas);
         return d.renderize();
     }

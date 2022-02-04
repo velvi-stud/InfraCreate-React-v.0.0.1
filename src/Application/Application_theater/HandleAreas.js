@@ -20,8 +20,8 @@ const Areas_node = (props) => {
         var x = {};
         function NEWarea(name, desc) {
             var temp = {
-                $area_name: name,
-                $area_desc: desc
+                area_name: name,
+                area_desc: desc
             }
             this.area = temp;
         }
@@ -29,7 +29,7 @@ const Areas_node = (props) => {
         Object.entries(areas).map(
             ([key, value]) => {
                 value = value.area;
-                y.push(new NEWarea(value.$area_name, value.$area_desc));
+                y.push(new NEWarea(value.area_name, value.area_desc));
             }
         );
         y.push(new NEWarea(an.current.value, ad.current.value));
@@ -48,7 +48,7 @@ const Areas_node = (props) => {
         Object.entries(areas).map(
             ([key, value]) => {
                 var ar = value.area;
-                if (ar.$area_name !== a_name)
+                if (ar.area_name !== a_name)
                     x[key] = value;
             }
         )
@@ -60,9 +60,9 @@ const Areas_node = (props) => {
         Object.entries(areas).map(
             ([key, value]) => {
                 var ar = value.area;
-                if (ar.$area_name === old_name) {
-                    ar.$area_name = new_name;
-                    ar.$area_desc = new_desc;
+                if (ar.area_name === old_name) {
+                    ar.area_name = new_name;
+                    ar.area_desc = new_desc;
                 }
                 value.area = ar;
                 x[key] = value;
@@ -73,14 +73,14 @@ const Areas_node = (props) => {
     }
 
     function showStoredAreas() {
-        console.log('shoAreas:', areas);
+        //console.log('shoAreas:', areas);
         var x = [];
         Object.entries(areas).map(
             ([key, value]) => {
                 value = value.area;
-                var name = value.$area_name;
-                var desc = value.$area_desc;
-                console.log('nw: ', key, value)
+                var name = value.area_name;
+                var desc = value.area_desc;
+                //console.log('nw: ', key, value)
                 var y = (
                     < div key={key} >
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' style={{ display: 'table' }}>

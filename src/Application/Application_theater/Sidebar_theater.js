@@ -20,7 +20,7 @@ class Sidebar_t extends React.Component {
         }
 
         this.func();
-        console.log(this.state.modulelist, this.state.listnode);
+        //console.log(this.state.modulelist, this.state.listnode);
         this.render = this.render.bind(this);
         this.renderDaD = this.renderDaD.bind(this);
     }

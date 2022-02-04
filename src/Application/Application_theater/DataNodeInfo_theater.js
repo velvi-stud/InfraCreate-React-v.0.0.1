@@ -13,7 +13,7 @@ class DataNodeInfo_t extends React.Component {
      * @returns 
      */
     constructor(dati, areas) {
-        console.log('::::::', areas);
+        //console.log('::::::', areas);
         super();
         if (dati === undefined || dati.selected_element === undefined || dati.selected_element === '') {
             this.show = false;

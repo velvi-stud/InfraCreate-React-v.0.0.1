@@ -44,10 +44,10 @@ import deletex from '../../images/nodeimg/delete.png';
 import selall from '../../images/nodeimg/select_all.png';
 
 import { useSelector, useDispatch } from 'react-redux';
-import exportToJson from '../DownloadJSON.js';
 
 import localforage from 'localforage';
 
+import parsefile from '../DownloadFILE.js';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -201,7 +201,7 @@ const FlowApp_m = (props) => {
     function onSave() {
         if (IstanzaReactFlow) {
             const flow = IstanzaReactFlow.toObject(); //converte il diagramma in oggetto
-            console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
+            //console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
             flow['#elements'] = _.size(flow.elements); // detrae il numero dei nodi.
             flow['module_name'] = state.name;
             flow['module_description'] = state.description;
@@ -209,7 +209,8 @@ const FlowApp_m = (props) => {
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
             console.log(JSON.stringify(flow)); // salva il json
             let filename = 'module_blueprint_' + state.name;
-            exportToJson(flow, filename);
+            new parsefile(filename,flow,'json');
+            new parsefile(filename,flow,'yaml');
         } else {
             console.log("error saving diagram!");
         }
@@ -308,7 +309,6 @@ const FlowApp_m = (props) => {
                 position,
                 data: { label: 'Insert node name', description: '' },
             };
-            console.log();
             setElementi((es) => es.concat(newNode)); // @@@@ aggiunge/concatena il nuovo nodo al canvas dei nodi Elementi
         }
     }

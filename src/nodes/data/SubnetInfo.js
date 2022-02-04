@@ -14,7 +14,7 @@ class SubnetInfo extends React.Component {
     constructor(elemento) {
         super();
         
-        console.log('subnet:', elemento);
+        //console.log('subnet:', elemento);
         this.element = elemento;
         this.tipo = this.element.type;
 
@@ -25,10 +25,8 @@ class SubnetInfo extends React.Component {
         this._allocation_pools_start = React.createRef(null); // allocation_pools:
         this._allocation_pools_end = React.createRef(null);
         this._enable_dhcp = React.createRef(null);
-        this.state = {
-            trycheck: null,
-        }
-        //this.renderize= this.renderize.bind(this);
+        this.state = null;
+        this.renderize= this.renderize.bind(this);
     }
 
     componentDidMount() {
@@ -40,39 +38,35 @@ class SubnetInfo extends React.Component {
         if (label !== null && label !== '')
             this.element['data']['label'] = label;
 
-        var desc = this._desc.current.value;
-        if (desc !== null && desc !== '')
-            this.element['data']['desc'] = desc;
+        var description = this._desc.current.value;
+        if (description !== null && description !== '')
+            this.element['data']['description'] = description;
 
         var cidr = {
-            $default: this._default.current.value,
+            default: this._default.current.value,
         }
 
         //if (this._allocation_pools_start !== undefined && this._allocation_pools_end !== undefined)
         var allocation_pools = {
-            $allocation_pool_start: this._allocation_pools_start.current.value,
-            $allocation_pool_end: this._allocation_pools_end.current.value,
+            allocation_pool_start: this._allocation_pools_start.current.value,
+            allocation_pool_end: this._allocation_pools_end.current.value,
         }
         var subnet = {
-            $ip_version: this._ip_version.current.value,
-            $cidr: cidr,
-            $allocation_pools: allocation_pools,
-            $enable_dhcp: this._enable_dhcp.current.checked,
+            ip_version: this._ip_version.current.value,
+            cidr: cidr,
+            allocation_pools: allocation_pools,
+            enable_dhcp: this._enable_dhcp.current.checked,
         };
 
-        this.element['data']['$subnet'] = subnet;
+        this.element['data']['subnet'] = subnet;
     }
 
     renderize() {
-        this.state= {
-            trycheck: null
-        }
+        this.state= null;
 
-        var x = this.checkDataList(['data', '$subnet', '$enable_dhcp'], 'null')
+        var x = this.checkDataList(['data', 'subnet', 'enable_dhcp'], 'null')
         if (x !== 'null') {
-            this.setState({
-                trycheck: x
-              })
+            this.state = x;
         }
 
         // const change = () => {
@@ -114,7 +108,7 @@ class SubnetInfo extends React.Component {
                                 <Form.Control
                                     ref={this._desc}
                                     /*as='textarea'*/
-                                    placeholder={this.checkDataList(['data', 'desc'], 'Insert node description')}
+                                    placeholder={this.checkDataList(['data', 'description'], 'Insert node description')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateSubnetData()}
                                 />
@@ -135,7 +129,7 @@ class SubnetInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateSubnetData()}
                                 >
-                                    <option >{this.checkDataList(['data', '$subnet', '$ip_version'], 'Select version')} </option>
+                                    <option >{this.checkDataList(['data', 'subnet', 'ip_version'], 'Select version')} </option>
                                     <option value="4"> 4  </option>
                                     <option value="16"> 16 </option>
                                 </Form.Select>
@@ -153,7 +147,7 @@ class SubnetInfo extends React.Component {
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
                                     ref={this._default}
-                                    placeholder={this.checkDataList(['data', '$subnet', '$cidr', '$default'], 'Insert node description')}
+                                    placeholder={this.checkDataList(['data', 'subnet', 'cidr', 'default'], 'Insert node description')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateSubnetData()}
                                 />
@@ -174,7 +168,7 @@ class SubnetInfo extends React.Component {
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
                                     ref={this._allocation_pools_start}
-                                    placeholder={this.checkDataList(['data', '$subnet', '$allocation_pools', '$allocation_pool_start'], 'Insert start ip')}
+                                    placeholder={this.checkDataList(['data', 'subnet', 'allocation_pools', 'allocation_pool_start'], 'Insert start ip')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateSubnetData()}
                                 />
@@ -191,7 +185,7 @@ class SubnetInfo extends React.Component {
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
                                     ref={this._allocation_pools_end}
-                                    placeholder={this.checkDataList(['data', '$subnet', '$allocation_pools', '$allocation_pool_end'], 'Insert end ip')}
+                                    placeholder={this.checkDataList(['data', 'subnet', 'allocation_pools', 'allocation_pool_end'], 'Insert end ip')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateSubnetData()}
                                 />
@@ -208,7 +202,7 @@ class SubnetInfo extends React.Component {
                             <Col xs={12} md={7} lg={8} style={{ margin: 'auto' }}>
                                 <Form.Check
                                     ref={this._enable_dhcp}
-                                    defaultChecked={this.state.trycheck}
+                                    defaultChecked={this.state}
                                     type="switch"
                                     id="custom-switch"
                                     //onClick={()=>{this.}}

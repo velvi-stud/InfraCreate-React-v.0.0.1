@@ -34,12 +34,12 @@ class ModuleInfo extends React.Component {
         // var label = this._label.current.value;
         // if (label !== null && label !== '')
         //     this.element['data']['label'] = label;
-        var desc = this._desc.current.value;
-        if (desc !== null && desc !== '')
-            this.element['data']['desc'] = desc;
+        var description = this._desc.current.value;
+        if (description !== null && description !== '')
+            this.element['data']['description'] = description;
         var area = this._area.current.value;
         if (area !== null && area !== '')
-            this.element['data']['$area'] = area;
+            this.element['data']['area'] = area;
 
     }
 
@@ -50,12 +50,12 @@ class ModuleInfo extends React.Component {
 
         const showAreas = () => {
             var items = []
-            console.log('areassssss:', this.areas);
+            //console.log('areassssss:', this.areas);
             if (this.areas !== undefined || this.areas === {}) {
                 Object.entries(this.areas).map(
                     ([key, value]) => {
                         value = value.area;
-                        var name = value.$area_name;
+                        var name = value.area_name;
                         items.push(<option key={name} value={name}>{name}</option>)
                     }
                 );
@@ -78,7 +78,7 @@ class ModuleInfo extends React.Component {
         }
 
 
-        console.log(this.element);
+        //console.log(this.element);
 
         return (
             <Row style={{ width: '100%', }} className='text-center align-center justify-content-center'>
@@ -150,7 +150,7 @@ class ModuleInfo extends React.Component {
                                 <Form.Control
                                     ref={this._desc}
                                     /*as='textarea'*/
-                                    placeholder={this.checkDataList(['data', 'desc'], 'Insert node description')}
+                                    placeholder={this.checkDataList(['data', 'description'], 'Insert node description')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateModuleData()}
                                 />
@@ -171,7 +171,7 @@ class ModuleInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateModuleData()}
                                 >
-                                    <option >{this.checkDataList(['data', '$area'], 'Select area')} </option>
+                                    <option >{this.checkDataList(['data', 'area'], 'Select area')} </option>
                                     {showAreas()}
                                     {/* <option value="Linux ">Linux  </option>
                                     <option value="Fedora">Fedora </option>

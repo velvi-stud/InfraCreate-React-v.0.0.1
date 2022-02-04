@@ -14,7 +14,7 @@ class PortInfo extends React.Component {
     constructor(elemento) {
         super();
 
-        console.log('server:', elemento);
+        //console.log('server:', elemento);
         this.element = elemento;
         this.tipo = this.element.type;
 
@@ -42,17 +42,17 @@ class PortInfo extends React.Component {
         if (label !== null && label !== '')
             this.element['data']['label'] = label;
 
-        var desc = this._desc.current.value;
-        if (desc !== null && desc !== '')
-            this.element['data']['desc'] = desc;
+        var description = this._desc.current.value;
+        if (description !== null && description !== '')
+            this.element['data']['description'] = description;
 
         var name = this._name.current.value;
         if (name !== null && name !== '')
-            this.element['data']['$name'] = name;
+            this.element['data']['name'] = name;
 
         var img = this._img.current.value;
         if (img !== null && img !== '')
-            this.element['data']['$image'] = img;
+            this.element['data']['image'] = img;
         if (img !== null && img !== undefined && img !== '' && img !== 'Select image') {
             var l = this.images.find(x => x.nome_img === img).os_img;
             //console.log(this.update_os);
@@ -61,19 +61,19 @@ class PortInfo extends React.Component {
 
 
         var flavour = {
-            $cpu: this._cpu.current.value,
-            $hd: this._hd.current.value,
-            $ram: this._ram.current.value
+            cpu: this._cpu.current.value,
+            hd: this._hd.current.value,
+            ram: this._ram.current.value
         };
         if (flavour !== null && flavour !== '')
-            this.element['data']['$flavor'] = (flavour);
+            this.element['data']['flavor'] = (flavour);
 
         var userdata = {
-            $usr: this._usr.current.value,
-            $pwd: this._pwd.current.value
+            usr: this._usr.current.value,
+            pwd: this._pwd.current.value
         };
         if (userdata !== null && userdata !== '')
-            this.element['data']['$userdata'] = (userdata);
+            this.element['data']['userdata'] = (userdata);
 
         return;
     }
@@ -126,7 +126,7 @@ class PortInfo extends React.Component {
                                 <Form.Control
                                     ref={this._desc}
                                     /*as='textarea'*/
-                                    placeholder={this.checkDataList(['data', 'desc'], 'Insert node description')}
+                                    placeholder={this.checkDataList(['data', 'description'], 'Insert node description')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 />
@@ -143,7 +143,7 @@ class PortInfo extends React.Component {
                             <Col xs={12} md={7} lg={8} /*style={{paddingLeft:'0'}}*/>
                                 <Form.Control
                                     ref={this._name}
-                                    placeholder={this.checkDataList(['data', '$name'], 'Insert server host-name')}
+                                    placeholder={this.checkDataList(['data', 'name'], 'Insert server host-name')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 />
@@ -164,7 +164,7 @@ class PortInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 >
-                                    <option >{this.checkDataList(['data', '$image'], 'Select image')} </option>
+                                    <option >{this.checkDataList(['data', 'image'], 'Select image')} </option>
                                     {showImg()}
                                     {/* <option value="Linux ">Linux  </option>
                                     <option value="Fedora">Fedora </option>
@@ -191,7 +191,7 @@ class PortInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 >
-                                    <option>{this.checkDataList(['data', '$flavor', '$cpu'], 'Select size')}</option>
+                                    <option>{this.checkDataList(['data', 'flavor', 'cpu'], 'Select size')}</option>
                                     <option value="4 ">4 core  </option>
                                     <option value="8">8 core </option>
                                     <option value="16">16 core </option>
@@ -214,7 +214,7 @@ class PortInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 >
-                                    <option>{this.checkDataList(['data', '$flavor', '$hd'], 'Select size')} </option>
+                                    <option>{this.checkDataList(['data', 'flavor', 'hd'], 'Select size')} </option>
                                     <option value="50">50 GB  </option>
                                     <option value="100">100 GB</option>
                                     <option value="500">500 GB</option>
@@ -237,7 +237,7 @@ class PortInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 >
-                                    <option>{this.checkDataList(['data', '$flavor', '$ram'], 'Select size')} </option>
+                                    <option>{this.checkDataList(['data', 'flavor', 'ram'], 'Select size')} </option>
                                     <option value="8 ">8 GB  </option>
                                     <option value="16">16 GB</option>
                                     <option value="32">32 GB </option>
@@ -258,7 +258,7 @@ class PortInfo extends React.Component {
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
                                     ref={this._usr}
-                                    placeholder={this.checkDataList(['data', '$userdata', '$usr'], 'Insert node name')}
+                                    placeholder={this.checkDataList(['data', 'userdata', 'usr'], 'Insert node name')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 />
@@ -275,7 +275,7 @@ class PortInfo extends React.Component {
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
                                     ref={this._pwd}
-                                    placeholder={this.checkDataList(['data', '$userdata', '$pwd'], 'Insert node name')}
+                                    placeholder={this.checkDataList(['data', 'userdata', 'pwd'], 'Insert node name')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 />

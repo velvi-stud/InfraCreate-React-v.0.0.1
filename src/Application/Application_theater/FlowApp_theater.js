@@ -49,7 +49,7 @@ import { useDispatch } from 'react-redux';
 
 import localforage from 'localforage';
 
-import parsefile from '../DownloadFILE';
+import downloadfile from '../DownloadFILE';
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -215,8 +215,8 @@ const FlowApp_t = (props) => {
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
             console.log(JSON.stringify(flow)); // salva il json
             let filename = 'theater_blueprint_' + state.name;
-            new parsefile(filename, flow, 'json');
-            new parsefile(filename, flow, 'yaml');
+            new downloadfile(filename, flow, 'json');
+            new downloadfile(filename, flow, 'yaml');
         } else {
             console.log("error saving diagram!");
         }

@@ -32,7 +32,7 @@ function exportToJson(fn,objectData) {
     }
   }
 
-  class parsefile {
+  class downloadfile {
       constructor(name,data,type){
           if(type === 'json'){
             exportToJson(name,data) 
@@ -45,4 +45,4 @@ function exportToJson(fn,objectData) {
       }
   }
   
-  export default parsefile;
+  export default downloadfile;

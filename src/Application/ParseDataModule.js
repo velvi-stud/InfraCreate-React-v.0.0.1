@@ -1,8 +1,9 @@
-import parsefile from "./DownloadFILE";
+import downloadfile from "./DownloadFILE";
 
 class parsedatamodule {
-    constructor(data_m) {
+    constructor(f_name,data_m) {
         this.data = data_m;
+        //CANCELLARE -> PER PROVARE UNA TOPOLOGIA
         this.data =
         {
             "elements": [
@@ -268,10 +269,11 @@ class parsedatamodule {
             "version": "1.0"
         };
         this.output = {}
-        this.parse();
+        this.reasume = {}
+        this.parse(f_name);
     }
 
-    parse() {
+    parse(f_name) {
         //var output = {};
         // initial part
         this.output['tosca_definitions_version'] = 'cloudify_dsl_1_3';
@@ -293,7 +295,10 @@ class parsedatamodule {
         this.getports();
         this.getcompletenetwork();
 
+        this.
+
         console.log('parsed output:', JSON.stringify(this.output));
+        new downloadfile(f_name, this.output, 'yaml')
     }
 
     getservers() {
@@ -456,6 +461,12 @@ class parsedatamodule {
             }
         );
     }
+
+
+    base_blueprint(){
+        
+    }
+
 
     getobjs(type) {
         var temp = this.data;

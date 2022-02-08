@@ -1,8 +1,9 @@
 import exportToYaml from './DownloadYAML';
 
-class parsetoyaml {
+class parsedatatheater {
     constructor(data){
         this.data = data;
+        
         this.parse(data);
     }
 
@@ -14,4 +15,4 @@ class parsetoyaml {
 
 }
 
-export default parsetoyaml;
+export default parsedatatheater;

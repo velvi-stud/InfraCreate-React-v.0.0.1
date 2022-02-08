@@ -35,7 +35,7 @@ function exportToJson(fn,objectData) {
   class parsefile {
       constructor(name,data,type){
           if(type === 'json'){
-            exportToJson(name,data)
+            exportToJson(name,data) 
           }
           else{
             const YAML = require('json-to-pretty-yaml');

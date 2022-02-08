@@ -48,6 +48,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import localforage from 'localforage';
 
 import parsefile from '../DownloadFILE.js';
+import parsedatamodule from '../ParseDataModule.js';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -209,8 +210,9 @@ const FlowApp_m = (props) => {
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
             console.log(JSON.stringify(flow)); // salva il json
             let filename = 'module_blueprint_' + state.name;
-            new parsefile(filename,flow,'json');
-            new parsefile(filename,flow,'yaml');
+            //new parsefile(filename,flow,'json');
+            //new parsefile(filename,flow,'yaml');
+            new parsedatamodule(flow);
         } else {
             console.log("error saving diagram!");
         }
@@ -411,9 +413,15 @@ const FlowApp_m = (props) => {
      */
     const GetOffcanvas = () => {
 
-        const updateState = (name, desc, version) => {
+        const updateState = (name, desc, ver) => {
             // console.log('oooo', name,desc,version);
-            var x = { name: name, description: desc, version: version, type: state.type };
+            if (name === undefined || name === null || name === '')
+                name = state.name;
+            if (desc === undefined || desc === null || desc === '')
+                desc = state.description;
+            if (ver === undefined || ver === null || ver === '')
+                ver = state.version;
+            var x = { name: name, description: desc, version: ver, type: state.type };
             setState(x);
         }
 

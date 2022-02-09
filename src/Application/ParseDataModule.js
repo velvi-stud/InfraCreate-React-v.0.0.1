@@ -4,7 +4,7 @@ class parsedatamodule {
     constructor(f_name, data_m) {
         this.data = data_m;
         //CANCELLARE -> PER PROVARE UNA TOPOLOGIA
-        this.data =
+        this.data1 =
         {
             "elements": [
                 {
@@ -289,30 +289,34 @@ class parsedatamodule {
 
     base_blueprint() {
         var mn = this.data['module_name'];
-        this.output['node_templates'][mn] = {};
-        this.output['node_templates'][mn]['type'] = 'sysman.creo.nodes.TheaterModule';
-        this.output['node_templates'][mn]['description'] = this.data['module_description'];
-        this.output['node_templates'][mn]['version'] = this.data['version'];
-        this.output['node_templates'][mn]['mode'] = 'Managed';
-        this.output['node_templates'][mn]['interface_network'] = [
+        this.output['node_templates'][mn] = {
+            properties: {}
+        };
+        this.output['node_templates'][mn]['properties']['type'] = 'sysman.creo.nodes.TheaterModule';
+        this.output['node_templates'][mn]['properties']['description'] = this.data['module_description'];
+        this.output['node_templates'][mn]['properties']['version'] = this.data['version'];
+        this.output['node_templates'][mn]['properties']['mode'] = 'Managed';
+        this.output['node_templates'][mn]['properties']['interface_network'] = [
             { providers: [] },
             { consumers: [] }
         ];
+        this.output['node_templates'][mn]['properties']['interface_network'] = [];
+
 
         //for providers
         var providers = [];
         var temp = this.data;
         var prov = temp.elements.filter(element => element.data !== undefined && element.type === 'network' && element.data.net_type === 'provider');
-        Object.entries(prov).map( //scroll link del network provider
-            ([key, value]) => {
+        Object.entries(prov).map( ([key, value]) => { //scroll link del network provider
                 var n = value;
                 var net_if = {};
                 net_if['interface'] = n.data.group;
-                net_if['network'] = n.data.label
+                net_if['network'] = n.data.label;
+                net_if['tag']=n.data.group;
                 net_if['subnets'] = [];
+                
                 var sub = this.getconnectiontotype(n['id'], 'subnet');
-                Object.entries(sub).map( //scroll subnet net provider
-                    ([key, value]) => {
+                Object.entries(sub).map( ([key, value]) => {//scroll subnet net provider
                         var s = value;
                         net_if['subnets'] = [
                             ...net_if['subnets'],
@@ -327,20 +331,20 @@ class parsedatamodule {
                 ]
             }
         );
+        
         //for consumers
         var consumers = [];
         temp = this.data;
         var cons = temp.elements.filter(element => element.data !== undefined && element.type === 'network' && element.data.net_type === 'consumer');
-        Object.entries(cons).map( //scroll link del network provider
-            ([key, value]) => {
+        Object.entries(cons).map( ([key, value]) => {//scroll link del network consumer
                 var n = value;
                 var net_if = {};
-                net_if.interface = n['data']['group'];
-                net_if.network = n['data']['label']
+                net_if['interface'] = n.data.group;
+                net_if['network'] = n.data.label;
+                net_if['tag']=n.data.group;
                 net_if.subnets = [];
                 var sub = this.getconnectiontotype(n['id'], 'subnet');
-                Object.entries(sub).map( //scroll subnet net provider
-                    ([key, value]) => {
+                Object.entries(sub).map( ([key, value]) => {//scroll subnet net consumer
                         var s = value;
                         net_if['subnets'] = [
                             ...net_if['subnets'],
@@ -356,13 +360,41 @@ class parsedatamodule {
             }
         );
 
-        this.output['node_templates'][mn]['interface_network'] = [
-            { providers: providers },
-            { consumers: consumers }
+        //for locals
+        var locals = [];
+        temp = this.data;
+        var locs = temp.elements.filter(element => element.data !== undefined && element.type === 'network' && element.data.net_type === 'local');
+        Object.entries(locs).map( ([key, value]) => { //scroll link del network local
+                var n = value;
+                var net_if = {};
+                net_if['interface'] = n.data.group;
+                net_if['network'] = n.data.label;
+                net_if['tag']=n.data.group;
+                net_if.subnets = [];
+                var sub = this.getconnectiontotype(n['id'], 'subnet');
+                Object.entries(sub).map( ([key, value]) => { //scroll subnet net local
+                        var s = value;
+                        net_if['subnets'] = [
+                            ...net_if['subnets'],
+                            { subnet: s['data']['label'] },
+                        ]
+                    }
+                );
+                locals = [
+                    ...locals,
+                    net_if,
+                ]
+            }
+        );
+        this.output['node_templates'][mn]['properties']['interface_networks'] = [
+            {providers: providers},
+            {consumers: consumers}
         ];
 
+        this.output['node_templates'][mn]['properties']['internal_networks'] = locals;
+
         // for vm
-        this.output['node_templates'][mn]['virtual_machines'] = [];
+        this.output['node_templates'][mn]['properties']['virtual_machines'] = [];
 
         var serv = this.getobjs('server');
         Object.entries(serv).map(([key, value]) => { // scroll server
@@ -409,24 +441,24 @@ class parsedatamodule {
 
             var z = new porte_vm(name_s, ports);
 
-            this.output['node_templates'][mn]['virtual_machines'] = [
-                ...this.output['node_templates'][mn]['virtual_machines'],
+            this.output['node_templates'][mn]['properties']['virtual_machines'] = [
+                ...this.output['node_templates'][mn]['properties']['virtual_machines'],
                 z,
             ]
 
-            Object.entries(this.output['node_templates'][mn]['virtual_machines']).map(([key, value]) => {
-                //console.log('ewwwwwwwwwww_.', this.output['node_templates'][mn]['virtual_machines'])
+            Object.entries(this.output['node_templates'][mn]['properties']['virtual_machines']).map(([key, value]) => {
+                //console.log('ewwwwwwwwwww_.', this.output['node_templates'][mn]['properties']['virtual_machines'])
             });
 
         });
 
         //console.log('............:',this.reasume);
-        // this.output['node_templates'][mn]= {};
-        // this.output['node_templates'][mn]['description'] = this.output['node_templates'][mn].description;
-        // this.output['node_templates'][mn]['version'] = this.output['node_templates'][mn].version;
-        // this.output['node_templates'][mn]['module'] = this.output['node_templates'][mn].module;
-        // this.output['node_templates'][mn]['interface_network'] = this.output['node_templates'][mn].interface_network;
-        // this.output['node_templates'][mn]['virtual_machines'] = this.output['node_templates'][mn].virtual_machines;
+        // this.output['node_templates'][mn]['properties']= {};
+        // this.output['node_templates'][mn]['properties']['description'] = this.output['node_templates'][mn]['properties'].description;
+        // this.output['node_templates'][mn]['properties']['version'] = this.output['node_templates'][mn]['properties'].version;
+        // this.output['node_templates'][mn]['properties']['module'] = this.output['node_templates'][mn]['properties'].module;
+        // this.output['node_templates'][mn]['properties']['interface_network'] = this.output['node_templates'][mn]['properties'].interface_network;
+        // this.output['node_templates'][mn]['properties']['virtual_machines'] = this.output['node_templates'][mn]['properties'].virtual_machines;
 
 
     }

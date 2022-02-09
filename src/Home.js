@@ -464,93 +464,67 @@ const Home = () => {
                     }
                 }, {
                     "source": "reactflow__node-subnet-1644415778467",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-network-1644415768209",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-subnet-1644415778467Insert node name-reactflow__node-network-1644415768209Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-subnet-1644415777494",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-network-1644415769591",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-subnet-1644415777494Insert node name-reactflow__node-network-1644415769591Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-subnet-1644415779714",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-network-1644415663500",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-subnet-1644415779714Insert node name-reactflow__node-network-1644415663500Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-port-1644415662461",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-subnet-1644415779714",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-port-1644415662461Insert node name-reactflow__node-subnet-1644415779714Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-port-1644415790193",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-subnet-1644415778467",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-port-1644415790193Insert node name-reactflow__node-subnet-1644415778467Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-port-1644415790882",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-subnet-1644415777494",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-port-1644415790882Insert node name-reactflow__node-subnet-1644415777494Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-port-1644415829740",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-subnet-1644415779714",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-port-1644415829740Insert node name-reactflow__node-subnet-1644415779714Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-port-1644415833371",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-subnet-1644415777494",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-port-1644415833371Insert node name-reactflow__node-subnet-1644415777494Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-server-1644415795233",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-port-1644415790882",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-server-1644415795233Insert node name-reactflow__node-port-1644415790882Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-server-1644415795233",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-port-1644415790193",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-server-1644415795233Insert node name-reactflow__node-port-1644415790193Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-server-1644415795233",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-port-1644415662461",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-server-1644415795233Insert node name-reactflow__node-port-1644415662461Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-server-1644415824840",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-port-1644415829740",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-server-1644415824840Insert node name-reactflow__node-port-1644415829740Insert node name",
                     "type": "default"
                 }, {
                     "source": "reactflow__node-server-1644415824840",
-                    "sourceHandle": "Insert node name",
                     "target": "reactflow__node-port-1644415833371",
-                    "targetHandle": "Insert node name",
                     "id": "reactflow__edge-reactflow__node-server-1644415824840Insert node name-reactflow__node-port-1644415833371Insert node name",
                     "type": "default"
                 }],

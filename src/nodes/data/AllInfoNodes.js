@@ -3,9 +3,9 @@ import ServerInfo from './ServerInfo.js';
 import NetworkInfo from './NetworkInfo.js';
 import SubnetInfo from './SubnetInfo.js';
 import ModuleInfo from './ModuleInfo.js';
-import {Row} from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
-class AllInfoNodes { 
+class AllInfoNodes {
 
     constructor(sel_el) {
         this.selected_element = sel_el;
@@ -24,12 +24,12 @@ class AllInfoNodes {
                 x = new PortInfo(this.selected_element);
                 x = x.renderize();
                 break;
-            case 'network':
-                x = new NetworkInfo(this.selected_element);
-                x = x.renderize();
-                break;
             case 'subnet':
                 x = new SubnetInfo(this.selected_element);
+                x = x.renderize();
+                break;
+            case 'network':
+                x = new NetworkInfo(this.selected_element);
                 x = x.renderize();
                 break;
             case 'module':

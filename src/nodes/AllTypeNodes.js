@@ -14,8 +14,8 @@ class AllTypeNodes {
         this.element = {
             server: new ServerNode(),
             port: new PortNode(),
-            network: new NetworkNode(),
             subnet: new SubnetNode(),
+            network: new NetworkNode(),
             module: new ModuleNode(),
         }
         // SETNAME -> ADD ->>>>>>>>>>>>>>>>> PER DEFINIRE NODI NEL REACTFLOW canvas

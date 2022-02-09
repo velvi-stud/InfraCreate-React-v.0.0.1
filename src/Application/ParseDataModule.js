@@ -296,11 +296,11 @@ class parsedatamodule {
         this.output['node_templates'][mn]['properties']['description'] = this.data['module_description'];
         this.output['node_templates'][mn]['properties']['version'] = this.data['version'];
         this.output['node_templates'][mn]['properties']['mode'] = 'Managed';
-        this.output['node_templates'][mn]['properties']['interface_network'] = [
+        this.output['node_templates'][mn]['properties']['interface_networks'] = [
             { providers: [] },
             { consumers: [] }
         ];
-        this.output['node_templates'][mn]['properties']['interface_network'] = [];
+        this.output['node_templates'][mn]['properties']['internal_networks'] = [];
 
 
         //for providers

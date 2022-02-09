@@ -329,7 +329,9 @@ const FlowApp_m = (props) => {
         if (selected_element.id.includes('reactflow__edge') /*|| selected_element.type === 'module'*/) {
             /* const ts = { selected_element: selected_element, show: false };
              setDNI(ts); */
-            return; // future implementazioni per hp nodi
+             const tm = { selected_element: selected_element, show: false };
+             setDNI(tm);
+             return; // future implementazioni per hp nodi
         }
         console.log('element clicked: ', selected_element);
         const tm = { selected_element: selected_element, show: true };
@@ -701,7 +703,7 @@ const FlowApp_m = (props) => {
                         </Row>
                         <Row>
                             <Col>
-                                <h5 className='p-0 m-0'>Node selected:</h5>
+                            <h5 className='p-0 m-0'>Element selected:</h5>
                                 {JSON.stringify(datanodeinfo.selected_element)}
                             </Col>
                         </Row>
@@ -751,6 +753,7 @@ const FlowApp_m = (props) => {
                                 nodeTypes={allNodeTypes} /* definisce i vari tipi di nodi */
                                 onElementsRemove={onElementsRemove} /* function da richiamare per l'eliminazione dei nodi */
                                 deleteKeyCode={46} /* definisce pulsante shortucut per eliminare 'delete-key' ossia canc */
+                                multiSelectionKeyCode = {17} // multiselection control, on pan shift
                                 onConnect={onConnect} /* function da richiamare quando si connettono */
                                 onDrop={onDrop} /* function da richiamare quando si trascina */
                                 onDragOver={onDragOver} /* function da richiamare quando si posa un °QUALSIASI° elemento all'interno */

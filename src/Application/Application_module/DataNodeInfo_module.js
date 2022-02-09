@@ -32,7 +32,7 @@ class DataNodeInfo_m extends React.Component {
     renderize() {
         if (this.show) {
             return (
-                <div className='vheight'>
+                <div className='vheight' style={{overflowY:'scroll'}}>
                     <Container className='cf px-1 py-2' style={{ direction: 'rtl', overflowX: 'hidden', overflowY: 'scroll', fontSize: "0.8em", position: 'relative' }}>
                         <Row className='mb-2'>
                             <Col style={{ overflowX: 'auto' }} className='p-2'>

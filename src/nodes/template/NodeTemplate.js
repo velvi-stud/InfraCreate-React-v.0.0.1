@@ -25,7 +25,7 @@ const node_temp = (tipo1, style1, img1, css_in1, css_out1, valid_connection_in, 
 			<div style={style}>
 				{/* PORTA INGRESSO TIPO 1*/}
 				<Handle
-					id={data.label}
+					//id={data.label}
 					type="target"
 					position="left"
 					style={css_in}
@@ -43,7 +43,7 @@ const node_temp = (tipo1, style1, img1, css_in1, css_out1, valid_connection_in, 
 
 				{/* PORTA USCITA TIPO 1*/}
 				<Handle
-					id={data.label}
+					//id={data.label}
 					type="source"
 					position="right"
 					style={css_out}

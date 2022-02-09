@@ -104,7 +104,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 								style={d}
 							/>
 						</OverlayTrigger>
-					;
+						;
 					x.push(l);
 					z = z + a;
 				}
@@ -134,24 +134,24 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 						...c
 					}
 					l =
-					<OverlayTrigger
-					key={v}
-					placement='right'
-					overlay={
-						<Tooltip id={`tooltip-${v}`}>
-							<strong>{value.data.label}</strong> consumer.
-						</Tooltip>
-					}
-				>
-					<Handle
-						key={v} //KEY === ID
-						id={v} // ID === ID == LABEL
-						type="target"
-						position="left"
-						style={d}
-					/>
-				</OverlayTrigger>
-			;
+						<OverlayTrigger
+							key={v}
+							placement='right'
+							overlay={
+								<Tooltip id={`tooltip-${v}`}>
+									<strong>{value.data.label}</strong> consumer.
+								</Tooltip>
+							}
+						>
+							<Handle
+								key={v} //KEY === ID
+								id={v} // ID === ID == LABEL
+								type="target"
+								position="left"
+								style={d}
+							/>
+						</OverlayTrigger>
+						;
 					x.push(l);
 					z = z + a;
 				}
@@ -230,17 +230,26 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 
 		const isSession = () => {
 			if (nc === 0) {
+				// return (
+				// 	<div>
+				// 		<p style={{ margin: '0', text: '1em' }}>
+				// 			<i>
+				// 				Session module
+				// 			</i>
+				// 		</p>
+				// 	</div>
+				// )
 				return (
-					<div>
-						<p style={{ margin: '0', text: '1em' }}>
-							<i>
-								Session module
-							</i>
-						</p>
-					</div>
+					<i style={{ margin: '0', text: '1em'}}>
+						Session module:
+					</i>
 				)
 			}
-			return null
+			return (
+				<i style={{ margin: '0', text: '1em'}}>
+					Module:
+				</i>
+			)
 		}
 
 		return (
@@ -251,10 +260,11 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 
 				{/* NOME */}
 				<div> <h5 style={{ margin: '0' }}> {data.label} </h5></div>
-				{isSession()}
 
-				{/* Description */}
-				<div> <p style={{ marginBottom: '0' }}> {data.description} </p> </div>
+				{/* {isSession()} */}
+
+				{/* MODULE TYPE */}
+				<div> <p style={{ marginBottom: '0.5em', fontSize: '0.7em' }}> {isSession()} {data.module} </p> </div>
 
 				{/* RF */}
 				{/* <button type="button" className="btn btn-dark" style={{ fontSize: '1em' }} onClick={() => { (BTN.display === 'none') ? setBTN({ title: 'Hide topology', display: 'block' }) : setBTN({ title: 'Show topology', display: 'none' }) }}>{BTN.title}</button>
@@ -290,6 +300,10 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 
 				{/* PORTA USCITA TIPO 1*/}
 				{handleprov()}
+
+
+				{/* Description */}
+				<div> <p style={{ marginBottom: '0' }}> {data.description} </p> </div>
 
 			</div>
 		)

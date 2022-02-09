@@ -21,7 +21,7 @@ class ModuleInfo extends React.Component {
         this.tipo = this.element.type;
         this.areas = areas;
 
-        // this._label = React.createRef(null);
+        this._label = React.createRef(null);
         this._desc = React.createRef(null);
         this._area = React.createRef(null);
 
@@ -31,9 +31,9 @@ class ModuleInfo extends React.Component {
 
 
     updateModuleData() {
-        // var label = this._label.current.value;
-        // if (label !== null && label !== '')
-        //     this.element['data']['label'] = label;
+        var label = this._label.current.value;
+        if (label !== null && label !== '')
+            this.element['data']['label'] = label;
         var description = this._desc.current.value;
         if (description !== null && description !== '')
             this.element['data']['description'] = description;
@@ -45,7 +45,6 @@ class ModuleInfo extends React.Component {
 
 
     renderize() {
-
 
 
         const showAreas = () => {
@@ -123,7 +122,7 @@ class ModuleInfo extends React.Component {
 
 
                         {/* NODE NAME */}
-                        {/* <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                        <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label className="">
                                     <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Module name</p>
@@ -132,12 +131,12 @@ class ModuleInfo extends React.Component {
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
                                     ref={this._label}
-                                    placeholder={this.checkDataList(['data', 'label'], 'Insert node name')}
+                                    placeholder={this.checkDataList(['data', 'label'], 'Insert module name')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateModuleData()}
                                 />
                             </Col>
-                        </Row> */}
+                        </Row>
 
                         {/* DESCRIPTION */}
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >

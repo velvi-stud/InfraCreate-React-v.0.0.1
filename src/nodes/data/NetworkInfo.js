@@ -118,6 +118,7 @@ class PortInfo extends React.Component {
                                     <option>{this.checkDataList(['data', 'net_type'], 'Select type')}</option>
                                     <option value="consumer"> Consumer </option>
                                     <option value="provider"> Provider </option>
+                                    <option value="local"> Local </option>
                                 </Form.Select>
                             </Col>
                         </Row>

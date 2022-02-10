@@ -51,11 +51,11 @@ class parsedatamodule {
         this.output['node_templates'][mn]['properties']['description'] = this.data['module_description'];
         this.output['node_templates'][mn]['properties']['version'] = this.data['version'];
         this.output['node_templates'][mn]['properties']['mode'] = 'Managed';
-        this.output['node_templates'][mn]['properties']['constraints'] = {
-            module_constraints: [],
-            interface_constraints: [],
-            network_constraints: [],
-        }
+        // this.output['node_templates'][mn]['properties']['constraints'] = {
+        //     module_constraints: [],
+        //     interface_constraints: [],
+        //     network_constraints: [],
+        // }
 
         this.output['node_templates'][mn]['properties']['interface_networks'] = [
             { providers: [] },
@@ -315,7 +315,7 @@ class parsedatamodule {
 
             network['type'] = 'cloudify.openstack.nodes.Network';
             network['properties'] = {
-                local_interface: n['data']['loca_interface'],
+                local_interface: n['data']['local_interface'],
                 remote_interface: n['data']['remote_interface'],
                 net_type: n['data']['net_type']
             }

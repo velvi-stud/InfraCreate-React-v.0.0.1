@@ -5,7 +5,7 @@ import img from '../images/nodeimg/network.png';
 
 class NetworkNode {
 
-    constructor(){
+    constructor(){ 
         this.type = "network";
         this.style = {
             background: 'orchid',

@@ -20,7 +20,8 @@ class PortInfo extends React.Component {
 
         this._label = React.createRef(null);
         this._desc = React.createRef(null);
-        this._groupname = React.createRef(null);
+        this._lolcalif = React.createRef(null);
+        this._remotelif = React.createRef(null);
         this._net_type = React.createRef(null);
     }
 
@@ -34,9 +35,14 @@ class PortInfo extends React.Component {
         if (description !== null && description !== '')
             this.element['data']['description'] = description;
 
-        var gname = this._groupname.current.value;
-        if (gname !== null && gname !== '')
-            this.element['data']['group'] = gname;
+        var localif = this._lolcalif.current.value;
+        if (localif !== null && localif !== ''){
+            this.element['data']['local_interface'] = localif;
+            this.element['data']['remote_interface'] = localif;
+        }
+        var remoteif = this._remotelif.current.value;
+        if (remoteif !== null && remoteif !== '')
+            this.element['data']['remote_interface'] = remoteif;
 
         var ntype = this._net_type.current.value;
         if (ntype !== null && ntype !== '')
@@ -84,17 +90,34 @@ class PortInfo extends React.Component {
                             </Col>
                         </Row>
 
-                        {/* GROUP NAME */}
+                        {/* local if */}
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
                                 <Form.Label className="">
-                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Group name</p>
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}>Local IF</p>
                                 </Form.Label>
                             </Col>
                             <Col xs={12} md={7} lg={8}>
                                 <Form.Control
-                                    ref={this._groupname}
-                                    placeholder={this.checkDataList(['data', 'group'], 'Insert group name')}
+                                    ref={this._lolcalif}
+                                    placeholder={this.checkDataList(['data', 'local_interface'], 'Local if name')}
+                                    style={{ fontSize: "1.4em" }}
+                                    onChange={() => this.updateNetworkData()}
+                                />
+                            </Col>
+                        </Row>
+
+                        {/* remote if */}
+                        <Row className='mb-2 mt-2 justify-content-center rowDNI' >
+                            <Col xs={12} md={5} lg={4} className='colDNI'>
+                                <Form.Label className="">
+                                    <p style={{ whiteSpace: 'nowrap', margin: 'auto', fontSize: '1.7em' }}> Remote IF</p>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={12} md={7} lg={8}>
+                                <Form.Control
+                                    ref={this._remotelif}
+                                    placeholder={this.checkDataList(['data', 'remote_interface'], 'Remote if name')}
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateNetworkData()}
                                 />

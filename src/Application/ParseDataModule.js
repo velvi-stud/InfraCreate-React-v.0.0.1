@@ -3,253 +3,7 @@ import downloadfile from "./DownloadFILE";
 class parsedatamodule {
     constructor(f_name, data_m) {
         this.data = data_m;
-        //CANCELLARE -> PER PROVARE UNA TOPOLOGIA
-        this.data1 =
-        {
-            "elements": [
-                {
-                    "id": "reactflow__node-server-1644332435088",
-                    "type": "server",
-                    "position": {
-                        "x": -225.88039927424455,
-                        "y": 193.3359513753102
-                    },
-                    "data": {
-                        "label": "server_1",
-                        "description": "desc_s1",
-                        "image": "image_1",
-                        "flavor": {
-                            "cpu": "4 ",
-                            "hd": "100",
-                            "ram": "32"
-                        },
-                        "userdata": {
-                            "usr": "admin",
-                            "pwd": "admin"
-                        },
-                        "name": "hn_s1"
-                    }
-                }, {
-                    "id": "reactflow__node-port-1644332437862",
-                    "type": "port",
-                    "position": {
-                        "x": 36.391303625163815,
-                        "y": 35.581670956980716
-                    },
-                    "data": {
-                        "label": "p1",
-                        "description": "desc p1",
-                        "properties": {
-                            "default": "d1",
-                            "type": "t1"
-                        }
-                    }
-                }, {
-                    "id": "reactflow__node-port-1644332440760",
-                    "type": "port",
-                    "position": {
-                        "x": 34.23930609661005,
-                        "y": 180.47908725944404
-                    },
-                    "data": {
-                        "label": "p2",
-                        "description": "desc p2",
-                        "properties": {
-                            "default": "d2",
-                            "type": "t2"
-                        }
-                    }
-                }, {
-                    "id": "reactflow__node-port-1644332444338",
-                    "type": "port",
-                    "position": {
-                        "x": 30.82702011752653,
-                        "y": 362.97307922724383
-                    },
-                    "data": {
-                        "label": "p3",
-                        "description": "desc p3",
-                        "properties": {
-                            "default": "d3",
-                            "type": "t3"
-                        }
-                    }
-                }, {
-                    "id": "reactflow__node-subnet-1644332448658",
-                    "type": "subnet",
-                    "position": {
-                        "x": 299.2887199276271,
-                        "y": -54.617187598131466
-                    },
-                    "data": {
-                        "label": "subnet1",
-                        "description": "desc s1",
-                        "subnet": {
-                            "ip_version": "4",
-                            "cidr": {
-                                "default": "cd1"
-                            },
-                            "allocation_pools": {
-                                "allocation_pool_start": "1",
-                                "allocation_pool_end": "1"
-                            },
-                            "enable_dhcp": true
-                        }
-                    }
-                }, {
-                    "id": "reactflow__node-subnet-1644332452112",
-                    "type": "subnet",
-                    "position": {
-                        "x": 295.41157971846235,
-                        "y": 144.77166786767287
-                    },
-                    "data": {
-                        "label": "subnet2",
-                        "description": "desc s2222",
-                        "subnet": {
-                            "ip_version": "16",
-                            "cidr": {
-                                "default": "cd1"
-                            },
-                            "allocation_pools": {
-                                "allocation_pool_start": "2",
-                                "allocation_pool_end": "2"
-                            },
-                            "enable_dhcp": false
-                        }
-                    }
-                }, {
-                    "id": "reactflow__node-subnet-1644332454978",
-                    "type": "subnet",
-                    "position": {
-                        "x": 295.6364215913124,
-                        "y": 368.6488080768376
-                    },
-                    "data": {
-                        "label": "subnet3",
-                        "description": "desc3",
-                        "subnet": {
-                            "ip_version": "4",
-                            "cidr": {
-                                "default": "cd3"
-                            },
-                            "allocation_pools": {
-                                "allocation_pool_start": "3",
-                                "allocation_pool_end": "3"
-                            },
-                            "enable_dhcp": false
-                        }
-                    }
-                }, {
-                    "id": "reactflow__node-network-1644332463084",
-                    "type": "network",
-                    "position": {
-                        "x": 584.0544147948352,
-                        "y": 141.68110023453676
-                    },
-                    "data": {
-                        "label": "net_2_1",
-                        "description": "desc 2",
-                        "net_type": "provider",
-                        "group": "Network_s1"
-                    }
-                }, {
-                    "id": "reactflow__node-network-1644332464755",
-                    "type": "network",
-                    "position": {
-                        "x": 587.5426995381956,
-                        "y": -128.69889358684765
-                    },
-                    "data": {
-                        "label": "net_1_1",
-                        "description": "desc1 n1",
-                        "net_type": "consumer",
-                        "group": "Network 1_1"
-                    }
-                }, {
-                    "id": "reactflow__node-network-1644332466408",
-                    "type": "network",
-                    "position": {
-                        "x": 583.7649886065869,
-                        "y": 371.96166477836505
-                    },
-                    "data": {
-                        "label": "net_3_3",
-                        "description": "sa inc.",
-                        "net_type": "provider",
-                        "group": "netwk_inc"
-                    }
-                }, {
-                    "source": "reactflow__node-server-1644332435088",
-                    "sourceHandle": "Insert node name",
-                    "target": "reactflow__node-port-1644332437862",
-                    "targetHandle": "Insert node name",
-                    "id": "reactflow__edge-reactflow__node-server-1644332435088Insert node name-reactflow__node-port-1644332437862Insert node name",
-                    "type": "default"
-                }, {
-                    "source": "reactflow__node-server-1644332435088",
-                    "sourceHandle": "Insert node name",
-                    "target": "reactflow__node-port-1644332440760",
-                    "targetHandle": "Insert node name",
-                    "id": "reactflow__edge-reactflow__node-server-1644332435088Insert node name-reactflow__node-port-1644332440760Insert node name",
-                    "type": "default"
-                }, {
-                    "source": "reactflow__node-server-1644332435088",
-                    "sourceHandle": "Insert node name",
-                    "target": "reactflow__node-port-1644332444338",
-                    "targetHandle": "Insert node name",
-                    "id": "reactflow__edge-reactflow__node-server-1644332435088Insert node name-reactflow__node-port-1644332444338Insert node name",
-                    "type": "default"
-                }, {
-                    "source": "reactflow__node-port-1644332437862",
-                    "sourceHandle": "Insert node name",
-                    "target": "reactflow__node-subnet-1644332448658",
-                    "targetHandle": "Insert node name",
-                    "id": "reactflow__edge-reactflow__node-port-1644332437862Insert node name-reactflow__node-subnet-1644332448658Insert node name",
-                    "type": "default"
-                }, {
-                    "source": "reactflow__node-port-1644332440760",
-                    "sourceHandle": "Insert node name",
-                    "target": "reactflow__node-subnet-1644332452112",
-                    "targetHandle": "Insert node name",
-                    "id": "reactflow__edge-reactflow__node-port-1644332440760Insert node name-reactflow__node-subnet-1644332452112Insert node name",
-                    "type": "default"
-                }, {
-                    "source": "reactflow__node-port-1644332444338",
-                    "sourceHandle": "Insert node name",
-                    "target": "reactflow__node-subnet-1644332454978",
-                    "targetHandle": "Insert node name",
-                    "id": "reactflow__edge-reactflow__node-port-1644332444338Insert node name-reactflow__node-subnet-1644332454978Insert node name",
-                    "type": "default"
-                }, {
-                    "source": "reactflow__node-subnet-1644332448658",
-                    "sourceHandle": "Insert node name",
-                    "target": "reactflow__node-network-1644332464755",
-                    "targetHandle": "Insert node name",
-                    "id": "reactflow__edge-reactflow__node-subnet-1644332448658Insert node name-reactflow__node-network-1644332464755Insert node name",
-                    "type": "default"
-                }, {
-                    "source": "reactflow__node-subnet-1644332452112",
-                    "sourceHandle": "Insert node name",
-                    "target": "reactflow__node-network-1644332463084",
-                    "targetHandle": "Insert node name",
-                    "id": "reactflow__edge-reactflow__node-subnet-1644332452112Insert node name-reactflow__node-network-1644332463084Insert node name",
-                    "type": "default"
-                }, {
-                    "source": "reactflow__node-subnet-1644332454978",
-                    "sourceHandle": "Insert node name",
-                    "target": "reactflow__node-network-1644332466408",
-                    "targetHandle": "Insert node name",
-                    "id": "reactflow__edge-reactflow__node-subnet-1644332454978Insert node name-reactflow__node-network-1644332466408Insert node name",
-                    "type": "default"
-                }],
-            "position": [219.02767854374633, 149.54388022674763],
-            "zoom": 0.5070726728662823,
-            "#elements": 19,
-            "module_name": "elements",
-            "module_description": "md1",
-            "version": "2.0"
-        };
+
         this.output = {}
         this.reasume = {}
 
@@ -290,12 +44,19 @@ class parsedatamodule {
     base_blueprint() {
         var mn = this.data['module_name'];
         this.output['node_templates'][mn] = {
+            type: '',
             properties: {}
         };
-        this.output['node_templates'][mn]['properties']['type'] = 'sysman.creo.nodes.TheaterModule';
+        this.output['node_templates'][mn]['type'] = 'sysman.creo.nodes.TheaterModule';
         this.output['node_templates'][mn]['properties']['description'] = this.data['module_description'];
         this.output['node_templates'][mn]['properties']['version'] = this.data['version'];
         this.output['node_templates'][mn]['properties']['mode'] = 'Managed';
+        this.output['node_templates'][mn]['properties']['constraints'] = {
+            module_constraints: [],
+            interface_constraints: [],
+            network_constraints: [],
+        }
+
         this.output['node_templates'][mn]['properties']['interface_networks'] = [
             { providers: [] },
             { consumers: [] }
@@ -307,88 +68,90 @@ class parsedatamodule {
         var providers = [];
         var temp = this.data;
         var prov = temp.elements.filter(element => element.data !== undefined && element.type === 'network' && element.data.net_type === 'provider');
-        Object.entries(prov).map( ([key, value]) => { //scroll link del network provider
-                var n = value;
-                var net_if = {};
-                net_if['interface'] = n.data.group;
-                net_if['network'] = n.data.label;
-                net_if['tag']=n.data.group;
-                net_if['subnets'] = [];
-                
-                var sub = this.getconnectiontotype(n['id'], 'subnet');
-                Object.entries(sub).map( ([key, value]) => {//scroll subnet net provider
-                        var s = value;
-                        net_if['subnets'] = [
-                            ...net_if['subnets'],
-                            { subnet: s.data.label },
-                        ]
-                    }
-                );
-                //console.log('++++++provider: ', net_if);
-                providers = [
-                    ...providers,
-                    net_if,
+        Object.entries(prov).map(([key, value]) => { //scroll link del network provider
+            var n = value;
+            var net_if = {};
+            net_if['interface'] = n['data']['local_interface'];
+            net_if['network'] = n['data']['label'];
+            net_if['tag'] = n['data']['local_interface'];
+            net_if['subnets'] = [];
+
+            var sub = this.getconnectiontotype(n['id'], 'subnet');
+            Object.entries(sub).map(([key, value]) => {//scroll subnet net provider
+                var s = value;
+                net_if['subnets'] = [
+                    ...net_if['subnets'],
+                    { subnet: s['data']['label'] },
                 ]
-            }
-        );
-        
+            });
+            //console.log('++++++provider: ', net_if);
+            providers = [
+                ...providers,
+                net_if,
+            ]
+        });
+
         //for consumers
         var consumers = [];
         temp = this.data;
         var cons = temp.elements.filter(element => element.data !== undefined && element.type === 'network' && element.data.net_type === 'consumer');
-        Object.entries(cons).map( ([key, value]) => {//scroll link del network consumer
-                var n = value;
-                var net_if = {};
-                net_if['interface'] = n.data.group;
-                net_if['network'] = n.data.label;
-                net_if['tag']=n.data.group;
-                net_if.subnets = [];
-                var sub = this.getconnectiontotype(n['id'], 'subnet');
-                Object.entries(sub).map( ([key, value]) => {//scroll subnet net consumer
-                        var s = value;
-                        net_if['subnets'] = [
-                            ...net_if['subnets'],
-                            { subnet: s['data']['label'] },
-                        ]
-                    }
-                );
-                //console.log('++++++consumer: ', net_if);
-                consumers = [
-                    ...consumers,
-                    net_if,
+        Object.entries(cons).map(([key, value]) => {//scroll link del network consumer
+            var n = value;
+            var net_if = {};
+            net_if['interface'] = n['data']['local_interface'];
+            net_if['network'] = n['data']['label'];
+            net_if['tag'] = n['data']['local_interface'];
+            net_if['subnets'] = [];
+            var sub = this.getconnectiontotype(n['id'], 'subnet');
+            Object.entries(sub).map(([key, value]) => {//scroll subnet net consumer
+                var s = value;
+                net_if['subnets'] = [
+                    ...net_if['subnets'],
+                    { subnet: s['data']['label'] },
                 ]
-            }
-        );
+            });
+            //console.log('++++++consumer: ', net_if);
+            consumers = [
+                ...consumers,
+                net_if,
+            ]
+
+            // PUT HERE CONSTRAINT -> interface_constraint
+
+        });
 
         //for locals
         var locals = [];
         temp = this.data;
+        
         var locs = temp.elements.filter(element => element.data !== undefined && element.type === 'network' && element.data.net_type === 'local');
-        Object.entries(locs).map( ([key, value]) => { //scroll link del network local
-                var n = value;
-                var net_if = {};
-                net_if['interface'] = n.data.group;
-                net_if['network'] = n.data.label;
-                net_if['tag']=n.data.group;
-                net_if.subnets = [];
-                var sub = this.getconnectiontotype(n['id'], 'subnet');
-                Object.entries(sub).map( ([key, value]) => { //scroll subnet net local
-                        var s = value;
-                        net_if['subnets'] = [
-                            ...net_if['subnets'],
-                            { subnet: s['data']['label'] },
-                        ]
-                    }
-                );
-                locals = [
-                    ...locals,
-                    net_if,
+        Object.entries(locs).map(([key, value]) => { //scroll link del network local
+            
+            var n = value;
+            var net_if = {};
+            net_if['interface'] = n['data']['local_interface'];
+            net_if['network'] = n['data']['label'];
+            net_if['tag'] = n['data']['local_interface'];
+            net_if['subnets'] = [];
+
+            var sub = this.getconnectiontotype(n['id'], 'subnet');
+            Object.entries(sub).map(([key, value]) => { //scroll subnet net local
+                var s = value;
+                net_if['subnets'] = [
+                    ...net_if['subnets'],
+                    { subnet: s['data']['label'] },
                 ]
-            }
-        );
+            });
+
+            locals = [
+                ...locals,
+                net_if,
+            ]
+        });
+
         this.output['node_templates'][mn]['properties']['interface_networks'] = [
-            {providers: providers},
-            {consumers: consumers}
+            { providers: providers },
+            { consumers: consumers }
         ];
 
         this.output['node_templates'][mn]['properties']['internal_networks'] = locals;
@@ -552,7 +315,8 @@ class parsedatamodule {
 
             network['type'] = 'cloudify.openstack.nodes.Network';
             network['properties'] = {
-                group: n['data']['group'],
+                local_interface: n['data']['loca_interface'],
+                remote_interface: n['data']['remote_interface'],
                 net_type: n['data']['net_type']
             }
             this.output['node_templates'][name_net] = network;

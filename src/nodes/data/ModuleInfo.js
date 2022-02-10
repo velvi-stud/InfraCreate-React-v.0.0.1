@@ -20,7 +20,7 @@ class ModuleInfo extends React.Component {
         this.element = elemento;
         this.tipo = this.element.type;
         this.areas = areas;
-
+ 
         this._label = React.createRef(null);
         this._desc = React.createRef(null);
         this._area = React.createRef(null);
@@ -78,6 +78,8 @@ class ModuleInfo extends React.Component {
 
 
         //console.log(this.element);
+        if(this.element['id'].includes('reactflow__edge'))
+            return null;
 
         return (
             <Row style={{ width: '100%', }} className='text-center align-center justify-content-center'>
@@ -98,6 +100,7 @@ class ModuleInfo extends React.Component {
                                             // pointerEvents: "none",
                                             background: "white",
                                             //display: BTN.display
+                                            position: "relative"
                                         }}
                                     >
                                         <ReactFlowProvider>

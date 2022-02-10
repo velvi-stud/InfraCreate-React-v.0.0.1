@@ -81,7 +81,8 @@ const Home = () => {
      */
     function retrieveData() {
         /* HP CHE PRENDE I DATI */
-        
+
+        //many port
         var module1 = [
             {
                 "elements": [
@@ -267,7 +268,8 @@ const Home = () => {
                         "label": "man_net",
                         "description": "",
                         "net_type": "consumer",
-                        "group": "man_net"
+                        "local_interface": "man_net",
+                        "remote_interface": "man_net",
                     }
                 }, {
                     "id": "reactflow__node-network-1644415768209",
@@ -280,7 +282,8 @@ const Home = () => {
                         "label": "private_net_dmz",
                         "description": "",
                         "net_type": "consumer",
-                        "group": "private_net_dmz"
+                        "local_interface": "private_net_dmz",
+                        "remote_interface": "private_net_dmz",
                     }
                 }, {
                     "id": "reactflow__node-network-1644415769591",
@@ -293,7 +296,8 @@ const Home = () => {
                         "label": "private_net_local",
                         "description": "",
                         "net_type": "Select type",
-                        "group": "private_net_local"
+                        "local_interface": "private_net_local",
+                        "remote_interface": "private_net_local",
                     }
                 }, {
                     "id": "reactflow__node-subnet-1644415777494",
@@ -537,7 +541,7 @@ const Home = () => {
                 "module_description": "esempio bp apache",
                 "version": "1.0"
             }
-        ]
+        ];
         //fw1
         var module3 = [
             {
@@ -832,7 +836,8 @@ const Home = () => {
                         "label": "private_net_simint",
                         "description": "",
                         "net_type": "provider",
-                        "group": "private_net_simint"
+                        "local_interface": "private_net_simint",
+                        "remote_interface": "private_net_simint",
                     }
                 }, {
                     "id": "reactflow__node-network-1644420347573",
@@ -845,7 +850,8 @@ const Home = () => {
                         "label": "private_net_dmz",
                         "description": "",
                         "net_type": "Select type",
-                        "group": "private_net_dmz"
+                        "local_interface": "private_net_dmz",
+                        "remote_interface": "private_net_dmz",
                     }
                 }, {
                     "id": "reactflow__node-network-1644420385093",
@@ -858,7 +864,8 @@ const Home = () => {
                         "label": "private_net_man",
                         "description": "",
                         "net_type": "provider",
-                        "group": "private_net_man"
+                        "local_interface": "private_net_man",
+                        "remote_interface": "private_net_man",
                     }
                 }, {
                     "id": "reactflow__node-network-1644420388058",
@@ -871,7 +878,8 @@ const Home = () => {
                         "label": "private_net_server",
                         "description": "",
                         "net_type": "provider",
-                        "group": "private_net_server"
+                        "local_interface": "private_net_server",
+                        "remote_interface": "private_net_server",
                     }
                 }, {
                     "id": "reactflow__node-network-1644420389827",
@@ -884,7 +892,8 @@ const Home = () => {
                         "label": "private_net_client",
                         "description": "",
                         "net_type": "provider",
-                        "group": "private_net_client"
+                        "local_interface": "private_net_client",
+                        "remote_interface": "private_net_client",
                     }
                 }, {
                     "id": "reactflow__node-network-1644420391249",
@@ -897,7 +906,8 @@ const Home = () => {
                         "label": "private_net_iot",
                         "description": "",
                         "net_type": "provider",
-                        "group": "private_net_iot"
+                        "local_interface": "private_net_iot",
+                        "remote_interface": "private_net_iot",
                     }
                 }, {
                     "id": "reactflow__node-network-1644420392586",
@@ -910,7 +920,8 @@ const Home = () => {
                         "label": "man_net",
                         "description": "",
                         "net_type": "consumer",
-                        "group": "private_net_name"
+                        "local_interface": "man_net",
+                        "remote_interface": "man_net",
                     }
                 }, {
                     "source": "reactflow__node-server-1644420122444",
@@ -1067,7 +1078,8 @@ const Home = () => {
                 "module_description": "description firewall apache",
                 "version": "2"
             }
-        ]
+        ];
+        //sess
         var module4 = [
             {
                 "elements": [
@@ -1328,11 +1340,12 @@ const Home = () => {
                 ],
                 "zoom": 1,
                 "#elements": 19,
-                "module_name": "example4",
+                "module_name": "example_session",
                 "module_description": "descrizione ex4",
                 "version": "1.0"
             }
         ];
+        // 1-1
         var module5 = [
             {
                 "elements": [
@@ -1577,6 +1590,7 @@ const Home = () => {
                 "version": "1.0"
             }
         ];
+
         var modules = [
             module1, module2, module3, module4, module5
         ];

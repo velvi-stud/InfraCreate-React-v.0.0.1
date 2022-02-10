@@ -174,7 +174,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 								overflow: "visible",
 								// fontSize: "1px",
 								// pointerEvents: "none",
-								background: "white",
+								background: "white", 
 								//display: BTN.display
 							}}
 						>

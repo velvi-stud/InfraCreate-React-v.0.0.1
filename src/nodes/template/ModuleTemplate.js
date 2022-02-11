@@ -136,7 +136,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 					l =
 						<OverlayTrigger
 							key={v}
-							placement='right'
+							placement='left'
 							overlay={
 								<Tooltip id={`tooltip-${v}`}>
 									<strong>{value.data.label}</strong> consumer.

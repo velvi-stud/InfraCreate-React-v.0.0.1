@@ -12,6 +12,7 @@ class parsedatamodule {
         //console.log('sovnavljfnvlife:', this._sub_net_)
 
         this.parse(f_name);
+        new downloadfile(f_name, data_m, 'json')
     }
 
     parse(f_name) {

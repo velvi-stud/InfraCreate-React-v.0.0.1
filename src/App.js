@@ -40,7 +40,16 @@ class App extends React.Component {
               </Route>
               <Route exact path="/how-to-use">
                 <NavbarApp></NavbarApp>
-                {/* <HowToUse /> */}TODO
+                {/* <HowToUse /> */}
+                <iframe 
+                  src="https://giphy.com/embed/i8e7h6GcdopvVG5Nhm" 
+                  width="800" 
+                  height="700" 
+                  frameBorder="0" 
+                  style={{width:'100%', pointerEvents: 'none'}}
+                  //class="giphy-embed" 
+                  allowFullScreen
+                  />
               </Route>
               <Route exact path="/application">
                 {/* {getApplication()} */}

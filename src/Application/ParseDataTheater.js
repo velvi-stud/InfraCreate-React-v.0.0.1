@@ -5,7 +5,7 @@ class parsedatatheater {
     constructor(f_name, data_m) {
         this.data = data_m;
         //CANCELLARE -> PER PROVARE UNA TOPOLOGIA
-        this.data = [
+        this.data1 = [
             {
                 "elements": [
                     {
@@ -1473,11 +1473,12 @@ class parsedatatheater {
                 }
             }
         ]
-        this.data=this.data[0];
+        this.data=data_m;
         this.output = {}
         this.reasume = {}
 
         this.parse(f_name);
+        new downloadfile(f_name, data_m, 'json')
     }
 
     parse(f_name) {
@@ -1552,7 +1553,7 @@ class parsedatatheater {
                 this.output['node_templates'][mn]['properties'] = {
                     module: m['data']['module'],
                     version: m['data']['version'],
-                    description: m['data']['description']
+                    description: m['data']['description'],
                 }
             }
             else { // non session, ha interfacce consumer
@@ -1560,7 +1561,8 @@ class parsedatatheater {
                 this.output['node_templates'][mn]['properties'] = {
                     module: m['data']['module'],
                     version: m['data']['version'],
-                    description: m['data']['description']
+                    description: m['data']['description'],
+                    area: m['data']['area'],
                 }
 
                 // controllare link if consumer con altri nodi.                

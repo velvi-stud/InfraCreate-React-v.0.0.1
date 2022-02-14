@@ -6,7 +6,7 @@ class ModuleNode {
     constructor() {
         this.type = "Module";
         this.style = {
-            background: 'pink',
+            background: '#C0C3D3',
             color: 'black',
             //borderRadius: '2em',
             padding: 10,

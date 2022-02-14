@@ -406,7 +406,7 @@ const Home = () => {
                         "label": "host_apache",
                         "description": "",
                         "image": "image_1",
-                        "flavor": {
+                        "flavour": {
                             "cpu": "4 ",
                             "hd": "100",
                             "ram": "16"
@@ -428,7 +428,7 @@ const Home = () => {
                         "label": "host_db",
                         "description": "hdb",
                         "image": "Select image",
-                        "flavor": {
+                        "flavour": {
                             "cpu": "Select size",
                             "hd": "Select size",
                             "ram": "Select size"
@@ -555,7 +555,7 @@ const Home = () => {
                     "label": "host_fw1",
                     "description": "module_fw_model_1",
                     "image": "image_1",
-                    "flavor": {
+                    "flavour": {
                         "cpu": "4",
                         "hd": "50",
                         "ram": "16"
@@ -1108,7 +1108,7 @@ const Home = () => {
                             "label": "serv1",
                             "description": "",
                             "image": "Select image",
-                            "flavor": {
+                            "flavour": {
                                 "cpu": "Select size",
                                 "hd": "Select size",
                                 "ram": "Select size"
@@ -1374,7 +1374,7 @@ const Home = () => {
                             "label": "serv1",
                             "description": "",
                             "image": "Select image",
-                            "flavor": {
+                            "flavour": {
                                 "cpu": "Select size",
                                 "hd": "Select size",
                                 "ram": "Select size"

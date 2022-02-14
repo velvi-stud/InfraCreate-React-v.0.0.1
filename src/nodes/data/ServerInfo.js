@@ -66,7 +66,7 @@ class PortInfo extends React.Component {
             ram: this._ram.current.value
         };
         if (flavour !== null && flavour !== '')
-            this.element['data']['flavor'] = (flavour);
+            this.element['data']['flavour'] = (flavour);
 
         var userdata = {
             usr: this._usr.current.value,
@@ -176,7 +176,7 @@ class PortInfo extends React.Component {
                         </Row>
 
 
-                        {/* FLAVOR */}
+                        {/* FLAVOUR */}
                         {/* CPU */}
                         <Row className='mb-2 mt-2 justify-content-center rowDNI' >
                             <Col xs={12} md={5} lg={4} className='colDNI'>
@@ -191,7 +191,7 @@ class PortInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 >
-                                    <option>{this.checkDataList(['data', 'flavor', 'cpu'], 'Select size')}</option>
+                                    <option>{this.checkDataList(['data', 'flavour', 'cpu'], 'Select size')}</option>
                                     <option value="4 ">4 core  </option>
                                     <option value="8">8 core </option>
                                     <option value="16">16 core </option>
@@ -214,7 +214,7 @@ class PortInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 >
-                                    <option>{this.checkDataList(['data', 'flavor', 'hd'], 'Select size')} </option>
+                                    <option>{this.checkDataList(['data', 'flavour', 'hd'], 'Select size')} </option>
                                     <option value="50">50 GB  </option>
                                     <option value="100">100 GB</option>
                                     <option value="500">500 GB</option>
@@ -237,7 +237,7 @@ class PortInfo extends React.Component {
                                     style={{ fontSize: "1.4em" }}
                                     onChange={() => this.updateServerData()}
                                 >
-                                    <option>{this.checkDataList(['data', 'flavor', 'ram'], 'Select size')} </option>
+                                    <option>{this.checkDataList(['data', 'flavour', 'ram'], 'Select size')} </option>
                                     <option value="8 ">8 GB  </option>
                                     <option value="16">16 GB</option>
                                     <option value="32">32 GB </option>

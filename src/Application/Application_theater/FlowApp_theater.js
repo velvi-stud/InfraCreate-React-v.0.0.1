@@ -113,7 +113,7 @@ const tempalte_example_elements = [
                     "label": "serv1",
                     "description": "",
                     "image": "Select image",
-                    "flavor": {
+                    "flavour": {
                         "cpu": "Select size",
                         "hd": "Select size",
                         "ram": "Select size"
@@ -347,7 +347,7 @@ const tempalte_example_elements = [
                     "label": "host_fw1",
                     "description": "module_fw_model_1",
                     "image": "image_1",
-                    "flavor": {
+                    "flavour": {
                         "cpu": "4",
                         "hd": "50",
                         "ram": "16"
@@ -1041,7 +1041,7 @@ const tempalte_example_elements = [
                     "label": "host_apache",
                     "description": "",
                     "image": "image_1",
-                    "flavor": {
+                    "flavour": {
                         "cpu": "4 ",
                         "hd": "100",
                         "ram": "16"
@@ -1063,7 +1063,7 @@ const tempalte_example_elements = [
                     "label": "host_db",
                     "description": "hdb",
                     "image": "Select image",
-                    "flavor": {
+                    "flavour": {
                         "cpu": "Select size",
                         "hd": "Select size",
                         "ram": "Select size"
@@ -1347,7 +1347,7 @@ const tempalte_example_elements = [
                     "label": "host_apache",
                     "description": "",
                     "image": "image_1",
-                    "flavor": {
+                    "flavour": {
                         "cpu": "4 ",
                         "hd": "100",
                         "ram": "16"
@@ -1369,7 +1369,7 @@ const tempalte_example_elements = [
                     "label": "host_db",
                     "description": "hdb",
                     "image": "Select image",
-                    "flavor": {
+                    "flavour": {
                         "cpu": "Select size",
                         "hd": "Select size",
                         "ram": "Select size"
@@ -1653,7 +1653,7 @@ const tempalte_example_elements = [
                     "label": "host_apache",
                     "description": "",
                     "image": "image_1",
-                    "flavor": {
+                    "flavour": {
                         "cpu": "4 ",
                         "hd": "100",
                         "ram": "16"
@@ -1675,7 +1675,7 @@ const tempalte_example_elements = [
                     "label": "host_db",
                     "description": "hdb",
                     "image": "Select image",
-                    "flavor": {
+                    "flavour": {
                         "cpu": "Select size",
                         "hd": "Select size",
                         "ram": "Select size"
@@ -2348,7 +2348,7 @@ const FlowApp_t = (props) => {
                         <Nav>
                             <Nav.Link onClick={() => onSave()}>Save</Nav.Link>
                             <Nav.Link onClick={() => onRestore()}>Restore</Nav.Link>
-                            <Nav.Link onClick={() => onAdd()}>Add tmplt</Nav.Link>
+                            <Nav.Link onClick={() => onAdd()}>Load template</Nav.Link>
                             <Nav.Link as={Link} to="/home">Exit</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

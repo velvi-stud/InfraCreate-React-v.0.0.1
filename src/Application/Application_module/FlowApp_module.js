@@ -7,7 +7,8 @@ import {
     Navbar,
     Button,
     Form,
-    Offcanvas
+    Offcanvas,
+    NavDropdown
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 //import { HotKeys } from "react-hotkeys"; //-> per shortcut
@@ -83,308 +84,307 @@ const allNodeTypes = ATN.GetObj();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //apachedb
-const adb = [
-    {
-        "elements": [{
-            "id": "reactflow__node-port-1644415662461",
-            "type": "port",
-            "position": {
-                "x": -33.74881997270175,
-                "y": -150.61614979526303
-            },
-            "data": {
-                "label": "port_apache_man",
-                "description": "",
-                "properties": {
-                    "default": "",
-                    "type": ""
-                }
+const adb = {
+    "elements": [{
+        "id": "reactflow__node-port-1644415662461",
+        "type": "port",
+        "position": {
+            "x": -33.74881997270175,
+            "y": -150.61614979526303
+        },
+        "data": {
+            "label": "port_apache_man",
+            "description": "",
+            "properties": {
+                "default": "",
+                "type": ""
             }
-        }, {
-            "id": "reactflow__node-network-1644415663500",
-            "type": "network",
-            "position": {
-                "x": 649,
-                "y": 30
-            },
-            "data": {
-                "label": "man_net",
-                "description": "",
-                "net_type": "consumer",
-                "local_interface": "man_net",
-                "remote_interface": "man_net",
-            }
-        }, {
-            "id": "reactflow__node-network-1644415768209",
-            "type": "network",
-            "position": {
-                "x": 666.7817886193823,
-                "y": 168.66930862553383
-            },
-            "data": {
-                "label": "private_net_dmz",
-                "description": "",
-                "net_type": "consumer",
-                "local_interface": "private_net_dmz",
-                "remote_interface": "private_net_dmz",
-            }
-        }, {
-            "id": "reactflow__node-network-1644415769591",
-            "type": "network",
-            "position": {
-                "x": 671.0945836262067,
-                "y": 322.09117326383165
-            },
-            "data": {
-                "label": "private_net_local",
-                "description": "",
-                "net_type": "Select type",
-                "local_interface": "private_net_local",
-                "remote_interface": "private_net_local",
-            }
-        }, {
-            "id": "reactflow__node-subnet-1644415777494",
-            "type": "subnet",
-            "position": {
-                "x": 357.9081653178969,
-                "y": 373.0500120908088
-            },
-            "data": {
-                "label": "private_sub_local",
-                "description": "",
-                "subnet": {
-                    "ip_version": "Select version",
-                    "cidr": {
-                        "default": ""
-                    },
-                    "allocation_pools": {
-                        "allocation_pool_start": "",
-                        "allocation_pool_end": ""
-                    },
-                    "enable_dhcp": false
-                }
-            }
-        }, {
-            "id": "reactflow__node-subnet-1644415778467",
-            "type": "subnet",
-            "position": {
-                "x": 341.1624920846573,
-                "y": 159.18110889851658
-            },
-            "data": {
-                "label": "private_sub_dmz",
-                "description": "",
-                "subnet": {
-                    "ip_version": "Select version",
-                    "cidr": {
-                        "default": ""
-                    },
-                    "allocation_pools": {
-                        "allocation_pool_start": "",
-                        "allocation_pool_end": ""
-                    },
-                    "enable_dhcp": false
-                }
-            }
-        }, {
-            "id": "reactflow__node-subnet-1644415779714",
-            "type": "subnet",
-            "position": {
-                "x": 342.10874395378613,
-                "y": -39.630899423442486
-            },
-            "data": {
-                "label": "man_sub",
-                "description": "",
-                "subnet": {
-                    "ip_version": "Select version",
-                    "cidr": {
-                        "default": ""
-                    },
-                    "allocation_pools": {
-                        "allocation_pool_start": "",
-                        "allocation_pool_end": ""
-                    },
-                    "enable_dhcp": false
-                }
-            }
-        }, {
-            "id": "reactflow__node-port-1644415790193",
-            "type": "port",
-            "position": {
-                "x": -36.57059419073413,
-                "y": -8.070071128781692
-            },
-            "data": {
-                "label": "port_apache_nic_1",
-                "description": "",
-                "properties": {
-                    "default": "",
-                    "type": ""
-                }
-            }
-        }, {
-            "id": "reactflow__node-port-1644415790882",
-            "type": "port",
-            "position": {
-                "x": -33.00347241714921,
-                "y": 135.55866562432925
-            },
-            "data": {
-                "label": "port_apache_nic_2",
-                "description": "",
-                "properties": {
-                    "default": "",
-                    "type": ""
-                }
-            }
-        }, {
-            "id": "reactflow__node-server-1644415795233",
-            "type": "server",
-            "position": {
-                "x": -351.6780904524764,
-                "y": -43.82518458040756
-            },
-            "data": {
-                "label": "host_apache",
-                "description": "",
-                "image": "image_1",
-                "flavor": {
-                    "cpu": "4 ",
-                    "hd": "100",
-                    "ram": "16"
+        }
+    }, {
+        "id": "reactflow__node-network-1644415663500",
+        "type": "network",
+        "position": {
+            "x": 649,
+            "y": 30
+        },
+        "data": {
+            "label": "man_net",
+            "description": "",
+            "net_type": "consumer",
+            "local_interface": "man_net",
+            "remote_interface": "man_net",
+        }
+    }, {
+        "id": "reactflow__node-network-1644415768209",
+        "type": "network",
+        "position": {
+            "x": 666.7817886193823,
+            "y": 168.66930862553383
+        },
+        "data": {
+            "label": "private_net_dmz",
+            "description": "",
+            "net_type": "consumer",
+            "local_interface": "private_net_dmz",
+            "remote_interface": "private_net_dmz",
+        }
+    }, {
+        "id": "reactflow__node-network-1644415769591",
+        "type": "network",
+        "position": {
+            "x": 671.0945836262067,
+            "y": 322.09117326383165
+        },
+        "data": {
+            "label": "private_net_local",
+            "description": "",
+            "net_type": "Select type",
+            "local_interface": "private_net_local",
+            "remote_interface": "private_net_local",
+        }
+    }, {
+        "id": "reactflow__node-subnet-1644415777494",
+        "type": "subnet",
+        "position": {
+            "x": 357.9081653178969,
+            "y": 373.0500120908088
+        },
+        "data": {
+            "label": "private_sub_local",
+            "description": "",
+            "subnet": {
+                "ip_version": "4",
+                "cidr": {
+                    "default": ""
                 },
-                "userdata": {
-                    "usr": "apc_admin",
-                    "pwd": "apc_pass"
+                "allocation_pools": {
+                    "allocation_pool_start": "",
+                    "allocation_pool_end": ""
                 },
-                "name": "h_apc"
+                "enable_dhcp": false
             }
-        }, {
-            "id": "reactflow__node-server-1644415824840",
-            "type": "server",
-            "position": {
-                "x": -350.9704316527975,
-                "y": 399.76736466888985
-            },
-            "data": {
-                "label": "host_db",
-                "description": "hdb",
-                "image": "Select image",
-                "flavor": {
-                    "cpu": "Select size",
-                    "hd": "Select size",
-                    "ram": "Select size"
+        }
+    }, {
+        "id": "reactflow__node-subnet-1644415778467",
+        "type": "subnet",
+        "position": {
+            "x": 341.1624920846573,
+            "y": 159.18110889851658
+        },
+        "data": {
+            "label": "private_sub_dmz",
+            "description": "",
+            "subnet": {
+                "ip_version": "4",
+                "cidr": {
+                    "default": ""
                 },
-                "userdata": {
-                    "usr": "db_admin",
-                    "pwd": "db_pass"
-                }
+                "allocation_pools": {
+                    "allocation_pool_start": "",
+                    "allocation_pool_end": ""
+                },
+                "enable_dhcp": false
             }
-        }, {
-            "id": "reactflow__node-port-1644415829740",
-            "type": "port",
-            "position": {
-                "x": -89.29896035693241,
-                "y": 334.02011806591906
+        }
+    }, {
+        "id": "reactflow__node-subnet-1644415779714",
+        "type": "subnet",
+        "position": {
+            "x": 342.10874395378613,
+            "y": -39.630899423442486
+        },
+        "data": {
+            "label": "man_sub",
+            "description": "",
+            "subnet": {
+                "ip_version": "4",
+                "cidr": {
+                    "default": ""
+                },
+                "allocation_pools": {
+                    "allocation_pool_start": "",
+                    "allocation_pool_end": ""
+                },
+                "enable_dhcp": false
+            }
+        }
+    }, {
+        "id": "reactflow__node-port-1644415790193",
+        "type": "port",
+        "position": {
+            "x": -36.57059419073413,
+            "y": -8.070071128781692
+        },
+        "data": {
+            "label": "port_apache_nic_1",
+            "description": "",
+            "properties": {
+                "default": "",
+                "type": ""
+            }
+        }
+    }, {
+        "id": "reactflow__node-port-1644415790882",
+        "type": "port",
+        "position": {
+            "x": -33.00347241714921,
+            "y": 135.55866562432925
+        },
+        "data": {
+            "label": "port_apache_nic_2",
+            "description": "",
+            "properties": {
+                "default": "",
+                "type": ""
+            }
+        }
+    }, {
+        "id": "reactflow__node-server-1644415795233",
+        "type": "server",
+        "position": {
+            "x": -351.6780904524764,
+            "y": -43.82518458040756
+        },
+        "data": {
+            "label": "host_apache",
+            "description": "",
+            "image": "image_1",
+            "flavour": {
+                "cpu": "4 ",
+                "hd": "100",
+                "ram": "16"
             },
-            "data": {
-                "label": "port_db_man",
-                "description": "",
-                "properties": {
-                    "default": "",
-                    "type": ""
-                }
-            }
-        }, {
-            "id": "reactflow__node-port-1644415833371",
-            "type": "port",
-            "position": {
-                "x": -90.9229770008505,
-                "y": 505.88587451874923
+            "userdata": {
+                "usr": "apc_admin",
+                "pwd": "apc_pass"
             },
-            "data": {
-                "label": "port_db_nic_1",
-                "description": "",
-                "properties": {
-                    "default": "",
-                    "type": ""
-                }
+            "name": "h_apc"
+        }
+    }, {
+        "id": "reactflow__node-server-1644415824840",
+        "type": "server",
+        "position": {
+            "x": -350.9704316527975,
+            "y": 399.76736466888985
+        },
+        "data": {
+            "label": "host_db",
+            "description": "hdb",
+            "image": "Select image",
+            "flavour": {
+                "cpu": "Select size",
+                "hd": "Select size",
+                "ram": "Select size"
+            },
+            "userdata": {
+                "usr": "db_admin",
+                "pwd": "db_pass"
             }
-        }, {
-            "source": "reactflow__node-subnet-1644415778467",
-            "target": "reactflow__node-network-1644415768209",
-            "id": "reactflow__edge-reactflow__node-subnet-1644415778467Insert node name-reactflow__node-network-1644415768209Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-subnet-1644415777494",
-            "target": "reactflow__node-network-1644415769591",
-            "id": "reactflow__edge-reactflow__node-subnet-1644415777494Insert node name-reactflow__node-network-1644415769591Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-subnet-1644415779714",
-            "target": "reactflow__node-network-1644415663500",
-            "id": "reactflow__edge-reactflow__node-subnet-1644415779714Insert node name-reactflow__node-network-1644415663500Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-port-1644415662461",
-            "target": "reactflow__node-subnet-1644415779714",
-            "id": "reactflow__edge-reactflow__node-port-1644415662461Insert node name-reactflow__node-subnet-1644415779714Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-port-1644415790193",
-            "target": "reactflow__node-subnet-1644415778467",
-            "id": "reactflow__edge-reactflow__node-port-1644415790193Insert node name-reactflow__node-subnet-1644415778467Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-port-1644415790882",
-            "target": "reactflow__node-subnet-1644415777494",
-            "id": "reactflow__edge-reactflow__node-port-1644415790882Insert node name-reactflow__node-subnet-1644415777494Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-port-1644415829740",
-            "target": "reactflow__node-subnet-1644415779714",
-            "id": "reactflow__edge-reactflow__node-port-1644415829740Insert node name-reactflow__node-subnet-1644415779714Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-port-1644415833371",
-            "target": "reactflow__node-subnet-1644415777494",
-            "id": "reactflow__edge-reactflow__node-port-1644415833371Insert node name-reactflow__node-subnet-1644415777494Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-server-1644415795233",
-            "target": "reactflow__node-port-1644415790882",
-            "id": "reactflow__edge-reactflow__node-server-1644415795233Insert node name-reactflow__node-port-1644415790882Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-server-1644415795233",
-            "target": "reactflow__node-port-1644415790193",
-            "id": "reactflow__edge-reactflow__node-server-1644415795233Insert node name-reactflow__node-port-1644415790193Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-server-1644415795233",
-            "target": "reactflow__node-port-1644415662461",
-            "id": "reactflow__edge-reactflow__node-server-1644415795233Insert node name-reactflow__node-port-1644415662461Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-server-1644415824840",
-            "target": "reactflow__node-port-1644415829740",
-            "id": "reactflow__edge-reactflow__node-server-1644415824840Insert node name-reactflow__node-port-1644415829740Insert node name",
-            "type": "default"
-        }, {
-            "source": "reactflow__node-server-1644415824840",
-            "target": "reactflow__node-port-1644415833371",
-            "id": "reactflow__edge-reactflow__node-server-1644415824840Insert node name-reactflow__node-port-1644415833371Insert node name",
-            "type": "default"
-        }],
-        "position": [69.72512349187082, 141.89821945809047],
-        "zoom": 0.8538177143912448,
-        "#elements": 26,
-        "module_name": "example_apache_db",
-        "module_description": "esempio bp apache",
-        "version": "1.0"
-    }
-];
+        }
+    }, {
+        "id": "reactflow__node-port-1644415829740",
+        "type": "port",
+        "position": {
+            "x": -89.29896035693241,
+            "y": 334.02011806591906
+        },
+        "data": {
+            "label": "port_db_man",
+            "description": "",
+            "properties": {
+                "default": "",
+                "type": ""
+            }
+        }
+    }, {
+        "id": "reactflow__node-port-1644415833371",
+        "type": "port",
+        "position": {
+            "x": -90.9229770008505,
+            "y": 505.88587451874923
+        },
+        "data": {
+            "label": "port_db_nic_1",
+            "description": "",
+            "properties": {
+                "default": "",
+                "type": ""
+            }
+        }
+    }, {
+        "source": "reactflow__node-subnet-1644415778467",
+        "target": "reactflow__node-network-1644415768209",
+        "id": "reactflow__edge-reactflow__node-subnet-1644415778467Insert node name-reactflow__node-network-1644415768209Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-subnet-1644415777494",
+        "target": "reactflow__node-network-1644415769591",
+        "id": "reactflow__edge-reactflow__node-subnet-1644415777494Insert node name-reactflow__node-network-1644415769591Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-subnet-1644415779714",
+        "target": "reactflow__node-network-1644415663500",
+        "id": "reactflow__edge-reactflow__node-subnet-1644415779714Insert node name-reactflow__node-network-1644415663500Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-port-1644415662461",
+        "target": "reactflow__node-subnet-1644415779714",
+        "id": "reactflow__edge-reactflow__node-port-1644415662461Insert node name-reactflow__node-subnet-1644415779714Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-port-1644415790193",
+        "target": "reactflow__node-subnet-1644415778467",
+        "id": "reactflow__edge-reactflow__node-port-1644415790193Insert node name-reactflow__node-subnet-1644415778467Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-port-1644415790882",
+        "target": "reactflow__node-subnet-1644415777494",
+        "id": "reactflow__edge-reactflow__node-port-1644415790882Insert node name-reactflow__node-subnet-1644415777494Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-port-1644415829740",
+        "target": "reactflow__node-subnet-1644415779714",
+        "id": "reactflow__edge-reactflow__node-port-1644415829740Insert node name-reactflow__node-subnet-1644415779714Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-port-1644415833371",
+        "target": "reactflow__node-subnet-1644415777494",
+        "id": "reactflow__edge-reactflow__node-port-1644415833371Insert node name-reactflow__node-subnet-1644415777494Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-server-1644415795233",
+        "target": "reactflow__node-port-1644415790882",
+        "id": "reactflow__edge-reactflow__node-server-1644415795233Insert node name-reactflow__node-port-1644415790882Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-server-1644415795233",
+        "target": "reactflow__node-port-1644415790193",
+        "id": "reactflow__edge-reactflow__node-server-1644415795233Insert node name-reactflow__node-port-1644415790193Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-server-1644415795233",
+        "target": "reactflow__node-port-1644415662461",
+        "id": "reactflow__edge-reactflow__node-server-1644415795233Insert node name-reactflow__node-port-1644415662461Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-server-1644415824840",
+        "target": "reactflow__node-port-1644415829740",
+        "id": "reactflow__edge-reactflow__node-server-1644415824840Insert node name-reactflow__node-port-1644415829740Insert node name",
+        "type": "default"
+    }, {
+        "source": "reactflow__node-server-1644415824840",
+        "target": "reactflow__node-port-1644415833371",
+        "id": "reactflow__edge-reactflow__node-server-1644415824840Insert node name-reactflow__node-port-1644415833371Insert node name",
+        "type": "default"
+    }],
+    "position": [69.72512349187082, 141.89821945809047],
+    "zoom": 0.8538177143912448,
+    "#elements": 26,
+    "module_name": "example_apache_db",
+    "module_description": "esempio bp apache",
+    "version": "1.0"
+}
+    ;
 //fw1
 var fw1 = {
     "elements": [{
@@ -398,14 +398,14 @@ var fw1 = {
             "label": "host_fw1",
             "description": "module_fw_model_1",
             "image": "image_1",
-            "flavor": {
+            "flavour": {
                 "cpu": "4",
                 "hd": "50",
                 "ram": "16"
             },
             "userdata": {
-                "usr": "",
-                "pwd": ""
+                "usr": "admin",
+                "pwd": "admin"
             },
             "name": "fw_h_1"
         }
@@ -525,7 +525,7 @@ var fw1 = {
             "label": "private_subnet_client",
             "description": "",
             "subnet": {
-                "ip_version": "Select version",
+                "ip_version": "4",
                 "cidr": {
                     "default": ""
                 },
@@ -547,7 +547,7 @@ var fw1 = {
             "label": "private_subnet_iot",
             "description": "",
             "subnet": {
-                "ip_version": "Select version",
+                "ip_version": "4",
                 "cidr": {
                     "default": ""
                 },
@@ -569,7 +569,7 @@ var fw1 = {
             "label": "private_subnet_server",
             "description": "",
             "subnet": {
-                "ip_version": "Select version",
+                "ip_version": "4",
                 "cidr": {
                     "default": ""
                 },
@@ -591,7 +591,7 @@ var fw1 = {
             "label": "private_subnet_dmz",
             "description": "",
             "subnet": {
-                "ip_version": "Select version",
+                "ip_version": "4",
                 "cidr": {
                     "default": ""
                 },
@@ -613,7 +613,7 @@ var fw1 = {
             "label": "private_subnet_simint",
             "description": "",
             "subnet": {
-                "ip_version": "Select version",
+                "ip_version": "4",
                 "cidr": {
                     "default": ""
                 },
@@ -635,7 +635,7 @@ var fw1 = {
             "label": "private_subnet_management",
             "description": "",
             "subnet": {
-                "ip_version": "Select version",
+                "ip_version": "4",
                 "cidr": {
                     "default": ""
                 },
@@ -657,7 +657,7 @@ var fw1 = {
             "label": "management_subnet",
             "description": "",
             "subnet": {
-                "ip_version": "Select version",
+                "ip_version": "4",
                 "cidr": {
                     "default": ""
                 },
@@ -1107,6 +1107,50 @@ const FlowApp_m = (props) => {
         */
         setElementi((els) => els.concat(fw1.elements));
     }, [setElementi]);
+    const onAddfw1 = useCallback(() => {
+        /*// node template
+        var px = Math.random() * 10;
+        var py = Math.random() * 10;
+        var py2 = Math.random() * 10 + py;
+        const newNode = [
+            {
+                id: getNodeId(),
+                data: { label: 'nuovo nodo base' },
+                position: { x: px, y: py, },
+            },
+            {
+                id: getNodeId() + 1,
+                data: { label: 'nuovo nodo special' },
+                type: 'special',
+                position: { x: py + 1, y: py2, },
+            }
+        ];
+        setElementi((els) => els.concat(newNode)); // @@@@ concatena i nodi creati a quelli presenti
+        */
+        setElementi((els) => els.concat(fw1.elements));
+    }, [setElementi]);
+    const onAddadb = useCallback(() => {
+        /*// node template
+        var px = Math.random() * 10;
+        var py = Math.random() * 10;
+        var py2 = Math.random() * 10 + py;
+        const newNode = [
+            {
+                id: getNodeId(),
+                data: { label: 'nuovo nodo base' },
+                position: { x: px, y: py, },
+            },
+            {
+                id: getNodeId() + 1,
+                data: { label: 'nuovo nodo special' },
+                type: 'special',
+                position: { x: py + 1, y: py2, },
+            }
+        ];
+        setElementi((els) => els.concat(newNode)); // @@@@ concatena i nodi creati a quelli presenti
+        */
+        setElementi((els) => els.concat(adb.elements));
+    }, [setElementi]);
 
 
     /**
@@ -1433,7 +1477,11 @@ const FlowApp_m = (props) => {
                         <Nav>
                             <Nav.Link onClick={() => onSave()}>Save</Nav.Link>
                             <Nav.Link onClick={() => onRestore()}>Restore</Nav.Link>
-                            <Nav.Link onClick={() => onAdd()}>Add tmplt</Nav.Link>
+                            {/* <Nav.Link onClick={() => onAdd()}>Add tmplt</Nav.Link> */}
+                            <NavDropdown title="Load template" id="basic-nav-dropdown">
+                                <NavDropdown.Item onClick={() => onAddfw1()}> Firewall </NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => onAddadb()}> Apache DB</NavDropdown.Item>
+                            </NavDropdown>
                             <Nav.Link as={Link} to="/home">Exit</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

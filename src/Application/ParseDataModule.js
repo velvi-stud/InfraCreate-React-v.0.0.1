@@ -253,6 +253,13 @@ class parsedatamodule {
 
                 server['type'] = 'cloudify.openstack.nodes.Server';
                 server['description'] = s['data']['description'];
+                server['server'] = [];
+                server['server'] = [
+                    {name: s['data']['name']},
+                    {image: s['data']['image']},
+                    {flavor: s['data']['flavour']},
+                    {userdata: s['data']['userdata']}
+                ]
                 server['relationships'] = links
                 this.output['node_templates'][name_server] = server;
                 links = []; // resetto i links

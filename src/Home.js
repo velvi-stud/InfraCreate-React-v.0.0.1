@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'; //IMPORTANTE -> IMPORTARE
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import iac from './images/coop/iac_img.jpg'
-
+import RD from './take-data/RestApi/retrieve-data.js'
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -1595,6 +1595,10 @@ const Home = () => {
         var modules = [
             module1, module2, module3, module4, module5
         ];
+
+        var x = new RD();
+        //modules = x.getModules();
+
         // carica dati
         dispatch({ data: modules, type: 'modulesretrieved' });
 

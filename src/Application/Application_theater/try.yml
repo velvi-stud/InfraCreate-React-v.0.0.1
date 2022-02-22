@@ -1,0 +1,303 @@
+tosca_definitions_version: "cloudify_dsl_1_3"
+description: ""
+imports:
+  - http: "www.getcloudify.org/spec/cloudify/4.5.5/types.yaml"
+  - plugin: "cloudify-openstack-plugin?version=2.14.7"
+  - plugin: "cloudify-utilities-plugin"
+  - plugin: "cloudify-ansible-plugin?version=2.6.0"
+  - plugin: "sysman-creo-plugin?version=1.0"
+version: "1.0"
+node_templates:
+  Module_Name:
+    type: "sysman.creo.nodes.TheaterModule"
+    properties:
+      description: ""
+      version: "1.0"
+      mode: "Managed"
+      interface_networks:
+        - providers:
+            - interface: "iot"
+              network: "private_network_iot"
+              tag: "iot"
+              subnets:
+                - subnet: "private_subnet_iot"
+            - interface: "client"
+              network: "private_network_client"
+              tag: "client"
+              subnets:
+                - subnet: "private_subnet_client"
+            - interface: "server"
+              network: "private_network_server"
+              tag: "server"
+              subnets:
+                - subnet: "private_subnet_server"
+            - interface: "dmz"
+              network: "private_network_dmz"
+              tag: "dmz"
+              subnets:
+                - subnet: "private_subnet_dmz"
+            - interface: "management"
+              network: "private_network_management"
+              tag: "management"
+              subnets:
+                - subnet: "private_subnet_management"
+            - interface: "simint"
+              network: "private_network_simint"
+              tag: "simint"
+              subnets:
+                - subnet: "private_subnet_simint"
+        - consumers:
+            - interface: "sdl_management"
+              network: "management_network"
+              tag: "sdl_management"
+              subnets:
+                - subnet: "management_subnet"
+      internal_networks: []
+      virtual_machines:
+        - virtual_machine: "host_fw1"
+          ports:
+            - port: "port_fw1_nic_1"
+              network: "private_network_simint"
+              subnets:
+                - subnet: "private_subnet_simint"
+            - port: "port_fw1_nic_2"
+              network: "private_network_dmz"
+              subnets:
+                - subnet: "private_subnet_dmz"
+            - port: "port_fw1_nic_3"
+              network: "private_network_server"
+              subnets:
+                - subnet: "private_subnet_server"
+            - port: "port_fw1_nic_4"
+              network: "private_network_iot"
+              subnets:
+                - subnet: "private_subnet_iot"
+            - port: "port_fw1_nic_5"
+              network: "private_network_client"
+              subnets:
+                - subnet: "private_subnet_client"
+            - port: "port_fw1_nic_6"
+              network: "private_network_management"
+              subnets:
+                - subnet: "private_subnet_management"
+            - port: "port_fw1_man"
+              network: "management_network"
+              subnets:
+                - subnet: "management_subnet"
+  host_fw1:
+    type: "cloudify.openstack.nodes.Server"
+    description: "module_fw_model_1"
+    server:
+      - name: "fw_h_1"
+      - image: "image_1"
+      - flavor:
+          cpu: "4"
+          hd: "50"
+          ram: "16"
+      - userdata:
+          usr: "admin"
+          pwd: "admin"
+    relationships:
+      - type: "cloudify.openstack.server_connected_to_port"
+        target: "port_fw1_nic_1"
+      - type: "cloudify.openstack.server_connected_to_port"
+        target: "port_fw1_nic_2"
+      - type: "cloudify.openstack.server_connected_to_port"
+        target: "port_fw1_nic_3"
+      - type: "cloudify.openstack.server_connected_to_port"
+        target: "port_fw1_nic_4"
+      - type: "cloudify.openstack.server_connected_to_port"
+        target: "port_fw1_nic_5"
+      - type: "cloudify.openstack.server_connected_to_port"
+        target: "port_fw1_nic_6"
+      - type: "cloudify.openstack.server_connected_to_port"
+        target: "port_fw1_man"
+  port_fw1_nic_1:
+    type: "cloudify.openstack.nodes.Port"
+    description: ""
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_simint"
+      - type: "cloudify.relationships.depends_on"
+        target: "private_subnet_simint"
+  port_fw1_nic_4:
+    type: "cloudify.openstack.nodes.Port"
+    description: ""
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_iot"
+      - type: "cloudify.relationships.depends_on"
+        target: "private_subnet_iot"
+  port_fw1_nic_3:
+    type: "cloudify.openstack.nodes.Port"
+    description: ""
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_server"
+      - type: "cloudify.relationships.depends_on"
+        target: "private_subnet_server"
+  port_fw1_nic_2:
+    type: "cloudify.openstack.nodes.Port"
+    description: ""
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_dmz"
+      - type: "cloudify.relationships.depends_on"
+        target: "private_subnet_dmz"
+  port_fw1_nic_5:
+    type: "cloudify.openstack.nodes.Port"
+    description: ""
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_client"
+      - type: "cloudify.relationships.depends_on"
+        target: "private_subnet_client"
+  port_fw1_nic_6:
+    type: "cloudify.openstack.nodes.Port"
+    description: ""
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_management"
+      - type: "cloudify.relationships.depends_on"
+        target: "private_subnet_management"
+  port_fw1_man:
+    type: "cloudify.openstack.nodes.Port"
+    description: ""
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "management_network"
+      - type: "cloudify.relationships.depends_on"
+        target: "management_subnet"
+  private_network_iot:
+    type: "cloudify.openstack.nodes.Network"
+    properties:
+      local_interface: "iot"
+      remote_interface: "iot"
+      net_type: "provider"
+  private_subnet_iot:
+    type: "cloudify.openstack.nodes.Subnet"
+    subnet:
+      ip_version: "4"
+      cidr:
+        default: ""
+      allocation_pools:
+        allocation_pool_start: ""
+        allocation_pool_end: ""
+      enable_dhcp: false
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_iot"
+  private_network_client:
+    type: "cloudify.openstack.nodes.Network"
+    properties:
+      local_interface: "client"
+      remote_interface: "client"
+      net_type: "provider"
+  private_subnet_client:
+    type: "cloudify.openstack.nodes.Subnet"
+    subnet:
+      ip_version: "4"
+      cidr:
+        default: ""
+      allocation_pools:
+        allocation_pool_start: ""
+        allocation_pool_end: ""
+      enable_dhcp: false
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_client"
+  private_network_server:
+    type: "cloudify.openstack.nodes.Network"
+    properties:
+      local_interface: "server"
+      remote_interface: "server"
+      net_type: "provider"
+  private_subnet_server:
+    type: "cloudify.openstack.nodes.Subnet"
+    subnet:
+      ip_version: "4"
+      cidr:
+        default: ""
+      allocation_pools:
+        allocation_pool_start: ""
+        allocation_pool_end: ""
+      enable_dhcp: false
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_server"
+  private_network_dmz:
+    type: "cloudify.openstack.nodes.Network"
+    properties:
+      local_interface: "dmz"
+      remote_interface: "dmz"
+      net_type: "provider"
+  private_subnet_dmz:
+    type: "cloudify.openstack.nodes.Subnet"
+    subnet:
+      ip_version: "4"
+      cidr:
+        default: ""
+      allocation_pools:
+        allocation_pool_start: ""
+        allocation_pool_end: ""
+      enable_dhcp: false
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_dmz"
+  private_network_management:
+    type: "cloudify.openstack.nodes.Network"
+    properties:
+      local_interface: "management"
+      remote_interface: "management"
+      net_type: "provider"
+  private_subnet_management:
+    type: "cloudify.openstack.nodes.Subnet"
+    subnet:
+      ip_version: "4"
+      cidr:
+        default: ""
+      allocation_pools:
+        allocation_pool_start: ""
+        allocation_pool_end: ""
+      enable_dhcp: false
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_management"
+  private_network_simint:
+    type: "cloudify.openstack.nodes.Network"
+    properties:
+      local_interface: "simint"
+      remote_interface: "simint"
+      net_type: "provider"
+  private_subnet_simint:
+    type: "cloudify.openstack.nodes.Subnet"
+    subnet:
+      ip_version: "4"
+      cidr:
+        default: ""
+      allocation_pools:
+        allocation_pool_start: ""
+        allocation_pool_end: ""
+      enable_dhcp: false
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "private_network_simint"
+  management_network:
+    type: "cloudify.openstack.nodes.Network"
+    properties:
+      local_interface: "sdl_management"
+      remote_interface: "sdl_management"
+      net_type: "consumer"
+  management_subnet:
+    type: "cloudify.openstack.nodes.Subnet"
+    subnet:
+      ip_version: "4"
+      cidr:
+        default: ""
+      allocation_pools:
+        allocation_pool_start: ""
+        allocation_pool_end: ""
+      enable_dhcp: false
+    relationships:
+      - type: "cloudify.relationships.contained_in"
+        target: "management_network"

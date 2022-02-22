@@ -7,7 +7,8 @@ import {
     Navbar,
     Button,
     Offcanvas,
-    Form
+    Form,
+    NavDropdown
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 //import { HotKeys } from "react-hotkeys"; //-> per shortcut
@@ -50,6 +51,7 @@ import { useDispatch } from 'react-redux';
 import localforage from 'localforage';
 
 import parsedatatheater from '../ParseDataTheater';
+import loadYAML_t from './LoadYAMLtheater';
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2304,6 +2306,11 @@ const FlowApp_t = (props) => {
         return d.renderize();
     }
 
+
+    function convert_yaml(){
+        var x = new loadYAML_t();
+    }
+
     /**
      * @function addNavBar
      *  create an pseudo-nav-bar on the project to manipulate infos.
@@ -2348,7 +2355,12 @@ const FlowApp_t = (props) => {
                         <Nav>
                             <Nav.Link onClick={() => onSave()}>Save</Nav.Link>
                             <Nav.Link onClick={() => onRestore()}>Restore</Nav.Link>
-                            <Nav.Link onClick={() => onAdd()}>Load template</Nav.Link>
+                            <NavDropdown title="Load template" id="basic-nav-dropdown">
+                                <NavDropdown.Item onClick={() => onAdd()}> Example1 </NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => onAdd()}> Example2</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item onClick={() => convert_yaml()}> Load yaml </NavDropdown.Item>
+                            </NavDropdown>
                             <Nav.Link as={Link} to="/home">Exit</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
@@ -2504,7 +2516,7 @@ const FlowApp_t = (props) => {
                     </Col>
                     <Col xs={dim_canvas} md={dim_canvas} lg={dim_canvas} className='justify-content-center text-center vheight' style={{ paddingTop: '1vh', paddingBottom: '1vh' }}>
                         {/* <ReactFlowProvider> */}
-                        <div className='react-flow shadow' style={{ width: '100%', height: '100%' }} > {/* Attention! The dimensions of your React Flow component depend on the parents dimensions. */}
+                        <div className='react-flow shadow' style={{ width: '100%', height: '100%', borderRadius: '1em' }} > {/* Attention! The dimensions of your React Flow component depend on the parents dimensions. */}
                             <ReactFlow
                                 onLoad={setIstanzaReactFlow}  /* carica istanza -> per salvare lo stato del flow */
                                 elements={elementi} /* Seleziona gli elementi da mostrare iniziali */

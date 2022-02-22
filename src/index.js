@@ -4,8 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
-import {createStore} from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducers from './reducers/Reducers';
 const store = createStore(rootReducers);
@@ -20,7 +19,6 @@ const showApp = () => {
   var x = new App();
   return (x.renderize());
 };
-
 
 ReactDOM.render(
   <div>

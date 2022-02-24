@@ -2532,6 +2532,8 @@ const FlowApp_t = (props) => {
                                 onNodeDoubleClick={onNodeDoubleClick} /* Quando viene cliccato 2 volte il nodo*/
                                 maxZoom={15}
                             >
+
+                                
                                 <Background
                                     variant={bkgnd['type']}
                                     gap={bkgnd['gap']}

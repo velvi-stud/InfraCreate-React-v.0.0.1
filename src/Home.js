@@ -5,11 +5,11 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import iac from './images/coop/iac_img.jpg'
 import RD from './take-data/RestApi/retrieve-data.js'
 
-import { useSelector, useDispatch } from 'react-redux';
+//import { useSelector, useDispatch } from 'react-redux';
 
 const Home = () => {
 
-    const [showDataInput, setShowDataInput] = useState({ tipo: '', show: false });
+    const [showDataInput, setShowDataInput] = useState({ tipo: '', show: false, isth: 'none' });
     const [display, setDisplay] = useState('block');
 
     const nome = createRef();
@@ -17,9 +17,19 @@ const Home = () => {
 
     const history = useHistory();
 
-    /* TO STORE DATA */
+
+    /**
+     * @function routeChange
+     *  redidect into Application js page
+     */
+    function routeChange() {
+        let path = `Application`;
+        history.push(path);
+    }
+
+    // TO STORE DATA
     // const modules = useSelector(state => state.modulesretrieved)
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     /**
      * @function updateShowDataInput
@@ -28,8 +38,8 @@ const Home = () => {
      *  show/hide div fot input text
      * @returns 
      */
-    function updateShowDataInput(tipo, show) {
-        const tm = { tipo, show };
+    function updateShowDataInput(tipo, show, isth) {
+        const tm = { tipo, show, isth };
         //console.log(tm, mod);
         if (tm.tipo === showDataInput.tipo) {
             setDisplay('none')
@@ -43,13 +53,20 @@ const Home = () => {
         return;
     }
 
+    function activateApp() {
+        if (showDataInput.tipo == 'module')
+            activateApp_module();
+        else
+            activateApp_theater()
+    }
+
     /**
      * @function activateApp
      *  1)  store data to pass (datapass) into shared area "redux"
      *      [in case is a theater hypotize the retrieve of module json]
      *  2) redirect to Application 
      */
-    function activateApp() {
+    function activateApp_module() {
         var name = nome.current.value; // prendere il valore dello stato corrente dell'elemto riferito da "nome"
         var description = descrizione.current.value; // prendere il valore dello stato corrente dell'elemto riferito da "descrizione"
         var type = showDataInput.tipo;
@@ -64,7 +81,8 @@ const Home = () => {
             version: version
         }
         // carica dati
-        dispatch({ data: newinfo, type: 'datapass' });
+        //dispatch({ data: newinfo, type: 'datapass' });
+        localStorage.setItem("datapass", JSON.stringify(newinfo));
 
         if (type === 'theater')
             retrieveData();
@@ -73,6 +91,58 @@ const Home = () => {
         routeChange();
     }
 
+    /** */
+    function activateApp_theater() {
+        var name = nome.current.value; // prendere il valore dello stato corrente dell'elemto riferito da "nome"
+        var description = descrizione.current.value; // prendere il valore dello stato corrente dell'elemto riferito da "descrizione"
+        var type = showDataInput.tipo;
+        var z = { type, name, description };
+        console.log("z: ", z);
+        var version = '1.0';
+        /* REDUX PER PASSARE DATI SULL'ENTITà DA MODELLARE */
+        var newinfo = {
+            type: type,
+            name: name,
+            description: description,
+            version: version
+        }
+        // carica dati
+        //dispatch({ data: newinfo, type: 'datapass' });
+        localStorage.setItem("datapass", JSON.stringify(newinfo));
+
+        retrieveData();
+
+        /* CHANGE ROUTE */
+        routeChange();
+    }
+
+    /** */
+    function activateApp_CR() {
+        var name = nome.current.value; // prendere il valore dello stato corrente dell'elemto riferito da "nome"
+        var description = descrizione.current.value; // prendere il valore dello stato corrente dell'elemto riferito da "descrizione"
+        var type = showDataInput.tipo;
+        var z = { type, name, description };
+        console.log("z: ", z);
+        var version = '1.0';
+        /* REDUX PER PASSARE DATI SULL'ENTITà DA MODELLARE */
+        var newinfo = {
+            type: type,
+            name: name,
+            description: description,
+            version: version
+        }
+        // carica dati
+        //dispatch({ data: newinfo, type: 'datapass' });
+        localStorage.setItem("datapass", JSON.stringify(newinfo));
+
+        retrieveData();
+        
+        // FOR API
+        new RD();
+
+        /* CHANGE ROUTE */
+        routeChange();
+    }
 
     /**
      * @function retrieveData
@@ -1596,23 +1666,15 @@ const Home = () => {
             module1, module2, module3, module4, module5
         ];
 
-        var x = new RD();
         //modules = x.getModules();
 
         // carica dati
-        dispatch({ data: modules, type: 'modulesretrieved' });
+        //dispatch({ data: modules, type: 'modulesretrieved' });
+        localStorage.setItem("modulesretrieved", JSON.stringify(modules));
 
     }
 
-    
-    /**
-     * @function routeChange
-     *  redidect into Application js page
-     */
-     function routeChange() {
-        let path = `Application`;
-        history.push(path);
-    }
+
 
     /**
      * @function showFormInput
@@ -1620,7 +1682,7 @@ const Home = () => {
      *  return, if a condition is verified, the div containing the form for the creation
      *  else return null.
      */
-    function showFormInput() {
+    function ShowFormInput() {
         if (showDataInput.show) {
             return (
                 <Container>
@@ -1640,7 +1702,16 @@ const Home = () => {
                                         <h3 className="d-inline">description</h3>
                                     </Form.Label>
                                     <Form.Control ref={descrizione} as="textarea" placeholder='Insert description' style={{ fontSize: "1.4em" }} />
-                                    <Button className="mt-3" as="input" type="button" value="Submit" style={{ fontSize: "1.4em", }} onClick={() => activateApp()} />
+
+                                    <Row className='align-content-center text-center justify-content-center'>
+                                        <Col style={{ display: 'block'}}>
+                                            <Button className="mt-3" as="input" type="button" value="Submit" style={{ fontSize: "1.4em", }} onClick={() => activateApp()} />
+                                        </Col>
+                                        <Col style={{ display: showDataInput.isth }}>
+                                            <Button className="mt-3 btn-danger" as="input" type="button" value="From CyberRange" style={{ fontSize: "1.4em", }} onClick={() => activateApp_CR()} />
+                                        </Col>
+                                    </Row>
+
                                 </Form.Group>
                             </Form>
                         </Col>
@@ -1648,9 +1719,7 @@ const Home = () => {
                 </Container>
             );
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
 
@@ -1676,15 +1745,15 @@ const Home = () => {
                 </Row>
                 <Row className="mt-5">
                     <Col xs={12} md={6} lg={6} >
-                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateShowDataInput('theater', true)} > Create Theater </Button>
+                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateShowDataInput('theater', true, 'block')} > Create Theater </Button>
                     </Col>
                     <Col xs={12} md={6} lg={6} >
-                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateShowDataInput('module', true)}> Create Module </Button>
+                        <Button className=" outline-primary lg h1 text-center" style={{ fontSize: "1.8em", }} onClick={() => updateShowDataInput('module', true, 'none')}> Create Module </Button>
                     </Col>
                 </Row>
 
                 <div style={{ display: display }}>
-                    {showFormInput()}
+                    {ShowFormInput()}
                 </div>
 
                 <img src={iac} width={'60%'} height={'50%'} className='mt-5'></img>

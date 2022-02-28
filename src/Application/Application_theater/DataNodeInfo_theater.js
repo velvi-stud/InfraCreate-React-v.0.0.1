@@ -5,7 +5,7 @@ import '../all.css'
 
 
 class DataNodeInfo_t extends React.Component {
-
+ 
     /**
      * 
      * @param {*} dati 

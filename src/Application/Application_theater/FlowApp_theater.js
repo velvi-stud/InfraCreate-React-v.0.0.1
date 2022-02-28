@@ -46,7 +46,7 @@ import selall from '../../images/nodeimg/select_all.png';
 
 import Areas_node from './HandleAreas';
 
-import { useDispatch } from 'react-redux';
+//import { useDispatch } from 'react-redux';
 
 import localforage from 'localforage';
 
@@ -1907,7 +1907,7 @@ const FlowApp_t = (props) => {
     /**
      * PER REPERIRE I DATI SALVATI
      */
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
 
     const [showoc, setShowOC] = useState(false);
@@ -2103,7 +2103,9 @@ const FlowApp_t = (props) => {
         setDimSider(4);
         setDisplay('block'); // MOSTRA LA COLONNA CONTENENTE LE SIDE INFO
 
-        dispatch({ data: selected_element, type: 'selectednode' });
+        //dispatch({ data: selected_element, type: 'selectednode' });
+        localStorage.setItem('selectednode',JSON.stringify(selected_element));
+
     }
 
     function onNodeDoubleClick(event, selected_element) {

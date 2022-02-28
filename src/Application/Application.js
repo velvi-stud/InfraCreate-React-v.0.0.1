@@ -5,7 +5,7 @@ import FlowApp_m from './Application_module/FlowApp_module';
 import FlowApp_t from './Application_theater/FlowApp_theater';
 import './all.css'
 import { ReactFlowProvider } from 'react-flow-renderer';
-import { useSelector, } from 'react-redux';
+//import { useSelector, } from 'react-redux';
 
 
 
@@ -13,7 +13,9 @@ import { useSelector, } from 'react-redux';
 
 const Application = () => {
 
-  const infopan = useSelector(state => state.datapass)
+  //var infopan = useSelector(state => state.datapass);
+  var infopan = localStorage.getItem('datapass');
+  infopan = JSON.parse(infopan)
   const [state, setState] = useState({ type: '', name: '', description: '', version: '' })
 
   /**
@@ -32,7 +34,7 @@ const Application = () => {
     }
     , [infopan.description, infopan.name, infopan.type, infopan.version])
 
-
+ 
   /**
    * @function getApp
    * @returns 

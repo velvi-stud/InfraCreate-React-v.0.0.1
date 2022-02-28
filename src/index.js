@@ -4,7 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { createStore } from 'redux';
+import Auth from './Autentication/Auth';
+
+import { createStore } from 'redux'; 
 import { Provider } from 'react-redux';
 import rootReducers from './reducers/Reducers';
 const store = createStore(rootReducers);
@@ -17,6 +19,7 @@ const store = createStore(rootReducers);
  */
 const showApp = () => {
   var x = new App();
+  new Auth();
   return (x.renderize());
 };
 
@@ -32,3 +35,4 @@ ReactDOM.render(
 );
 
 reportWebVitals();
+

@@ -1,58 +1,10 @@
 
-import Keycloak from 'keycloak-js';
-//keycloak init options
-let initOptions = {
-    url: 'http://10.50.1.25/auth/',
-    realm: 'cyberrange',
-    clientId: 'emo-client',
-    onLoad: 'login-required',
-    //response_uri: 'localhost:3000'
-}
+//let shared = null;
 
-let keycloak = Keycloak(initOptions);
-
-keycloak.init({ onLoad: initOptions.onLoad })
-    .success(
-        (auth) => {
-            if (!auth) {
-                window.location.reload();
-            } else {
-                console.info("Authenticated");
-                //console.info("Authenticated", keycloak.token);
-            }
-
-            // ReactDOM.render....
-
-            localStorage.setItem("react-token", keycloak.token);
-            localStorage.setItem("react-refresh-token", keycloak.refreshToken);
-
-            setTimeout(
-                () => {
-                    keycloak.updateToken(70)
-                        .then(
-                            (refreshed) => {
-                                if (refreshed) {
-                                    console.debug('Token refreshed' + refreshed);
-                                } else {
-                                    console.warn('Token not refreshed, valid for '
-                                        + Math.round(keycloak.tokenParsed.exp + keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
-                                }
-                            }
-                        )
-                        .catch(
-                            () => {
-                                console.error('Failed to refresh token');
-                            }
-                        );
-                }, 60000)
-        }
-    ).error(
-        () => {
-            console.error("Authenticated Failed");
-        }
-    );
-
-let shared = null;
+var myHeaders = new Headers();
+var token = localStorage.getItem('react-token');
+token = "Bearer " + token;
+myHeaders.append("Authorization", token);
 
 class RD {
 
@@ -64,8 +16,8 @@ class RD {
         // HP2: SECONDO MODULI TEATRO, SAPENDO L'UUID REPERITO DA PRIMA
         // http://10.20.30.210:8000/library-asset/api/v1/rest/modules/theatre_uuid/{theater_uuid = 9c0bf7a7-2ea3-4f88-9860-1c0ad212e2fc}
 
-        this.infojson1 = {};
-        this.infojson2 = {};
+        this.theater_info = {};
+        this.modules_info = {};
 
         this.data_t = {};
         this.data_m = {};
@@ -77,91 +29,43 @@ class RD {
 
     }
 
-    takedata(){
-        this.taketheater();
-    }
+    async takedata() {
+        //this.taketheater();
+        this.theater_info = await this.taketheater('502');
+        this.theater_info = JSON.parse(this.theater_info);
+        this.modules_info = await this.takemodules(this.theater_info);
+        this.modules_info = JSON.parse(this.modules_info);
 
-    async taketheater() {
-        var myHeaders = new Headers();
-        var token = localStorage.getItem('react-token');
-        token = "Bearer " + token;
-        //console.log(token);
-        myHeaders.append("Authorization", token);
+        //console.log("-----", this.infojson1, this.infojson2);
 
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-        await fetch("http://10.20.30.210:8000/library-asset/api/v1/rest/theatres/502", requestOptions)
-            .then(response => response.text())
-            .then(
-                result => {
-                    //console.log("INFOJS1: ", result)
-                    this.infojson1 = result;
-                    this.takemodules();
-                }
-            )
-            .catch(error => console.log('error', error));
-    }
+        this.fetch_theater_info();
+        this.fetch_modules_info();
 
-    async takemodules() {
-        var myHeaders = new Headers();
-        var token = localStorage.getItem('react-token');
-        token = "Bearer " + token;
-        //console.log(token);
-        myHeaders.append("Authorization", token);
-
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-        await fetch("http://10.20.30.210:8000/library-asset/api/v1/rest/modules/theatre_uuid/9c0bf7a7-2ea3-4f88-9860-1c0ad212e2fc", requestOptions)
-            .then(response => response.text())
-            .then(
-                result => {
-                    //console.log("INFOJS2: ", result)
-                    this.infojson2 = result;
-                    this.datataken();
-                }
-            )
-            .catch(error => console.log('error', error));
-    }
-
-    datataken(){
-        this.infojson1 = JSON.parse(this.infojson1);
-        this.infojson2 = JSON.parse(this.infojson2);
-        console.log("INFOJS1: ", this.infojson1);
-        console.log("INFOJS2: ", this.infojson2);
-        
-        this.theater_details();
-        this.showModulesUUID();
-
+        // ELEMENTI FILTRATI
         console.log(this.data_t);
         console.log(this.data_m);
-
     }
 
-    theater_details() {
-        this.data_t['name'] = this.infojson1['name'];
-        this.data_t['description'] = this.infojson1['description'];
-        this.data_t['id'] = this.infojson1['id'];
-        this.data_t['uuid'] = this.infojson1['uuid'];
-        this.data_t['version'] = this.infojson1['version'];
-        this.data_t['areas'] = this.infojson1['blueprintFile']['node_templates'][this.data_t['name']]['properties']['areas'];
+
+    fetch_theater_info() {
+        this.data_t['name'] = this.theater_info['name'];
+        this.data_t['description'] = this.theater_info['description'];
+        this.data_t['id'] = this.theater_info['id'];
+        this.data_t['uuid'] = this.theater_info['uuid'];
+        this.data_t['version'] = this.theater_info['version'];
+        this.data_t['areas'] = this.theater_info['blueprintFile']['node_templates'][this.data_t['name']]['properties']['areas'];
         //console.log(this.data_t);
     }
 
-    showModulesUUID() {
+    fetch_modules_info() {
         var modules = [];
-        Object.entries(this.infojson2).map(([key, value]) => {
+        Object.entries(this.modules_info).map(([key, value]) => {
             //console.log(value)
             var name = value['name'];
             var uuid = value['uuid'];
             var id = value['id'];
             var version = value['version'];
-            modules.push({ module_name: name, id: id ,module_uuid: uuid, version: version });
+            modules.push({ module_name: name, id: id, module_uuid: uuid, version: version });
         });
         //console.log(modules);
         this.data_m = modules;
@@ -182,6 +86,62 @@ class RD {
     getTheaterDetails() {
         return this.data_t;
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////// FUNCTION FOR CALL API ///////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    // function that retreive data theater to take info and the theater UUID
+    async taketheater(theater_id) {
+        //var myHeaders = new Headers();
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        const Promised = await fetch("http://10.20.30.210:8000/library-asset/api/v1/rest/theatres/" + theater_id, requestOptions)
+            .then(response => response.text())
+            .then(
+                result => {
+                    //console.log("INFOJS1: ", result)
+                    //this.infojson1 = result;
+                    // this.takemodules();
+                    return result;
+                }
+            )
+            .catch(error => console.log('error', error));
+        return Promised;
+    }
+
+    // function that retreive from theater UUID the module ID
+    async takemodules(theater_info) {
+        var uuid = theater_info['uuid'];
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        //await fetch("http://10.20.30.210:8000/library-asset/api/v1/rest/modules/theatre_uuid/9c0bf7a7-2ea3-4f88-9860-1c0ad212e2fc", requestOptions)
+        const Promised = await fetch("http://10.20.30.210:8000/library-asset/api/v1/rest/modules/theatre_uuid/" + uuid, requestOptions)
+            .then(response => response.text())
+            .then(
+                result => {
+                    //console.log("INFOJS2: ", result)
+                    // this.infojson2 = result;
+                    // this.datataken();
+                    return result;
+                }
+            )
+            .catch(error => console.log('error', error));
+        return Promised;
+    }
+
+
+
 
 }
 

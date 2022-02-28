@@ -44,7 +44,7 @@ import avanti from '../../images/nodeimg/redo.png';
 import deletex from '../../images/nodeimg/delete.png';
 import selall from '../../images/nodeimg/select_all.png';
 
-import { useSelector, useDispatch } from 'react-redux';
+//import { useSelector, useDispatch } from 'react-redux';
 
 import localforage from 'localforage';
 
@@ -990,8 +990,9 @@ const FlowApp_m = (props) => {
     /**
      * PER REPERIRE I DATI SALVATI
      */
-    const infopan = useSelector(state => state.datapass)
-    const dispatch = useDispatch();
+    //var infopan = useSelector(state => state.datapass)
+    var infopan = localStorage.getItem('datapass');
+    //const dispatch = useDispatch();
 
     const [showoc, setShowOC] = useState(false);
     const handleClose = () => setShowOC(false);
@@ -1228,7 +1229,8 @@ const FlowApp_m = (props) => {
         setDimSider(4);
         setDisplay('block'); // MOSTRA LA COLONNA CONTENENTE LE SIDE INFO
 
-        dispatch({ data: selected_element, type: 'selectednode' });
+        //dispatch({ data: selected_element, type: 'selectednode' });
+        localStorage.setItem('selectednode',JSON.stringify(selected_element))
     }
 
     /**

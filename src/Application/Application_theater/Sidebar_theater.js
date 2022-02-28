@@ -4,7 +4,7 @@ import AllTypeNodes from '../../nodes/AllTypeNodes';
 import _ from 'lodash';
 import ModuleNode from '../../nodes/ModuleNode';
 import '../all.css'
-import { useSelector, useDispatch } from 'react-redux';
+//import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -30,7 +30,9 @@ class Sidebar_t extends React.Component {
      *  retireve module data from "redux" shared area
      */
     func = () => {
-        var moduleslist = useSelector(state => state.modulesretrieved)
+        //var moduleslist = useSelector(state => state.modulesretrieved)
+        var moduleslist = localStorage.getItem('modulesretrieved');
+        moduleslist = JSON.parse(moduleslist);
         this.state = {
             moduleslist: moduleslist,
             listnode: []

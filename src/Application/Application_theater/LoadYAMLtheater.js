@@ -4,7 +4,7 @@ let shared = null;
 class loadYAML_t {
     constructor(f_name, data_m) {
         this.getyamljson = this.getyamljson.bind(this);
-        const inputYML = 'C:\Users\Velvi\Downloads\module_blueprint_Module_Name.yaml';
+        const inputYML = 'C:\Users\Velvi\Downloads\module_blueprint_name.yaml';
         const outputJSON = 'C:\Users\Velvi\Downloads\output.json';
         const yaml = require('js-yaml');
         //var fs = require('fs');

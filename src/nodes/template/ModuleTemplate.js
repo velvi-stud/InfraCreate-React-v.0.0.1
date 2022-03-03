@@ -6,6 +6,7 @@ import ServerNode from '../ServerNode.js';
 import SubnetNode from '../SubnetNode.js';
 import NetworkNode from '../NetworkNode.js';
 import _ from 'lodash';
+import "../node.css";
 
 
 class xxx {
@@ -259,12 +260,12 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 				{handlecons()}
 
 				{/* NOME */}
-				<div> <h5 style={{ margin: '0' }}> {data.label} </h5></div>
+				<div> <h5 className='unselectable' style={{ margin: '0' }}> {data.label} </h5></div>
 
 				{/* {isSession()} */}
 
 				{/* MODULE TYPE */}
-				<div> <p style={{ marginBottom: '0.5em', fontSize: '0.7em' }}> {isSession()} {data.module} </p> </div>
+				<div> <p className='unselectable' style={{ marginBottom: '0.5em', fontSize: '0.7em' }}> {isSession()} {data.module} </p> </div>
 
 				{/* RF */}
 				{/* <button type="button" className="btn btn-dark" style={{ fontSize: '1em' }} onClick={() => { (BTN.display === 'none') ? setBTN({ title: 'Hide topology', display: 'block' }) : setBTN({ title: 'Show topology', display: 'none' }) }}>{BTN.title}</button>
@@ -303,7 +304,7 @@ const module_temp = (tipo1, style1, css_in1, css_out1) => {
 
 
 				{/* Description */}
-				<div> <p style={{ marginBottom: '0' }}> {data.description} </p> </div>
+				<div> <p className='unselectable' style={{ marginBottom: '0' }}> {data.description} </p> </div>
 
 			</div>
 		)

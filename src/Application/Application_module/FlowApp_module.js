@@ -382,8 +382,8 @@ const adb = {
     "position": [69.72512349187082, 141.89821945809047],
     "zoom": 0.8538177143912448,
     "#elements": 26,
-    "module_name": "example_apache_db",
-    "module_description": "esempio bp apache",
+    "name": "example_apache_db",
+    "description": "esempio bp apache",
     "version": "1.0"
 }
     ;
@@ -919,8 +919,8 @@ var fw1 = {
     "position": [108.16241109945827, 192.42498692292224],
     "zoom": 0.5,
     "#elements": 43,
-    "module_name": "fw_1",
-    "module_description": "Modulo Firewall",
+    "name": "fw_1",
+    "description": "Modulo Firewall",
     "version": "1.0"
 }
 
@@ -1047,8 +1047,8 @@ const FlowApp_m = (props) => {
             const flow = IstanzaReactFlow.toObject(); //converte il diagramma in oggetto
             //console.log(_.size(flow.elements), "elements in diagram"); // uso '_' libreria
             flow['#elements'] = _.size(flow.elements); // detrae il numero dei nodi.
-            flow['module_name'] = state.name;
-            flow['module_description'] = state.description;
+            flow['name'] = state.name;
+            flow['description'] = state.description;
             flow['version'] = state.version;
             localforage.setItem(flowKey, flow); // @@@@ salva gli elementi trasformati in obj reperibili con la chiave specificata
             console.log(JSON.stringify(flow)); // salva il json

@@ -54,7 +54,7 @@ class Sidebar_m extends React.Component {
     renderDaD(type, style) {
         return (
             // l'attr. KEY serve quando si creano elementi così, non è obbligatorio ma da errore
-            <Row key={type} className='justify-content-center text-center m-2'>
+            <Row key={type} className='justify-content-center text-center m-2 div_side_text unselectable'>
                 <div style={style} onDragStart={(event) => this.onDragStart(event, type)} draggable>
                     {type.charAt(0).toUpperCase() + type.slice(1)} Node
                 </div>

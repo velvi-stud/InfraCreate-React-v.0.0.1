@@ -1513,7 +1513,7 @@ class parsedatatheater {
             properties: {}
         };
         this.output['node_templates'][mn]['type'] = 'sysman.creo.nodes.Theater';
-        this.output['node_templates'][mn]['properties']['description'] = this.data['module_description'];
+        this.output['node_templates'][mn]['properties']['description'] = this.data['description'];
         this.output['node_templates'][mn]['properties']['version'] = this.data['theater_version'];
         this.output['node_templates'][mn]['properties']['mode'] = 'Managed';
         this.output['node_templates'][mn]['properties']['areas'] = [];

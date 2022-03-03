@@ -9,6 +9,7 @@ import Auth from './Autentication/Auth';
 import { createStore } from 'redux'; 
 import { Provider } from 'react-redux';
 import rootReducers from './reducers/Reducers';
+import { clear } from 'localforage';
 const store = createStore(rootReducers);
 
 /**
@@ -18,10 +19,17 @@ const store = createStore(rootReducers);
  *  html of App to upload
  */
 const showApp = () => {
+  clear_before();
   var x = new App();
   new Auth();
   return (x.renderize());
 };
+
+function clear_before() {
+  localStorage.setItem('datapass',JSON.stringify(" "));
+  localStorage.setItem('modulesretrieved',JSON.stringify(" "));
+  //localStorage.setItem("react-token", JSON.stringify(" "));
+}
 
 ReactDOM.render(
   <div>

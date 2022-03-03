@@ -7,7 +7,7 @@
         "plugin:cloudify-ansible-plugin?version=2.6.0",
         "plugin:sysman-creo-plugin?version=1.0"
     ],
-    "module_name": "", 
+    "name": "", 
     "description": "",
     "inputs": "",
     "node_templates":{

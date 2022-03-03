@@ -19,7 +19,7 @@ class parsedatamodule {
         //var output = {};
         // initial part
         this.output['tosca_definitions_version'] = 'cloudify_dsl_1_3';
-        this.output['description'] = this.data['module_description'];
+        this.output['description'] = this.data['description'];
         this.output['imports'] = [
             { http: 'www.getcloudify.org/spec/cloudify/4.5.5/types.yaml' },
         ];
@@ -43,13 +43,13 @@ class parsedatamodule {
     }
 
     base_blueprint() {
-        var mn = this.data['module_name'];
+        var mn = this.data['name'];
         this.output['node_templates'][mn] = {
             type: '',
             properties: {}
         };
         this.output['node_templates'][mn]['type'] = 'sysman.creo.nodes.TheaterModule';
-        this.output['node_templates'][mn]['properties']['description'] = this.data['module_description'];
+        this.output['node_templates'][mn]['properties']['description'] = this.data['description'];
         this.output['node_templates'][mn]['properties']['version'] = this.data['version'];
         this.output['node_templates'][mn]['properties']['mode'] = 'Managed';
         // this.output['node_templates'][mn]['properties']['constraints'] = {

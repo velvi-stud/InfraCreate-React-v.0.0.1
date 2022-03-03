@@ -33,27 +33,19 @@ class Sidebar_t extends React.Component {
         //var moduleslist = useSelector(state => state.modulesretrieved)
         var moduleslist = localStorage.getItem('modulesretrieved');
         moduleslist = JSON.parse(moduleslist);
+        //console.log(moduleslist)
         this.state = {
             moduleslist: moduleslist,
             listnode: []
         }
         var name, description, version, topology;
-        //console.log(moduleslist);
         Object.entries(moduleslist).map(
             ([key, value]) => {
-                value = value[0];
-                name = value.module_name;
-                description = value.module_description;
+                name = value.name;
+                description = value.description;
                 version = value.version;
                 topology = value.elements;
-                // console.log(
-                //     'elemento', key, ':', value.module_name,
-                //     'descrizione:', value.module_description,
-                //     'version', value.version,
-                //     'topology', value.elements,
-                // );
                 this.state.listnode.push(this.renderDaD(name, description, version, topology));
-
             }
         )
     }
@@ -96,7 +88,7 @@ class Sidebar_t extends React.Component {
     renderDaD(name, description, version, topology) {
         return (
             // l'attr. KEY serve quando si creano elementi così, non è obbligatorio ma da errore
-            <Row key={name} className='justify-content-center text-center m-2'>
+            <Row key={name} className='justify-content-center text-center m-2 div_side_text unselectable'>
                 <div style={this.style} onDragStart={(event) => this.onDragStart(event, name, description, version, topology)} draggable>
                     {name}
                 </div>

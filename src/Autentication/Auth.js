@@ -3,6 +3,10 @@ import Keycloak from 'keycloak-js'; // per prendere token api
 
 class Auth {
     constructor() {
+        this.generatetoken();
+    }
+
+    async generatetoken() {
         //keycloak init options
         let initOptions = {
             url: 'http://10.50.1.25/auth/',
@@ -14,7 +18,7 @@ class Auth {
 
         let keycloak = Keycloak(initOptions);
 
-        keycloak.init({ onLoad: initOptions.onLoad })
+        await keycloak.init({ onLoad: initOptions.onLoad })
             .success(
                 (auth) => {
                     if (!auth) {
@@ -39,7 +43,7 @@ class Auth {
                                         } else {
                                             console.warn('Token not refreshed, valid for '
                                                 + Math.round(keycloak.tokenParsed.exp + keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
-                                        }
+                                        } //34637 sec
                                     }
                                 )
                                 .catch(

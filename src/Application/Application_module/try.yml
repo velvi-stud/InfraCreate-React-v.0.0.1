@@ -8,7 +8,7 @@ imports:
   - plugin: "sysman-creo-plugin?version=1.0"
 version: "1.0"
 node_templates:
-  Module_Name:
+  name:
     type: "sysman.creo.nodes.TheaterModule"
     properties:
       description: ""

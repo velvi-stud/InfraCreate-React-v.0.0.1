@@ -1,5 +1,6 @@
 import React from 'react';
 import { Handle } from 'react-flow-renderer';
+import "../node.css";
 
 
 const node_temp = (tipo1, style1, img1, css_in1, css_out1, valid_connection_in, valid_connection_out) => {
@@ -23,7 +24,8 @@ const node_temp = (tipo1, style1, img1, css_in1, css_out1, valid_connection_in, 
 		}
 		return (
 			<div style={style}>
-				{/* PORTA INGRESSO TIPO 1*/}
+
+				{/* PORTA INGRESSO TIPO 1 -> TARGET*/}
 				<Handle
 					//id={data.label}
 					type="target"
@@ -33,13 +35,13 @@ const node_temp = (tipo1, style1, img1, css_in1, css_out1, valid_connection_in, 
 				/>
 
 				{/* NOME */}
-				<div> <b> {data.label} </b></div>
+				<div className='unselectable'> <b> {data.label} </b></div>
 
 				{/* IMMAGINE */}
 				<img src={imagins} width={w} height={h} alt="picgra" />
 
 				{/* Description */}
-				<div> <p style={{ marginBottom: '0' }}> {data.description} </p> </div>
+				<div> <p  className='unselectable' style={{ marginBottom: '0' }}> {data.description} </p> </div>
 
 				{/* PORTA USCITA TIPO 1*/}
 				<Handle

@@ -14,7 +14,7 @@ class tryJSON extends React.Component {
 
     add_name_desc(tipo, name, desc) {
         this.df.tipo = tipo;
-        this.df.module_name = name;
+        this.df.name = name;
         this.df.description = desc;
     }
 
@@ -116,7 +116,7 @@ export default tryJSON;
 //     }
 
 //     function add_name_desc(name,desc){
-//         df.module_name=name;
+//         df.name=name;
 //         df.description=desc;
 //     }
 

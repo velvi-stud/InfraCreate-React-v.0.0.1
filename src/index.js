@@ -4,13 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import Auth from './Autentication/Auth';
-
+import Auth from './RestApi/Auth';
+/*
 import { createStore } from 'redux'; 
 import { Provider } from 'react-redux';
 import rootReducers from './reducers/Reducers';
 import { clear } from 'localforage';
 const store = createStore(rootReducers);
+*/
 
 /**
  * @function showApp
@@ -34,9 +35,9 @@ function clear_before() {
 ReactDOM.render(
   <div>
     {/* <React.StrictMode> */}
-    <Provider store={store} >
+    {/* <Provider store={store} > */}
       {showApp()}
-    </Provider>
+    {/* </Provider> */}
     {/* </React.StrictMode> */}
   </div>,
   document.getElementById('root')

@@ -1,12 +1,12 @@
 import { React } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; //IMPORTANTE -> IMPORTARE
 import { Container, Row, Card, Col } from 'react-bootstrap';
-import rv from './images/coop/romeo_velvi.webp.jpg'
-import adr from './images/coop/alessandro_della_rocca.webp.jpg'
-import ac from './images/coop/annamaria_colantuono.webp.jpg'
-import em from './images/coop/emanuela_mostrato.webp.jpg'
-import fc from './images/coop/fabio_cornevilli.webp.jpg'
-import gr from './images/coop/gianluca_roscigno.webp.jpg'
+import rv from '../images/coop/romeo_velvi.webp.jpg'
+import adr from '../images/coop/alessandro_della_rocca.webp.jpg'
+import ac from '../images/coop/annamaria_colantuono.webp.jpg'
+import em from '../images/coop/emanuela_mostrato.webp.jpg'
+import fc from '../images/coop/fabio_cornevilli.webp.jpg'
+import gr from '../images/coop/gianluca_roscigno.webp.jpg'
 
 const AboutUs = () => {
     //TODO controllare perchè non funziona About us con RUTE E LINK

@@ -4,10 +4,11 @@ import React from 'react';
 
 import './App.css';
 import NavbarApp from './NavbarApp';
-import Home from './Home';
-import AboutUs from './AboutUs';
+import Home from './StaticPages/Home';
+import AboutUs from './StaticPages/AboutUs';
 
 import Application from './Application/Application.js'
+import HowToUse from './StaticPages/HowToUse';
 
 
 // la function App() è richiamata per ritornare qualcosa -> html
@@ -40,16 +41,7 @@ class App extends React.Component {
               </Route>
               <Route exact path="/how-to-use">
                 <NavbarApp></NavbarApp>
-                {/* <HowToUse /> */}
-                <iframe 
-                  src="https://giphy.com/embed/i8e7h6GcdopvVG5Nhm" 
-                  width="800" 
-                  height="700" 
-                  frameBorder="0" 
-                  style={{width:'100%', pointerEvents: 'none'}}
-                  //class="giphy-embed" 
-                  allowFullScreen
-                  />
+                <HowToUse/>
               </Route>
               <Route exact path="/application">
                 {/* {getApplication()} */}

@@ -1,4 +1,4 @@
-import downloadfile from "./DownloadFILE";
+import downloadfile from "../DownloadFILE";
 import _ from "lodash";
 
 class parsedatatheater {

@@ -48,9 +48,7 @@ import selall from '../../images/nodeimg/select_all.png';
 
 import localforage from 'localforage';
 
-import downloadfile from '../DownloadFILE.js';
-import parsedatamodule from '../ParseDataModule.js';
-import { Dropdown } from 'bootstrap';
+import parsedatamodule from './ParseDataModule.js';
 import loadYAML_m from './LoadYAMLmodule.js';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -385,8 +383,7 @@ const adb = {
     "name": "example_apache_db",
     "description": "esempio bp apache",
     "version": "1.0"
-}
-    ;
+};
 //fw1
 var fw1 = {
     "elements": [{
@@ -922,7 +919,7 @@ var fw1 = {
     "name": "fw_1",
     "description": "Modulo Firewall",
     "version": "1.0"
-}
+};
 
 
 

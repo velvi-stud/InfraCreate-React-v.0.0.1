@@ -1,4 +1,4 @@
-import downloadfile from "./DownloadFILE";
+import downloadfile from "../DownloadFILE";
 
 class parsedatamodule {
     constructor(f_name, data_m) {

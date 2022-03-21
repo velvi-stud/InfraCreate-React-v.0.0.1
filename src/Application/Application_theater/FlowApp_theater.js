@@ -46,11 +46,9 @@ import selall from '../../images/nodeimg/select_all.png';
 
 import Areas_node from './HandleAreas';
 
-//import { useDispatch } from 'react-redux';
-
 import localforage from 'localforage';
 
-import parsedatatheater from '../ParseDataTheater';
+import parsedatatheater from './ParseDataTheater';
 import loadYAML_t from './LoadYAMLtheater';
 
 

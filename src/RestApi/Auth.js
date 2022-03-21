@@ -3,6 +3,8 @@ import Keycloak from 'keycloak-js'; // per prendere token api
 
 class Auth {
     constructor() {
+        // remove return for auth
+        return;
         this.generatetoken();
     }
 

@@ -43,6 +43,7 @@ const Areas_node = (props) => {
         setAreas(x);
         props.onChange(x);
     }
+    
     function removeArea(a_name) {
         var x = {};
         Object.entries(areas).map(
@@ -55,6 +56,7 @@ const Areas_node = (props) => {
         setAreas(x);
         props.onChange(x);
     }
+
     function updateArea(old_name,new_name, new_desc) { //TODO
         var x = {};
         Object.entries(areas).map(

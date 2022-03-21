@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Button, Overlay, Tooltip, Popover, OverlayTrigger } from 'react-bootstrap';
-import ReactFlow, { Background, Handle, ReactFlowProvider, Controls } from 'react-flow-renderer';
+import React from 'react';
+import { Button, Tooltip, Popover, OverlayTrigger } from 'react-bootstrap';
+import ReactFlow, { Handle, ReactFlowProvider, Controls } from 'react-flow-renderer';
 import PortNode from '../PortNode.js';
 import ServerNode from '../ServerNode.js';
 import SubnetNode from '../SubnetNode.js';

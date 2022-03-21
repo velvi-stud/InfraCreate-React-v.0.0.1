@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'; //IMPORTANTE -> IMPORTARE
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import iac from './images/coop/iac_img.jpg'
-import RD from './take-data/retrieve-data.js'
+import RD from './RestApi/retrieve-data.js'
 
 //import { useSelector, useDispatch } from 'react-redux';
 
